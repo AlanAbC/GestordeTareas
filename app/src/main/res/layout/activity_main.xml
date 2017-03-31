@@ -8,7 +8,8 @@
     tools:context="com.example.alan.gestordetareas.MainActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/contenedor">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,30 +23,30 @@
 
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/menu"
                 android:id="@+id/Btnmenu" />
             <TextView
-                android:layout_width="170dp"
+                android:layout_width="160dp"
                 android:layout_height="40dp"
                 android:id="@+id/usuario"
                 android:text="Hola USERNAME"
-                android:textSize="21dp"
+                android:textSize="19dp"
                 android:paddingTop="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/Btnmenu"
                 android:textColor="@android:color/white"
-                android:layout_marginStart="20dp" />
+                android:layout_marginStart="20dp"
+                android:layout_alignTop="@+id/Btnmenu"
+                android:layout_toEndOf="@+id/Btnmenu" />
             <TextView
                 android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:text="Agregar Materia"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:paddingTop="10dp"
                 android:layout_toRightOf="@id/usuario"
                 android:textColor="@android:color/white"
@@ -53,15 +54,16 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#C3CDD0"
+            android:layout_height="wrap_content"
+
             android:id="@+id/hoy"
             android:layout_below="@id/menu"
             >
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
                 android:text="Por hacer hoy"
+                android:background="#C3CDD0"
                 android:textSize="20dp"
                 android:id="@+id/txtHoy"
                 android:textColor="@android:color/black"
@@ -77,13 +79,14 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#C3CDD0"
+            android:layout_height="wrap_content"
+
             android:id="@+id/mañana"
             android:layout_below="@id/hoy">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
+                android:background="#C3CDD0"
                 android:text="Por mañana"
                 android:textSize="20dp"
                 android:id="@+id/txtMañana"
@@ -97,17 +100,18 @@
                 android:layout_below="@id/txtMañana">
 
             </ListView>
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#C3CDD0"
+            android:layout_height="wrap_content"
             android:id="@+id/semana"
           android:layout_below="@id/mañana"
             >
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
+                android:background="#C3CDD0"
                 android:text="Por hacer esta semana"
                 android:textSize="20dp"
                 android:id="@+id/txtSemana"
@@ -124,14 +128,14 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#C3CDD0"
+            android:layout_height="wrap_content"
             android:id="@+id/mes"
             android:layout_below="@id/semana"
             >
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
+                android:background="#C3CDD0"
                 android:text="Por hacer este mes"
                 android:textSize="20dp"
                 android:id="@+id/txtMes"
@@ -147,7 +151,19 @@
                 android:layout_below="@id/txtMes">
 
             </ListView>
+
+
         </RelativeLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="470dp"
+            android:id="@+id/agregar"
+            android:layout_marginLeft="280dp"
+            android:src="@drawable/add"
+            app:fabSize="normal"
+            />
+
     </RelativeLayout>
 
 
