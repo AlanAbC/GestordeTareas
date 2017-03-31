@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context="com.example.alan.gestordetareas.Materias">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/contenedor">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            android:background= "#5F7B89"
+            android:id="@+id/menu"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/menu"
+                android:id="@+id/Btnmenu" />
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:id="@+id/usuario"
+                android:text="MATERIAS"
+                android:textSize="19dp"
+                android:paddingTop="10dp"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="20dp"
+                android:layout_alignTop="@+id/Btnmenu"
+                android:layout_toEndOf="@+id/Btnmenu" />
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:text="Agregar Materia"
+                android:textSize="12dp"
+                android:paddingTop="10dp"
+                android:layout_toRightOf="@id/usuario"
+                android:textColor="@android:color/white"
+                android:id="@+id/AgregarMateria" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>
