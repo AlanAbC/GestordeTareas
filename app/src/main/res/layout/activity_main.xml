@@ -1,21 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="0dp"
     tools:context="com.example.alan.gestordetareas.MainActivity">
-
     <RelativeLayout
-        android:layout_width="368dp"
-        android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:background= "#519A87">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            android:background= "#519A87"
+            android:id="@+id/menu"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/menu"
+                android:id="@+id/Btnmenu" />
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="40dp"
+                android:id="@+id/usuario"
+                android:text="Hola USERNAME"
+                android:textSize="21dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/Btnmenu"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="20dp" />
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:text="Agregar Materia"
+                android:textSize="14dp"
+                android:paddingTop="10dp"
+                android:layout_toRightOf="@id/usuario"
+                android:textColor="@android:color/white"
+                android:id="@+id/AgregarMateria" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#C3CDD0"
+            android:id="@+id/hoy"
+            android:layout_below="@id/menu"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Por hacer hoy"
+                android:textSize="20dp"
+                android:id="@+id/txtHoy"
+                android:textColor="@android:color/black"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listaHoy"
+                android:layout_below="@id/txtHoy">
+
+            </ListView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#C3CDD0"
+            android:id="@+id/mañana"
+            android:layout_below="@id/hoy">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Por mañana"
+                android:textSize="20dp"
+                android:id="@+id/txtMañana"
+                android:textColor="@android:color/black"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listaMañana"
+                android:layout_below="@id/txtMañana">
+
+            </ListView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#C3CDD0"
+            android:id="@+id/semana"
+          android:layout_below="@id/mañana"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Por hacer esta semana"
+                android:textSize="20dp"
+                android:id="@+id/txtSemana"
+                android:textColor="@android:color/black"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listaSemana"
+                android:layout_below="@id/txtSemana">
+
+            </ListView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#C3CDD0"
+            android:id="@+id/mes"
+            android:layout_below="@id/semana"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Por hacer este mes"
+                android:textSize="20dp"
+                android:id="@+id/txtMes"
+                android:textColor="@android:color/black"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listaMes"
+                android:layout_below="@id/txtMes">
+
+            </ListView>
+        </RelativeLayout>
     </RelativeLayout>
 
-</RelativeLayout>
+
+
+</ScrollView>
