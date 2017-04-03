@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Materias"></activity>
+        <activity android:name=".Materias" />
+        <activity android:name=".mostrarTarea"></activity>
     </application>
 
 </manifest>

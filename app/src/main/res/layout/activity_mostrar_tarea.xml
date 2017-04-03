@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
+        tools:context="com.example.alan.gestordetareas.mostrarTarea">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:id="@+id/nombre"
+            android:background="@android:color/darker_gray">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="130dp"
+                android:paddingLeft="27dp"
+                android:text="Nombre Tarea"
+                android:textSize="30dp"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_below="@id/nombre"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:shadowColor="#8a6603"
+            android:shadowDx="3"
+            android:id="@+id/datos"
+            android:shadowDy="2"
+            android:shadowRadius="1.8"
+            android:layout_height="150dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="Nombre completo de la tarea"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:id="@+id/nombreC"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="Nombre "
+                android:id="@+id/nombreT"
+                android:paddingLeft="20dp"
+                android:layout_below="@id/nombreC"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="Materia"
+                android:id="@+id/materia"
+                android:layout_below="@+id/nombreT"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:id="@+id/materiaT"
+                android:paddingLeft="20dp"
+                android:layout_below="@+id/materia"
+                android:text="Aqui va la materia"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:id="@+id/fecha"
+                android:layout_below="@id/materiaT"
+                android:text="Fecha"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:id="@+id/fechaT"
+                android:layout_below="@id/fecha"
+                android:paddingLeft="20dp"
+                android:text="##/##/####"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_below="@id/datos"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="35dp"
+            android:shadowColor="#8a6603"
+            android:shadowDx="3"
+            android:shadowDy="2"
+            android:shadowRadius="1.8"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="Descripcion"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:id="@+id/descripcion"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:text="Aqui va la descripcion de la tarea "
+                android:id="@+id/descripcionT"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:layout_below="@id/descripcion"
+                android:textSize="20dp"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+</ScrollView>
