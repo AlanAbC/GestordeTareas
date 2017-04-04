@@ -12,9 +12,12 @@ import android.view.Window;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
+
     int width;
     FloatingActionButton agregar;
     int height;
+    FloatingActionButton agregar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,5 +31,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    public void agregarTarea(View view){
+        Intent i = new Intent(MainActivity.this, agregarTarea.class);
+        startActivity(i);
     }
 }

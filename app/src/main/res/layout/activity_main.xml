@@ -165,6 +165,7 @@
             android:layout_marginLeft="280dp"
             android:src="@drawable/add"
             app:fabSize="normal"
+            android:onClick="agregarTarea"
             />
 
     </RelativeLayout>
