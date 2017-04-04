@@ -140,9 +140,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="470dp"
-            android:id="@+id/agregar"
+            android:id="@+id/agregarT"
             android:layout_marginLeft="280dp"
-            android:src="@drawable/add"
+            android:src="@drawable/agregarT"
+            android:backgroundTint="#00f563"
             app:fabSize="normal"
             />
 

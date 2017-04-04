@@ -161,6 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="470dp"
             android:id="@+id/agregar"
+            android:backgroundTint="#8000ff"
             android:layout_marginLeft="280dp"
             android:src="@drawable/add"
             app:fabSize="normal"
