@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Materias" />
-        <activity android:name=".mostrarTarea"></activity>
+        <activity android:name=".mostrarTarea" />
+        <activity android:name=".agregarTarea"></activity>
     </application>
 
 </manifest>

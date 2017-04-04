@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
+        tools:context="com.example.alan.gestordetareas.agregarTarea">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            android:background= "#8000ff"
+            android:id="@+id/menu"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/menu"
+                android:id="@+id/Btnmenu" />
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:id="@+id/tarea"
+                android:text="AGREGAR TAREA"
+                android:textSize="19dp"
+                android:paddingTop="10dp"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="20dp"
+                android:layout_alignTop="@+id/Btnmenu"
+                android:layout_toEndOf="@+id/Btnmenu" />
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:text="Agregar Materia"
+                android:textSize="12dp"
+                android:paddingTop="10dp"
+                android:layout_toRightOf="@id/tarea"
+                android:textColor="@android:color/white"
+                android:id="@+id/AgregarMateria" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/agregarTarea"
+            android:layout_below="@id/menu"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:id="@+id/nombre"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="20dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/nombreT"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/nombre"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Materia"
+                android:layout_marginTop="35dp"
+                android:layout_below="@id/nombreT"
+                android:id="@+id/materia"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:paddingLeft="20dp"
+                />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="40dp"
+                android:id="@+id/materiaS"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/materia"></Spinner>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:layout_marginTop="35dp"
+                android:layout_below="@id/materiaS"
+                android:id="@+id/fecha"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:paddingLeft="20dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción"
+                android:layout_marginTop="35dp"
+                android:layout_below="@id/fecha"
+                android:id="@+id/descripcion"
+                android:textStyle="bold"
+                android:textSize="23dp"
+                android:paddingLeft="20dp"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/descripcionT"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/descripcion"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"/>
+        </RelativeLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="470dp"
+            android:id="@+id/agregar"
+            android:layout_marginLeft="280dp"
+            android:src="@drawable/add"
+            app:fabSize="normal"
+            />
+
+    </RelativeLayout>
+</ScrollView>
