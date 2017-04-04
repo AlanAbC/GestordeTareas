@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 public class MainActivity extends AppCompatActivity {
 
     int width;
-    FloatingActionButton agregar;
     int height;
     FloatingActionButton agregar;
 
