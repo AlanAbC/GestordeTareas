@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="0dp"
@@ -156,20 +159,25 @@
 
 
         </RelativeLayout>
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="470dp"
-            android:id="@+id/agregar"
-            android:backgroundTint="#8000ff"
-            android:layout_marginLeft="280dp"
-            android:src="@drawable/add"
-            app:fabSize="normal"
-            android:onClick="agregarTarea"
-            />
+
 
     </RelativeLayout>
 
-
-
 </ScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/agregar"
+        android:backgroundTint="#8000ff"
+        android:src="@drawable/add"
+        app:fabSize="normal"
+        android:onClick="agregarTarea"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|right|end"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        app:elevation="2dp"/>
+</RelativeLayout>
+
