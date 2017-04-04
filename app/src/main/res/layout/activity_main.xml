@@ -4,166 +4,168 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="0dp"
-    tools:context="com.example.alan.gestordetareas.MainActivity">
-    <RelativeLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/contenedor">
+        android:padding="0dp"
+        tools:context="com.example.alan.gestordetareas.MainActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
-            android:background= "#519A87"
-            android:id="@+id/menu"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:layout_height="match_parent"
+            android:id="@+id/contenedor">
 
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/menu"
-                android:id="@+id/Btnmenu" />
-            <TextView
-                android:layout_width="160dp"
-                android:layout_height="40dp"
-                android:id="@+id/usuario"
-                android:text="Hola USERNAME"
-                android:textSize="19dp"
-                android:paddingTop="10dp"
-                android:textColor="@android:color/white"
-                android:layout_marginStart="20dp"
-                android:layout_alignTop="@+id/Btnmenu"
-                android:layout_toEndOf="@+id/Btnmenu" />
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:text="Agregar Materia"
-                android:textSize="12dp"
-                android:paddingTop="10dp"
-                android:layout_toRightOf="@id/usuario"
-                android:textColor="@android:color/white"
-                android:id="@+id/AgregarMateria" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:id="@+id/hoy"
-            android:layout_below="@id/menu"
-            >
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:text="Por hacer hoy"
-                android:background="#C3CDD0"
-                android:textSize="20dp"
-                android:id="@+id/txtHoy"
-                android:textColor="@android:color/black"
-                android:paddingTop="10dp"
-                android:paddingLeft="20dp"/>
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listaHoy"
-                android:layout_below="@id/txtHoy">
-
-
-
-            </ListView>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:id="@+id/mañana"
-            android:layout_below="@id/hoy">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="#C3CDD0"
-                android:text="Por mañana"
-                android:textSize="20dp"
-                android:id="@+id/txtMañana"
-                android:textColor="@android:color/black"
-                android:paddingTop="10dp"
-                android:paddingLeft="20dp"/>
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listaMañana"
-                android:layout_below="@id/txtMañana">
-
-            </ListView>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/semana"
-          android:layout_below="@id/mañana"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="#C3CDD0"
-                android:text="Por hacer esta semana"
-                android:textSize="20dp"
-                android:id="@+id/txtSemana"
-                android:textColor="@android:color/black"
-                android:paddingTop="10dp"
-                android:paddingLeft="20dp"/>
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listaSemana"
-                android:layout_below="@id/txtSemana">
-
-            </ListView>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/mes"
-            android:layout_below="@id/semana"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="#C3CDD0"
-                android:text="Por hacer este mes"
-                android:textSize="20dp"
-                android:id="@+id/txtMes"
-                android:textColor="@android:color/black"
-                android:paddingTop="10dp"
-                android:paddingLeft="20dp"
+                android:layout_height="60dp"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp"
+                android:background= "#519A87"
+                android:id="@+id/menu"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
-            <ListView
+                android:layout_alignParentStart="true">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/menu"
+                    android:id="@+id/Btnmenu" />
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/usuario"
+                    android:text="Hola USERNAME"
+                    android:textSize="19dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginStart="20dp"
+                    android:layout_alignTop="@+id/Btnmenu"
+                    android:layout_toEndOf="@+id/Btnmenu" />
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Agregar Materia"
+                    android:textSize="12dp"
+                    android:paddingTop="10dp"
+                    android:layout_toRightOf="@id/usuario"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/AgregarMateria" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/listaMes"
-                android:layout_below="@id/txtMes">
+                android:id="@+id/hoy"
+                android:layout_below="@id/menu">
 
-            </ListView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Por hacer hoy"
+                    android:background="#C3CDD0"
+                    android:textSize="20dp"
+                    android:id="@+id/txtHoy"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"/>
 
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listaHoy"
+                    android:layout_below="@id/txtHoy"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mañana"
+                android:layout_below="@id/hoy">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#C3CDD0"
+                    android:text="Por mañana"
+                    android:textSize="20dp"
+                    android:id="@+id/txtMañana"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listaMañana"
+                    android:layout_below="@id/txtMañana"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/semana"
+                android:layout_below="@id/mañana">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#C3CDD0"
+                    android:text="Por hacer esta semana"
+                    android:textSize="20dp"
+                    android:id="@+id/txtSemana"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"/>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listaSemana"
+                    android:layout_below="@id/txtSemana"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mes"
+                android:layout_below="@id/semana">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#C3CDD0"
+                    android:text="Por hacer este mes"
+                    android:textSize="20dp"
+                    android:id="@+id/txtMes"
+                    android:textColor="@android:color/black"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listaMes"
+                    android:layout_below="@id/txtMes"/>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
+    </ScrollView>
 
-    </RelativeLayout>
-
-</ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -179,5 +181,6 @@
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
         app:elevation="2dp"/>
+
 </RelativeLayout>
 
