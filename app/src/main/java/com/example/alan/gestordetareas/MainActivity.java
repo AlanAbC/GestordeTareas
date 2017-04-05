@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     final List<MenuItem> items = new ArrayList<>();
     private Menu menu;
+    private ImageView btnMenu;
     NavigationView nav;
 
     @Override
@@ -65,7 +67,15 @@ public class MainActivity extends AppCompatActivity {
                 }else if(pos == 4){
                     msg("Acerca de");
                 }
+                drawerLayout.closeDrawer(nav);
                 return false;
+            }
+        });
+        btnMenu = (ImageView)findViewById(R.id.Btnmenu);
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(nav);
             }
         });
     }
@@ -73,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
     public void agregarTarea(View view){
         Intent i = new Intent(MainActivity.this, agregarTarea.class);
         startActivity(i);
-    }
-
-    public void abrirMenu(View view){
-
     }
 
     public void msg(String msg){
