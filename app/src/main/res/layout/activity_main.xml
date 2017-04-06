@@ -39,7 +39,15 @@
                         android:src="@drawable/menu"
                         android:id="@+id/Btnmenu"/>
 
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/Btnmenu"
+                        android:text="INICIO"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="20dp"/>
 
 
 
@@ -56,7 +64,7 @@
                         android:layout_height="40dp"
                         android:text="Por hacer hoy"
                         android:background="#C3CDD0"
-                        android:textSize="20dp"
+                        android:textSize="17dp"
                         android:id="@+id/txtHoy"
                         android:textColor="@android:color/black"
                         android:paddingTop="10dp"
@@ -81,7 +89,7 @@
                         android:layout_height="40dp"
                         android:background="#C3CDD0"
                         android:text="Por mañana"
-                        android:textSize="20dp"
+                        android:textSize="17dp"
                         android:id="@+id/txtMañana"
                         android:textColor="@android:color/black"
                         android:paddingTop="10dp"
@@ -106,7 +114,7 @@
                         android:layout_height="40dp"
                         android:background="#C3CDD0"
                         android:text="Por hacer esta semana"
-                        android:textSize="20dp"
+                        android:textSize="17dp"
                         android:id="@+id/txtSemana"
                         android:textColor="@android:color/black"
                         android:paddingTop="10dp"
@@ -131,7 +139,7 @@
                         android:layout_height="40dp"
                         android:background="#C3CDD0"
                         android:text="Por hacer este mes"
-                        android:textSize="20dp"
+                        android:textSize="17dp"
                         android:id="@+id/txtMes"
                         android:textColor="@android:color/black"
                         android:paddingTop="10dp"
