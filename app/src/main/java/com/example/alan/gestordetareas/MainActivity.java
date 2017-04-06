@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
                 item.setChecked(true);
                 int pos = items.indexOf(item);
                 if(pos == 0){
-                    msg("Materias");
+                    Intent i = new Intent(MainActivity.this, agregar_materia.class);
+                    startActivity(i);
                 }else if(pos == 1){
                     msg("Tareas Completadas");
                 }else if(pos == 2){

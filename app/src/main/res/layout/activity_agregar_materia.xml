@@ -188,31 +188,35 @@
                         android:layout_marginTop="10dp"
                         android:textAlignment="center"/>
                 </RelativeLayout>
+                <CheckBox
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/conLunes"
+                    android:id="@+id/checkMartes"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Tmartes"
+                    android:text="Martes"
+                    android:layout_below="@id/conLunes"
+                    android:layout_marginTop="15dp"
+                    android:textSize="20dp"
+                    android:layout_toRightOf="@id/checkMartes"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/conMartes"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:layout_below="@id/conLunes">
-                    <CheckBox
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/checkMartes"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/Tmartes"
-                        android:text="Martes"
-                        android:layout_marginTop="15dp"
-                        android:textSize="20dp"
-                        android:layout_toRightOf="@id/checkMartes"/>
+
                     <EditText
                         android:layout_width="120dp"
                         android:id="@+id/entradaTMa"
-                        android:layout_toRightOf="@id/Tmartes"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="45dp"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:layout_width="120dp"
@@ -222,10 +226,11 @@
                         android:text="Entrada"
                         android:textSize="20dp"
                         android:textAlignment="center"
-                        android:layout_marginLeft="125dp"/>
+                        android:layout_marginLeft="45dp"/>
                     <EditText
                         android:layout_width="120dp"
                         android:id="@+id/salidaTMa"
+                        android:layout_marginTop="20dp"
                         android:layout_toRightOf="@id/entradaTMa"
                         android:layout_marginLeft="15dp"
                         android:layout_height="wrap_content" />

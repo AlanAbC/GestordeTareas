@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 public class agregar_materia extends AppCompatActivity {
     CheckBox lunes;
+    int flagLunes=0;
     RelativeLayout conLunes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,13 @@ public class agregar_materia extends AppCompatActivity {
         lunes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                conLunes.setVisibility(View.VISIBLE);
+                if(flagLunes==0){
+                    conLunes.setVisibility(View.VISIBLE);
+                    flagLunes=1;
+                }else{
+                    conLunes.setVisibility(View.GONE);
+                    flagLunes=0;
+                }
             }
         });
     }
