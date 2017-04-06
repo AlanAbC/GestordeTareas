@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     msg("Horario");
                 }else if(pos == 4){
                     msg("Acerca de");
-                }
+                }a
                 drawerLayout.closeDrawer(nav);
                 return false;
             }
