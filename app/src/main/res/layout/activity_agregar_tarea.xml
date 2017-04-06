@@ -163,7 +163,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/agregar"
-        android:backgroundTint="#00f563"
+        app:backgroundTint="#00f563"
         android:src="@drawable/agregart"
         app:fabSize="normal"
         android:onClick="agregarTarea"
