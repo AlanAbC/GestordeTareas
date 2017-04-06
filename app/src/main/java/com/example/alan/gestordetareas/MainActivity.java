@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        menuNav();
+    }
+
+    public void menuNav() {
         nav = (NavigationView)findViewById(R.id.navigation);
         menu = nav.getMenu();
         for(int i = 0; i < menu.size(); i++){
@@ -56,16 +60,19 @@ public class MainActivity extends AppCompatActivity {
                 item.setChecked(true);
                 int pos = items.indexOf(item);
                 if(pos == 0){
-                    Intent i = new Intent(MainActivity.this, agregar_materia.class);
+                    Intent i = new Intent(MainActivity.this, Materias.class);
                     startActivity(i);
                 }else if(pos == 1){
                     msg("Tareas Completadas");
                 }else if(pos == 2){
                     Intent i = new Intent(MainActivity.this, agregarTarea.class);
                     startActivity(i);
-                }else if(pos == 3){
+                }else if(pos == 3) {
                     msg("Horario");
                 }else if(pos == 4){
+                    Intent i = new Intent(MainActivity.this, agregar_materia.class);
+                    startActivity(i);
+                }else if(pos == 5){
                     msg("Acerca de");
                 }
                 drawerLayout.closeDrawer(nav);

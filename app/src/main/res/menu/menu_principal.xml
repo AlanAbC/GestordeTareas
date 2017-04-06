@@ -18,6 +18,9 @@
             android:title="Horario" />
         <item
             android:id="@+id/opcion5"
+            android:title="Agregar Materia" />
+        <item
+            android:id="@+id/opcion6"
             android:title="Acerca de" />
     </group>
 </menu>
