@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".Materias" />
         <activity android:name=".mostrarTarea" />
-        <activity android:name=".agregarTarea"></activity>
+        <activity android:name=".agregarTarea" />
+        <activity android:name=".agregar_materia"></activity>
     </application>
 
 </manifest>

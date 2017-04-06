@@ -23,7 +23,7 @@
                 android:layout_height="60dp"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="8dp"
-                android:background= "#6100c1"
+                android:background= "#dd4040"
                 android:id="@+id/menu"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true">
@@ -139,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/agregar"
-        app:backgroundTint="#00ce53"
+        app:backgroundTint="#1b9aaa"
         android:src="@drawable/agregart"
         app:fabSize="normal"
         android:onClick="agregarTarea"
