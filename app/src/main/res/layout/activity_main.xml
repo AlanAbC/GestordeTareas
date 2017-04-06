@@ -26,7 +26,7 @@
                     android:layout_height="60dp"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="8dp"
-                    android:background= "#519A87"
+                    android:background= "#017fa8"
                     android:id="@+id/menu"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true">
@@ -39,29 +39,9 @@
                         android:src="@drawable/menu"
                         android:id="@+id/Btnmenu"/>
 
-                    <TextView
-                        android:layout_width="160dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/usuario"
-                        android:text="Hola USERNAME"
-                        android:textSize="19dp"
-                        android:paddingTop="10dp"
-                        android:textColor="@android:color/white"
-                        android:layout_marginStart="20dp"
-                        android:layout_alignTop="@+id/Btnmenu"
-                        android:layout_toEndOf="@+id/Btnmenu" />
 
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="20dp"
-                        android:text="Agregar Materia"
-                        android:textSize="12dp"
-                        android:paddingTop="10dp"
-                        android:layout_toRightOf="@id/usuario"
-                        android:textColor="@android:color/white"
-                        android:id="@+id/AgregarMateria" />
+
+
 
                 </RelativeLayout>
 
