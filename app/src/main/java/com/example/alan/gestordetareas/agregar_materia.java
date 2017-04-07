@@ -1,13 +1,24 @@
 package com.example.alan.gestordetareas;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class agregar_materia extends AppCompatActivity {
+
     CheckBox lunes;
     CheckBox martes;
     CheckBox miercoles;
@@ -26,93 +37,152 @@ public class agregar_materia extends AppCompatActivity {
     RelativeLayout conJueves;
     RelativeLayout conViernes;
     RelativeLayout conSabado;
+    //Menu, Declaracion de variables
+    private DrawerLayout drawerLayout;
+    final List<MenuItem> items = new ArrayList<>();
+    private Menu menu;
+    private ImageView btnMenu;
+    private NavigationView nav;
+    //Fin menu, declaracion de variables
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_agregar_materia);
-        lunes=(CheckBox)findViewById(R.id.checkLunes);
-        conLunes=(RelativeLayout)findViewById(R.id.conLunes);
-        martes=(CheckBox)findViewById(R.id.checkMartes);
-        conMartes=(RelativeLayout)findViewById(R.id.conMartes);
-        miercoles=(CheckBox)findViewById(R.id.checkMiercoles);
-        conMiercoles=(RelativeLayout)findViewById(R.id.conMiercoles);
-        jueves=(CheckBox)findViewById(R.id.checkJueves);
-        conJueves=(RelativeLayout)findViewById(R.id.conJueves);
-        viernes=(CheckBox)findViewById(R.id.checkViernes);
-        conViernes=(RelativeLayout)findViewById(R.id.conViernes);
-        sabado=(CheckBox)findViewById(R.id.checkSabado);
-        conSabado=(RelativeLayout)findViewById(R.id.conSabado);
+        //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
+        drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
+        nav = (NavigationView)findViewById(R.id.navigation);
+        menu = nav.getMenu();
+        menuNav();
+        // Fin menu
+        lunes = (CheckBox)findViewById(R.id.checkLunes);
+        conLunes = (RelativeLayout)findViewById(R.id.conLunes);
+        martes = (CheckBox)findViewById(R.id.checkMartes);
+        conMartes = (RelativeLayout)findViewById(R.id.conMartes);
+        miercoles = (CheckBox)findViewById(R.id.checkMiercoles);
+        conMiercoles = (RelativeLayout)findViewById(R.id.conMiercoles);
+        jueves = (CheckBox)findViewById(R.id.checkJueves);
+        conJueves = (RelativeLayout)findViewById(R.id.conJueves);
+        viernes = (CheckBox)findViewById(R.id.checkViernes);
+        conViernes = (RelativeLayout)findViewById(R.id.conViernes);
+        sabado = (CheckBox)findViewById(R.id.checkSabado);
+        conSabado = (RelativeLayout)findViewById(R.id.conSabado);
         lunes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagLunes==0){
+                if(flagLunes == 0){
                     conLunes.setVisibility(View.VISIBLE);
-                    flagLunes=1;
+                    flagLunes = 1;
                 }else{
                     conLunes.setVisibility(View.GONE);
-                    flagLunes=0;
+                    flagLunes = 0;
                 }
             }
         });
         martes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagMartes==0){
+                if(flagMartes == 0){
                     conMartes.setVisibility(View.VISIBLE);
-                    flagMartes=1;
+                    flagMartes = 1;
                 }else{
                     conMartes.setVisibility(View.GONE);
-                    flagMartes=0;
+                    flagMartes = 0;
                 }
             }
         });
         miercoles.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagMiercoles==0){
+                if(flagMiercoles == 0){
                     conMiercoles.setVisibility(View.VISIBLE);
-                    flagMiercoles=1;
+                    flagMiercoles = 1;
                 }else{
                     conMiercoles.setVisibility(View.GONE);
-                    flagMiercoles=0;
+                    flagMiercoles = 0;
                 }
             }
         });
         jueves.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagJueves==0){
+                if(flagJueves == 0){
                     conJueves.setVisibility(View.VISIBLE);
-                    flagJueves=1;
+                    flagJueves = 1;
                 }else{
                     conJueves.setVisibility(View.GONE);
-                    flagJueves=0;
+                    flagJueves = 0;
                 }
             }
         });
         viernes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagViernes==0){
+                if(flagViernes == 0){
                     conViernes.setVisibility(View.VISIBLE);
-                    flagViernes=1;
+                    flagViernes = 1;
                 }else{
                     conViernes.setVisibility(View.GONE);
-                    flagViernes=0;
+                    flagViernes = 0;
                 }
             }
         });
         sabado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagSabado==0){
+                if(flagSabado == 0){
                     conSabado.setVisibility(View.VISIBLE);
-                    flagSabado=1;
+                    flagSabado = 1;
                 }else{
                     conSabado.setVisibility(View.GONE);
-                    flagSabado=0;
+                    flagSabado = 0;
                 }
+            }
+        });
+    }
+
+    /**
+     * Funcion encargada del menu
+     * Muestra, oculta y redirecciona el menu
+     */
+    public void menuNav() {
+        for(int i = 0; i < menu.size(); i++){
+            items.add(menu.getItem(i));
+        }
+        nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                item.setChecked(true);
+                int pos = items.indexOf(item);
+                if(pos == 0){
+                    Intent i = new Intent(agregar_materia.this, Materias.class);
+                    startActivity(i);
+                }else if(pos == 1){
+                    Intent i = new Intent(agregar_materia.this, completadas.class);
+                    startActivity(i);
+                }else if(pos == 2){
+                    Intent i = new Intent(agregar_materia.this, agregarTarea.class);
+                    startActivity(i);
+                }else if(pos == 3) {
+                    Intent i = new Intent(agregar_materia.this, horario.class);
+                    startActivity(i);
+                }else if(pos == 4){
+
+                }else if(pos == 5){
+                    Intent i = new Intent(agregar_materia.this, acerca.class);
+                    startActivity(i);
+                }
+                drawerLayout.closeDrawer(nav);
+                item.setChecked(false);
+                return false;
+            }
+        });
+        btnMenu = (ImageView)findViewById(R.id.Btnmenu);
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(nav);
             }
         });
     }

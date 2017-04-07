@@ -25,18 +25,19 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton agregar;
+    //Menu, Declaracion de variables
     private DrawerLayout drawerLayout;
     final List<MenuItem> items = new ArrayList<>();
     private Menu menu;
     private ImageView btnMenu;
-    NavigationView nav;
+    private NavigationView nav;
+    //Fin menu, declaracion de variables
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-        drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         agregar=(FloatingActionButton)findViewById(R.id.agregar);
         agregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +46,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        menuNav();
-    }
-
-    public void menuNav() {
+        //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
+        drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         nav = (NavigationView)findViewById(R.id.navigation);
         menu = nav.getMenu();
+        menuNav();
+        // Fin menu
+    }
+
+
+    /**
+     * Funcion encargada del menu
+     * Muestra, oculta y redirecciona el menu
+     */
+    public void menuNav() {
         for(int i = 0; i < menu.size(); i++){
             items.add(menu.getItem(i));
         }
@@ -79,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
                 }
                 drawerLayout.closeDrawer(nav);
+                item.setChecked(false);
                 return false;
             }
         });
