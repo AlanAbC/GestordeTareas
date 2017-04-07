@@ -19,7 +19,10 @@
         <activity android:name=".Materias" />
         <activity android:name=".mostrarTarea" />
         <activity android:name=".agregarTarea" />
-        <activity android:name=".agregar_materia"></activity>
+        <activity android:name=".agregar_materia" />
+        <activity android:name=".horario" />
+        <activity android:name=".completadas" />
+        <activity android:name=".acerca"></activity>
     </application>
 
 </manifest>

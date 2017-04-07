@@ -63,17 +63,20 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(MainActivity.this, Materias.class);
                     startActivity(i);
                 }else if(pos == 1){
-                    msg("Tareas Completadas");
+                    Intent i = new Intent(MainActivity.this, completadas.class);
+                    startActivity(i);
                 }else if(pos == 2){
                     Intent i = new Intent(MainActivity.this, agregarTarea.class);
                     startActivity(i);
                 }else if(pos == 3) {
-                    msg("Horario");
+                    Intent i = new Intent(MainActivity.this, horario.class);
+                    startActivity(i);
                 }else if(pos == 4){
                     Intent i = new Intent(MainActivity.this, agregar_materia.class);
                     startActivity(i);
                 }else if(pos == 5){
-                    msg("Acerca de");
+                    Intent i = new Intent(MainActivity.this, acerca.class);
+                    startActivity(i);
                 }
                 drawerLayout.closeDrawer(nav);
                 return false;
