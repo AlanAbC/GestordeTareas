@@ -6,13 +6,15 @@ public class ObjHorario {
     private ObjMateria materia;
     private String entrada;
     private String salida;
+    private String salon;
     private String dia;
 
-    public ObjHorario(int id, ObjMateria materia, String entrada, String salida, String dia) {
+    public ObjHorario(int id, ObjMateria materia, String entrada, String salida, String salon, String dia) {
         this.id = id;
         this.materia = materia;
         this.entrada = entrada;
         this.salida = salida;
+        this.salon = salon;
         this.dia = dia;
     }
 
@@ -50,6 +52,14 @@ public class ObjHorario {
 
     public void setSalida(String salida) {
         this.salida = salida;
+    }
+
+    public String getSalon() {
+        return salon;
+    }
+
+    public void setSalon(String salon) {
+        this.salon = salon;
     }
 
     public String getDia() {
