@@ -618,7 +618,24 @@
                             android:textAlignment="center"/>
 
                     </RelativeLayout>
-
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Color"
+                        android:layout_below="@id/conSabado"
+                        android:id="@+id/color"
+                        android:textStyle="bold"
+                        android:textSize="19dp"
+                        android:layout_marginTop="15dp"
+                        android:paddingLeft="20dp"/>
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:id="@+id/colorS"
+                        android:layout_marginTop="15dp"
+                        android:layout_below="@id/color"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"></Spinner>
                 </RelativeLayout>
 
             </RelativeLayout>
