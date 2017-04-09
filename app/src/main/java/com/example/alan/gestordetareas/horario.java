@@ -51,22 +51,29 @@ public class horario extends AppCompatActivity {
                 item.setChecked(true);
                 int pos = items.indexOf(item);
                 if(pos == 0){
+                    finish();
+                }else if(pos == 1){
                     Intent i = new Intent(horario.this, Materias.class);
                     startActivity(i);
-                }else if(pos == 1){
+                    finish();
+                }else if(pos == 2){
                     Intent i = new Intent(horario.this, completadas.class);
                     startActivity(i);
-                }else if(pos == 2){
-                    Intent i = new Intent(horario.this, agregarTarea.class);
-                    startActivity(i);
+                    finish();
                 }else if(pos == 3) {
 
                 }else if(pos == 4){
+                    Intent i = new Intent(horario.this, agregarTarea.class);
+                    startActivity(i);
+                    finish();
+                }else if(pos == 5){
                     Intent i = new Intent(horario.this, agregar_materia.class);
                     startActivity(i);
-                }else if(pos == 5){
+                    finish();
+                }else if(pos == 6){
                     Intent i = new Intent(horario.this, acerca.class);
                     startActivity(i);
+                    finish();
                 }
                 drawerLayout.closeDrawer(nav);
                 item.setChecked(false);

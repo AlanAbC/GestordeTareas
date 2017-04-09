@@ -69,21 +69,23 @@ public class MainActivity extends AppCompatActivity {
                 item.setChecked(true);
                 int pos = items.indexOf(item);
                 if(pos == 0){
+
+                }else if(pos == 1){
                     Intent i = new Intent(MainActivity.this, Materias.class);
                     startActivity(i);
-                }else if(pos == 1){
-                    Intent i = new Intent(MainActivity.this, completadas.class);
-                    startActivity(i);
                 }else if(pos == 2){
-                    Intent i = new Intent(MainActivity.this, agregarTarea.class);
+                    Intent i = new Intent(MainActivity.this, completadas.class);
                     startActivity(i);
                 }else if(pos == 3) {
                     Intent i = new Intent(MainActivity.this, horario.class);
                     startActivity(i);
                 }else if(pos == 4){
-                    Intent i = new Intent(MainActivity.this, agregar_materia.class);
+                    Intent i = new Intent(MainActivity.this, agregarTarea.class);
                     startActivity(i);
                 }else if(pos == 5){
+                    Intent i = new Intent(MainActivity.this, agregar_materia.class);
+                    startActivity(i);
+                }else if(pos == 6){
                     Intent i = new Intent(MainActivity.this, acerca.class);
                     startActivity(i);
                 }

@@ -156,22 +156,29 @@ public class agregar_materia extends AppCompatActivity {
                 item.setChecked(true);
                 int pos = items.indexOf(item);
                 if(pos == 0){
+                    finish();
+                }else if(pos == 1){
                     Intent i = new Intent(agregar_materia.this, Materias.class);
                     startActivity(i);
-                }else if(pos == 1){
+                    finish();
+                }else if(pos == 2){
                     Intent i = new Intent(agregar_materia.this, completadas.class);
                     startActivity(i);
-                }else if(pos == 2){
+                    finish();
+                }else if(pos == 3) {
+                    Intent i = new Intent(agregar_materia.this, completadas.class);
+                    startActivity(i);
+                    finish();
+                }else if(pos == 4){
                     Intent i = new Intent(agregar_materia.this, agregarTarea.class);
                     startActivity(i);
-                }else if(pos == 3) {
-                    Intent i = new Intent(agregar_materia.this, horario.class);
-                    startActivity(i);
-                }else if(pos == 4){
-
+                    finish();
                 }else if(pos == 5){
+
+                }else if(pos == 6){
                     Intent i = new Intent(agregar_materia.this, acerca.class);
                     startActivity(i);
+                    finish();
                 }
                 drawerLayout.closeDrawer(nav);
                 item.setChecked(false);

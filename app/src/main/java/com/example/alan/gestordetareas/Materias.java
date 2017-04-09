@@ -51,22 +51,29 @@ public class Materias extends AppCompatActivity {
                 item.setChecked(true);
                 int pos = items.indexOf(item);
                 if(pos == 0){
-
+                    finish();
                 }else if(pos == 1){
+
+                }else if(pos == 2){
                     Intent i = new Intent(Materias.this, completadas.class);
                     startActivity(i);
-                }else if(pos == 2){
+                    finish();
+                }else if(pos == 3) {
+                    Intent i = new Intent(Materias.this, completadas.class);
+                    startActivity(i);
+                    finish();
+                }else if(pos == 4){
                     Intent i = new Intent(Materias.this, agregarTarea.class);
                     startActivity(i);
-                }else if(pos == 3) {
-                    Intent i = new Intent(Materias.this, horario.class);
-                    startActivity(i);
-                }else if(pos == 4){
+                    finish();
+                }else if(pos == 5){
                     Intent i = new Intent(Materias.this, agregar_materia.class);
                     startActivity(i);
-                }else if(pos == 5){
+                    finish();
+                }else if(pos == 6){
                     Intent i = new Intent(Materias.this, acerca.class);
                     startActivity(i);
+                    finish();
                 }
                 drawerLayout.closeDrawer(nav);
                 item.setChecked(false);
