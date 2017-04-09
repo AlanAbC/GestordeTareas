@@ -4,9 +4,9 @@ public class ObjUsuario {
 
     private String nombre;
     private int primera;
-    private int img;
+    private String img;
 
-    public ObjUsuario(String nombre, int primera, int img) {
+    public ObjUsuario(String nombre, int primera, String img) {
         this.nombre = nombre;
         this.primera = primera;
         this.img = img;
@@ -32,11 +32,11 @@ public class ObjUsuario {
         this.primera = primera;
     }
 
-    public int getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 }
