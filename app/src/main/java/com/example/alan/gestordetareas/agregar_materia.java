@@ -1,14 +1,18 @@
 package com.example.alan.gestordetareas;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -50,6 +54,13 @@ public class agregar_materia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_agregar_materia);
+        //Cambiar el color en la barra de notificaciones (Solo funciona de lollipop hacia arriba)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.agregar));
+        }
+        //Fin cambio de color de barra de notificaciones
         //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
         drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         nav = (NavigationView)findViewById(R.id.navigation);
@@ -166,7 +177,7 @@ public class agregar_materia extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }else if(pos == 3) {
-                    Intent i = new Intent(agregar_materia.this, completadas.class);
+                    Intent i = new Intent(agregar_materia.this, horario.class);
                     startActivity(i);
                     finish();
                 }else if(pos == 4){

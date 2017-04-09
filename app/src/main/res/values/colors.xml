@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="main">#1b9aaa</color>
+    <color name="agregar">#dd4040</color>
+    <color name="completadas">#06d6a0</color>
+    <color name="horario">#eea600</color>
+    <color name="materias">#dd4040</color>
+    <color name="acerca">#a042ff</color>
 </resources>
