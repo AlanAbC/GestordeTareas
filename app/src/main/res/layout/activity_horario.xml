@@ -74,28 +74,28 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_width="87dp"
+                            android:layout_width="81dp"
                             android:text="Mat"
                             android:background="@drawable/cell"
                             android:textAlignment="center"
                             android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:layout_width="87dp"
+                            android:layout_width="81dp"
                             android:text="Entrada"
                             android:background="@drawable/cell"
                             android:textAlignment="center"
                             android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:layout_width="87dp"
+                            android:layout_width="81dp"
                             android:text="Salida"
                             android:background="@drawable/cell"
                             android:textAlignment="center"
                             android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:layout_width="87dp"
+                            android:layout_width="81dp"
                             android:text="Salon"
                             android:background="@drawable/cell"
                             android:textAlignment="center"
@@ -111,28 +111,28 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_width="87dp"
+                            android:layout_width="81dp"
                             android:text=""
                             android:background="@drawable/cell"
                             android:textAlignment="center"
                             android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:layout_width="87dp"
+                            android:layout_width="81dp"
                             android:text=""
                             android:background="@drawable/cell"
                             android:textAlignment="center"
                             android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:layout_width="87dp"
+                            android:layout_width="81dp"
                             android:text=""
                             android:background="@drawable/cell"
                             android:textAlignment="center"
                             android:layout_height="wrap_content"/>
 
                         <TextView
-                            android:layout_width="87dp"
+                            android:layout_width="81dp"
                             android:text=""
                             android:background="@drawable/cell"
                             android:textAlignment="center"
