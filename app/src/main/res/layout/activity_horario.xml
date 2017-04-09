@@ -75,7 +75,7 @@
 
                         <TextView
                             android:layout_width="81dp"
-                            android:text="Mat"
+                            android:text="Materia"
                             android:background="@drawable/cell"
                             android:textAlignment="center"
                             android:layout_height="wrap_content"/>
