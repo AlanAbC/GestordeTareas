@@ -7,12 +7,14 @@ import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class AdminBD extends SQLiteOpenHelper {
 
     public static final int DataBaseVersion = 1;
-    public static final String DataBaseName = "GestorTarea";
+    public static final String DataBaseName = "GestorTarea.db";
 
     public AdminBD(Context context) {
         super(context, DataBaseName, null, DataBaseVersion);
@@ -90,9 +92,12 @@ public class AdminBD extends SQLiteOpenHelper {
      */
     public ObjUsuario selectUsuario(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Usuario", null);
+        Cursor cursor = db.query("Usuario", null, null, null, null, null, null);
         cursor.moveToFirst();
-        ObjUsuario usuario = new ObjUsuario(cursor.getString(1), cursor.getInt(0), cursor.getString(2));
+        ObjUsuario usuario = new ObjUsuario(
+                cursor.getString(cursor.getColumnIndex("usuNombre")),
+                cursor.getInt(cursor.getColumnIndex("usuPrimera")),
+                cursor.getString(cursor.getColumnIndex("usuImg")));
         db.close();
         cursor.close();
         return usuario;
@@ -100,14 +105,14 @@ public class AdminBD extends SQLiteOpenHelper {
 
     /**
      * Funcion que actualiza al usuario y cambia el valor de primera vez
-     * @param nombre
+     * @param usuario
      * @return 0 si hay algun error y 1 en caso de que se actualice correctamente
      */
-    public int updateUsuario(String nombre){
+    public int updateUsuario(ObjUsuario usuario){
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues v = new ContentValues();
-            v.put("usuNombre", nombre);
+            v.put("usuNombre", usuario.getNombre());
             v.put("usuPrimera", 1);
             db.update("Usuario", v, "usuPrimera = 0", null);
             db.close();
@@ -118,21 +123,38 @@ public class AdminBD extends SQLiteOpenHelper {
     }
 
     /**
+     * Funcion que regresa todos los colores de la base de datos
+     * @return Array List de objetos tipo ObjColor
+     */
+    public ArrayList<ObjColor> selectColores(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query("Colores", null, null, null ,null, null ,null);
+        ArrayList<ObjColor> colores = new ArrayList<ObjColor>();
+        if(cursor.moveToFirst()){
+            ObjColor color = new ObjColor(
+                    cursor.getInt(cursor.getColumnIndex("colId")),
+                    cursor.getString(cursor.getColumnIndex("colNombre")),
+                    cursor.getString(cursor.getColumnIndex("colExa")));
+            colores.add(color);
+        }
+        db.close();
+        cursor.close();
+        return colores;
+    }
+
+    /**
      * Funcion que inserta una materia en la base de datos
-     * @param nombre
-     * @param avb
-     * @param profesor
-     * @param color
+     * @param materia
      * @return 0 si pasa un error y 1 en caso de que todo salga bien
      */
-    public int insertMateria(String nombre, String avb, String profesor, int color){
+    public int insertMateria(ObjMateria materia){
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues v = new ContentValues();
-            v.put("matNombre", nombre);
-            v.put("matAbv", avb);
-            v.put("matProfesor", profesor);
-            v.put("colId", color);
+            v.put("matNombre", materia.getNombre());
+            v.put("matAbv", materia.getAbv());
+            v.put("matProfesor", materia.getProfesor());
+            v.put("colId", materia.getColor().getId());
             db.insert("Materias", null, v);
             db.close();
             return 1;
@@ -143,22 +165,18 @@ public class AdminBD extends SQLiteOpenHelper {
 
     /**
      * Funcion que actualiza la informacion de una materia de la base de datos
-     * @param id
-     * @param nombre
-     * @param avb
-     * @param profesor
-     * @param color
+     * @param materia
      * @return 0 en caso de error 1 en caso correcto
      */
-    public int updatetMateria(int id, String nombre, String avb, String profesor, int color){
+    public int updatetMateria(ObjMateria materia){
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues v = new ContentValues();
-            v.put("matNombre", nombre);
-            v.put("matAbv", avb);
-            v.put("matProfesor", profesor);
-            v.put("colId", color);
-            db.update("Materias", v, "matId = " + id, null);
+            v.put("matNombre", materia.getNombre());
+            v.put("matAbv", materia.getAbv());
+            v.put("matProfesor", materia.getProfesor());
+            v.put("colId", materia.getColor().getId());
+            db.update("Materias", v, "matId = " + materia.getId(), null);
             db.close();
             return 1;
         }catch(Exception e){
@@ -192,8 +210,15 @@ public class AdminBD extends SQLiteOpenHelper {
         ArrayList<ObjMateria> materias = new ArrayList<ObjMateria>();
         if(cursor.moveToFirst()){
             do{
-                ObjColor color = new ObjColor(cursor.getInt(5), cursor.getString(6), cursor.getString(7));
-                ObjMateria materia = new ObjMateria(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), color);
+                ObjColor color = new ObjColor(cursor.getInt(cursor.getColumnIndex("colID")),
+                        cursor.getString(cursor.getColumnIndex("colNombre")),
+                        cursor.getString(cursor.getColumnIndex("colExa")));
+                ObjMateria materia = new ObjMateria(
+                        cursor.getInt(cursor.getColumnIndex("matId")),
+                        cursor.getString(cursor.getColumnIndex("matNombre")),
+                        cursor.getString(cursor.getColumnIndex("matAbv")),
+                        cursor.getString(cursor.getColumnIndex("matProfesor")),
+                        color);
                 materias.add(materia);
             }while(cursor.moveToNext());
         }
@@ -204,22 +229,18 @@ public class AdminBD extends SQLiteOpenHelper {
 
     /**
      * Funcion que inserta un registro en la tabla Horario de la base de datos
-     * @param materia
-     * @param entrada
-     * @param salida
-     * @param salon
-     * @param dia
+     * @param horario
      * @return 0 en caso de error 1 en caso correcto
      */
-    public int insertHorario(int materia, String entrada, String salida, String salon, String dia){
+    public int insertHorario(ObjHorario horario){
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues v = new ContentValues();
-            v.put("matId", materia);
-            v.put("horEntrada", entrada);
-            v.put("horSalida", salida);
-            v.put("horSalon", salon);
-            v.put("horDia", dia);
+            v.put("matId", horario.getMateria().getId());
+            v.put("horEntrada", horario.getEntrada());
+            v.put("horSalida", horario.getSalida());
+            v.put("horSalon", horario.getSalon());
+            v.put("horDia", horario.getDia());
             db.insert("Horario", null, v);
             db.close();
             return 1;
@@ -230,24 +251,19 @@ public class AdminBD extends SQLiteOpenHelper {
 
     /**
      * Funcion que actualiza un horario de la base de datos
-     * @param id
-     * @param materia
-     * @param entrada
-     * @param salida
-     * @param salon
-     * @param dia
+     * @param horario
      * @return 0 en caso de error y 1 en caso correcto
      */
-    public int updateHorario(int id, int materia, String entrada, String salida, String salon, String dia){
+    public int updateHorario(ObjHorario horario){
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             ContentValues v = new ContentValues();
-            v.put("matId", materia);
-            v.put("horEntrada", entrada);
-            v.put("horSalida", salida);
-            v.put("horSalon", salon);
-            v.put("horDia", dia);
-            db.update("Horario", v, "horId = " + id, null);
+            v.put("matId", horario.getMateria().getId());
+            v.put("horEntrada", horario.getEntrada());
+            v.put("horSalida", horario.getSalida());
+            v.put("horSalon", horario.getSalon());
+            v.put("horDia", horario.getDia());
+            db.update("Horario", v, "horId = " + horario.getId(), null);
             db.close();
             return 1;
         }catch(Exception e){
@@ -271,5 +287,125 @@ public class AdminBD extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Funcion que regresa un array list con todos los horarios de la base de datos
+     * @return Array List de objetos tipos ObjHorario
+     */
+    public ArrayList<ObjHorario> selectHorarios(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Horaio", null);
+        ArrayList<ObjMateria> materias = selectMaterias();
+        ArrayList<ObjHorario> horarios = new ArrayList<ObjHorario>();
+        if(cursor.moveToFirst()){
+            do{
+                for(ObjMateria materia : materias){
+                    if((cursor.getInt(cursor.getColumnIndex("matId")) == materia.getId())){
+                        ObjHorario horario = new ObjHorario(
+                                cursor.getInt(cursor.getColumnIndex("horId")),
+                                materia,
+                                cursor.getString(cursor.getColumnIndex("horEntrada")),
+                                cursor.getString(cursor.getColumnIndex("horSalida")),
+                                cursor.getString(cursor.getColumnIndex("horSalon")),
+                                cursor.getString(cursor.getColumnIndex("horDia")));
+                        horarios.add(horario);
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+        db.close();
+        cursor.close();
+        return horarios;
+    }
 
+    /**
+     * Funcion que regresa una lista con todas las tareas que hay en la base de datos
+     * @return Array List de Objetos tipo ObjTarea
+     * @throws ParseException
+     */
+    public ArrayList<ObjTarea> selectTareas() throws ParseException {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Tareas", null);
+        ArrayList<ObjMateria> materias = selectMaterias();
+        ArrayList<ObjTarea> tareas = new ArrayList<ObjTarea>();
+        if(cursor.moveToFirst()){
+            SimpleDateFormat sdf = new SimpleDateFormat();
+            do{
+                for(ObjMateria materia : materias){
+                    if((cursor.getInt(cursor.getColumnIndex("matId")) == materia.getId())){
+                        ObjTarea tarea = new ObjTarea(
+                                cursor.getInt(cursor.getColumnIndex("tarId")),
+                                cursor.getString(cursor.getColumnIndex("tarNombre")),
+                                sdf.parse(cursor.getString(cursor.getColumnIndex("tarFechaEntrega"))),
+                                sdf.parse(cursor.getString(cursor.getColumnIndex("tarFechaCreacion"))),
+                                cursor.getString(cursor.getColumnIndex("tarDescripcion")),
+                                materia);
+                        tareas.add(tarea);
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+        db.close();
+        cursor.close();
+        return tareas;
+    }
+
+    /**
+     * funcion para insertar una nueva tarea a la base de datos
+     * @param tarea
+     * @return 0 en caso de error y 1 en caso correcto
+     */
+    public int insertTarea(ObjTarea tarea){
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues v = new ContentValues();
+            v.put("tarNombre", tarea.getNombre());
+            v.put("tarFechaEntrega", tarea.getFechaEntrega().toString());
+            v.put("tarFechaCreacion", tarea.getFechaCreacion().toString());
+            v.put("tarDescripcion", tarea.getDescripcion());
+            v.put("matId", tarea.getMateria().getId());
+            db.insert("Tareas", null, v);
+            db.close();
+            return 1;
+        }catch(Exception e){
+            return 0;
+        }
+    }
+
+    /**
+     * funcion para actualizar una tarea de la base de datos
+     * @param tarea
+     * @return 0 en caso de error y 1 en caso correcto
+     */
+    public int updateTarea(ObjTarea tarea){
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues v = new ContentValues();
+            v.put("tarNombre", tarea.getNombre());
+            v.put("tarFechaEntrega", tarea.getFechaEntrega().toString());
+            v.put("tarFechaCreacion", tarea.getFechaCreacion().toString());
+            v.put("tarDescripcion", tarea.getDescripcion());
+            v.put("matId", tarea.getMateria().getId());
+            db.update("Tareas", v, "tarId = " + tarea.getId(), null);
+            db.close();
+            return 1;
+        }catch(Exception e){
+            return 0;
+        }
+    }
+
+    /**
+     * Funcion para eliminar una tarea
+     * @param id
+     * @return 0 en caso de error y 1 en caso correcto
+     */
+    public int deleteTarea(int id){
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.delete("Tareas", "tarId = " + id, null);
+            db.close();
+            return 1;
+        }catch(Exception e){
+            return 0;
+        }
+    }
 }
