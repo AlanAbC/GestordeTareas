@@ -175,8 +175,6 @@ public class AdminBD extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndex("usuNombre")),
                     cursor.getInt(cursor.getColumnIndex("usuPrimera")),
                     cursor.getString(cursor.getColumnIndex("usuImg")));
-            db.close();
-            cursor.close();
             return usuario;
         }
         return null;
@@ -194,7 +192,6 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("usuNombre", usuario.getNombre());
             v.put("usuPrimera", 1);
             db.update("Usuario", v, "usuPrimera = 0", null);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -218,8 +215,6 @@ public class AdminBD extends SQLiteOpenHelper {
                 colores.add(color);
             }while(cursor.moveToNext());
         }
-        db.close();
-        cursor.close();
         return colores;
     }
 
@@ -237,7 +232,6 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("matProfesor", materia.getProfesor());
             v.put("colId", materia.getColor().getId());
             db.insert("Materias", null, v);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -258,7 +252,6 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("matProfesor", materia.getProfesor());
             v.put("colId", materia.getColor().getId());
             db.update("Materias", v, "matId = " + materia.getId(), null);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -274,7 +267,6 @@ public class AdminBD extends SQLiteOpenHelper {
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             db.delete("Materias", "matId = " + id, null);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -291,7 +283,7 @@ public class AdminBD extends SQLiteOpenHelper {
         ArrayList<ObjMateria> materias = new ArrayList<ObjMateria>();
         if(cursor.moveToFirst()){
             do{
-                ObjColor color = new ObjColor(cursor.getInt(cursor.getColumnIndex("colID")),
+                ObjColor color = new ObjColor(cursor.getInt(cursor.getColumnIndex("colId")),
                         cursor.getString(cursor.getColumnIndex("colNombre")),
                         cursor.getString(cursor.getColumnIndex("colExa")));
                 ObjMateria materia = new ObjMateria(
@@ -303,9 +295,25 @@ public class AdminBD extends SQLiteOpenHelper {
                 materias.add(materia);
             }while(cursor.moveToNext());
         }
-        db.close();
-        cursor.close();
         return materias;
+    }
+
+    public ObjMateria findMateria(String nombre){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Materias, Colores WHERE Materias.colId = Colores.colId AND Materias.matNombre = '" + nombre + "'", null);
+        if(cursor.moveToFirst()){
+            ObjColor color = new ObjColor(cursor.getInt(cursor.getColumnIndex("colId")),
+                    cursor.getString(cursor.getColumnIndex("colNombre")),
+                    cursor.getString(cursor.getColumnIndex("colExa")));
+            ObjMateria materia = new ObjMateria(
+                    cursor.getInt(cursor.getColumnIndex("matId")),
+                    cursor.getString(cursor.getColumnIndex("matNombre")),
+                    cursor.getString(cursor.getColumnIndex("matAbv")),
+                    cursor.getString(cursor.getColumnIndex("matProfesor")),
+                    color);
+            return materia;
+        }
+        return null;
     }
 
     /**
@@ -323,7 +331,6 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("horSalon", horario.getSalon());
             v.put("horDia", horario.getDia());
             db.insert("Horario", null, v);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -345,7 +352,6 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("horSalon", horario.getSalon());
             v.put("horDia", horario.getDia());
             db.update("Horario", v, "horId = " + horario.getId(), null);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -361,7 +367,6 @@ public class AdminBD extends SQLiteOpenHelper {
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             db.delete("Horario", "horId = " + id, null);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -393,8 +398,6 @@ public class AdminBD extends SQLiteOpenHelper {
                 }
             }while(cursor.moveToNext());
         }
-        db.close();
-        cursor.close();
         return horarios;
     }
 
@@ -425,8 +428,6 @@ public class AdminBD extends SQLiteOpenHelper {
                 }
             }while(cursor.moveToNext());
         }
-        db.close();
-        cursor.close();
         return tareas;
     }
 
@@ -445,7 +446,6 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("tarDescripcion", tarea.getDescripcion());
             v.put("matId", tarea.getMateria().getId());
             db.insert("Tareas", null, v);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -467,7 +467,6 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("tarDescripcion", tarea.getDescripcion());
             v.put("matId", tarea.getMateria().getId());
             db.update("Tareas", v, "tarId = " + tarea.getId(), null);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
@@ -483,7 +482,6 @@ public class AdminBD extends SQLiteOpenHelper {
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             db.delete("Tareas", "tarId = " + id, null);
-            db.close();
             return 1;
         }catch(Exception e){
             return 0;
