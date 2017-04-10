@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="USERNAME"
+        android:id="@+id/menuNombreUsuario"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>

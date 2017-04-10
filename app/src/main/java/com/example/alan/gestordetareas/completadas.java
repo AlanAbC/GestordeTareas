@@ -14,12 +14,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class completadas extends AppCompatActivity {
 
+    private AdminBD db; //Variable del administrador de la base de datos
     //Menu, Declaracion de variables
     private DrawerLayout drawerLayout;
     final List<MenuItem> items = new ArrayList<>();
@@ -46,6 +48,15 @@ public class completadas extends AppCompatActivity {
         menu = nav.getMenu();
         menuNav();
         // Fin menu
+        //Codigo para crear el objeto de la base de datos y
+        //agregar el nombre de usuario al menu
+        db = new AdminBD(this);
+        ObjUsuario usuario = db.selectUsuario();
+        //Codigo para poner en el Menu el nombre de usuario
+        View header = nav.getHeaderView(0);
+        TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
+        nombreUsuario.setText(usuario.getNombre());
+        //Fin Codigo para poner el nombre de usuario en el menu
     }
 
     /**
