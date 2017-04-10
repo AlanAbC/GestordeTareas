@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }else {
-            //Codigo para poner en el Menu el nombre de usuario
+            //Codigo para poner en el Menu el nombre de usuario jj
             View header = nav.getHeaderView(0);
             TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
             nombreUsuario.setText(usuario.getNombre());
