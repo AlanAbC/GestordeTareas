@@ -13,9 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,6 +34,8 @@ public class Materias extends AppCompatActivity {
     private ImageView btnMenu;
     private NavigationView nav;
     //Fin menu, declaracion de variables
+    private ListView listaMaterias;
+    private ArrayList<ObjMateria> materias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,24 @@ public class Materias extends AppCompatActivity {
         TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
         nombreUsuario.setText(usuario.getNombre());
         //Fin Codigo para poner el nombre de usuario en el menu
+        listaMaterias = (ListView)findViewById(R.id.listaMaterias);
+        cargarmaterias();
+    }
+
+    private void cargarmaterias() {
+        materias = db.selectMaterias();
+        listaMaterias.setAdapter(new MateriasAdaptador(getApplicationContext(), materias));
+        listaMaterias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     /**

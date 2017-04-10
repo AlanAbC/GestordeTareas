@@ -7,12 +7,14 @@
     android:orientation="vertical"
     android:gravity="bottom">
 
-    <LinearLayout
+    <TextView
         android:layout_width="10dp"
         android:layout_height="match_parent"
         android:background="#000000"
-        android:orientation="vertical"
-        android:id="@+id/colorMat"></LinearLayout>
+        android:textSize="50dp"
+        android:id="@+id/colorFondoMateria"/>
+
+
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -20,7 +22,7 @@
         android:layout_marginTop="5dp"
         android:id="@+id/materia"
         android:paddingLeft="15dp"
-        android:layout_toRightOf="@id/colorMat"
+        android:layout_toRightOf="@id/colorFondoMateria"
         android:text="NOMBRE MATERIA"
         />
     <TextView
@@ -31,7 +33,7 @@
         android:id="@+id/maestro"
         android:layout_below="@id/materia"
         android:paddingLeft="25dp"
-        android:layout_toRightOf="@id/colorMat"
+        android:layout_toRightOf="@id/colorFondoMateria"
         android:text="NOMBRE MAESTRO"
         />
     <ImageButton
