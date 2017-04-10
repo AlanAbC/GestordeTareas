@@ -2,14 +2,16 @@ package com.example.alan.gestordetareas;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * Clase encargada de acer el daptador de un layout a contenido
+ * de un espiner para poner los colores
+ */
 public class SpinnerAdaptador extends BaseAdapter{
 
     LayoutInflater inflator;

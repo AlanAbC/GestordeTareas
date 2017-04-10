@@ -1,7 +1,6 @@
 package com.example.alan.gestordetareas;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,19 +8,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -234,6 +229,9 @@ public class agregar_materia extends AppCompatActivity {
         });
     }
 
+    /**
+     * Funcion encargada de crear el spinner de colores
+     */
     public void llenarColores(){
         ArrayList<ObjColor> colores = db.selectColores();
         String[] c = new String[colores.size()];
