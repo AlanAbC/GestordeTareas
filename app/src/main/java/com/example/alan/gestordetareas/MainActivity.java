@@ -1,6 +1,8 @@
 package com.example.alan.gestordetareas;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -61,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
         menu = nav.getMenu();
         menuNav();
         // Fin menu
+        AdminBD db = new AdminBD(this);
+        ObjUsuario usuario = db.selectUsuario();
+        if(usuario.getPrimera() == 0){
+            //Codigo para seleccionar nombre
+        }else {
+            // Codigo para poner en donde corresponde el nombre y cargar las tareas
+        }
     }
 
 

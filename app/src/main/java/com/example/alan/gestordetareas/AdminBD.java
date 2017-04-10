@@ -20,65 +20,142 @@ public class AdminBD extends SQLiteOpenHelper {
         super(context, DataBaseName, null, DataBaseVersion);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String baseDatos = "Create table IF NOT EXISTS Usuario (\n" +
-                "\tusuPrimera integer NOT NULL Primary Key,\n" +
-                "\tusuNombre Varchar(70),\n" +
-                "\tusuImg Varchar(50));\n" +
-                "\n" +
-                "Create table IF NOT EXISTS Colores (\n" +
-                "\tcolId Integer NOT NULL Primary Key AUTOINCREMENT,\n" +
-                "\tColNombre varchar(20),\n" +
-                "\tcolExa varchar(6));\n" +
-                "\n" +
-                "Create table IF NOT EXISTS Materias (\n" +
-                "\tmatId integer NOT NULL Primary Key AUTOINCREMENT,\n" +
-                "\tmatNombre varchar(50),\n" +
-                "\tmatAbv varchar(10),\n" +
-                "\tmatProfesor varchar(70),\n" +
-                "\tcolId Integer NOT NULL);\n" +
-                "\n" +
-                "Create table IF NOT EXISTS Horario (\n" +
-                "\thorId Integer NOT NULL Primary Key AUTOINCREMENT,\n" +
-                "\tmatId Integer NOT NULL,\n" +
-                "\thorEntrada varchar(10),\n" +
-                "\thorSalida varchar(10),\n" +
-                "\thorSalon varchar(30),\n" +
-                "\thorDia varchar(40));\n" +
-                "\n" +
-                "Create table IF NOT EXISTS Tareas (\n" +
-                "\ttarId Integer NOT NULL Primary Key AUTOINCREMENT,\n" +
-                "\ttarNombre varchar(30),\n" +
-                "\ttarFechaEntrega DateTime,\n" +
-                "\ttarFechaCreacion DateTime,\n" +
-                "\ttarDescripcion varchar(150),\n" +
-                "\tmatId Integer NOT NULL);\n" +
-                "Insert into Colores values\n" +
-                "\t(1, 'Rosa', '#F03453'),\n" +
-                "\t(2, 'Azul', '#375AE4'),\n" +
-                "\t(3, 'Verde', '#37E482'),\n" +
-                "\t(4, 'Verde 2', '#93E437'),\n" +
-                "\t(5, 'Morado', '#C737E4'),\n" +
-                "\t(6, 'Naranja', '#E48837'),\n" +
-                "\t(7, 'Azul 2', '#37DEE4'),\n" +
-                "\t(8, 'Azul 3', '#3748E4'),\n" +
-                "\t(9, 'Rojo', '#E43737'),\n" +
-                "\t(10, 'Verde 3', '#51E437'),\n" +
-                "\t(11, 'Azul 4', '#37A8E4'),\n" +
-                "\t(12, 'Morado 2', '#A837E4'),\n" +
-                "\t(13, 'Verde 4', '#074D16'),\n" +
-                "\t(14, 'Azul 5', '#074D48'),\n" +
-                "\t(15, 'Rojo 2', '#4D1307'),\n" +
-                "\t(16, 'Morado 3', '#4D0745'),\n" +
-                "\t(17, 'Azul 6', '#10074D'),\n" +
-                "\t(18, 'Azul 7', '#074C4D');\n" +
-                "\n" +
-                "Insert into Usuario values\n" +
-                "\t(0, 'USARNAME', 'imgmenu');";
+        String usuario = "Create table Usuario (" +
+                    "usuPrimera integer NOT NULL PRIMARY KEY," +
+                    "usuNombre TEXT," +
+                    "usuImg TEXT)";
+        String colores = "Create table Colores (" +
+                    "colId Integer NOT NULL Primary Key AUTOINCREMENT," +
+                    "colNombre TEXT," +
+                    "colExa TEXT)";
+        String materias = "Create table Materias (" +
+                    "matId integer NOT NULL Primary Key AUTOINCREMENT," +
+                    "matNombre TEXT," +
+                    "matAbv TEXT," +
+                    "matProfesor TEXT," +
+                    "colId Integer NOT NULL)";
+        String horarios = "Create table Horario (" +
+                    "horId Integer NOT NULL Primary Key AUTOINCREMENT," +
+                    "matId Integer NOT NULL," +
+                    "horEntrada TEXT," +
+                    "horSalida TEXT," +
+                    "horSalon TEXT," +
+                    "horDia TEXT)";
+        String tareas = "Create table Tareas (" +
+                    "tarId Integer NOT NULL Primary Key AUTOINCREMENT," +
+                    "tarNombre TEXT," +
+                    "tarFechaEntrega DateTime," +
+                    "tarFechaCreacion DateTime," +
+                    "tarDescripcion TEXT," +
+                    "matId Integer NOT NULL);";
 
-        db.execSQL(baseDatos);
+        //Tablas
+        db.execSQL(usuario);
+        db.execSQL(colores);
+        db.execSQL(materias);
+        db.execSQL(horarios);
+        db.execSQL(tareas);
+
+        //Usuario
+        ContentValues v = new ContentValues();
+        v.put("usuPrimera", "0");
+        v.put("usuNombre", "Usuario");
+        v.put("usuImg", "imgmenu");
+        db.insert("Usuario", null, v);
+
+        //Colores
+        ContentValues c1 = new ContentValues();
+        c1.put("colNombre", "Rosa");
+        c1.put("colExa", "#F03453");
+        db.insert("Colores", null, c1);
+
+        ContentValues c2 = new ContentValues();
+        c2.put("colNombre", "Azul");
+        c2.put("colExa", "#375AE4");
+        db.insert("Colores", null, c2);
+
+        ContentValues c3 = new ContentValues();
+        c3.put("colNombre", "Verde");
+        c3.put("colExa", "#37E482");
+        db.insert("Colores", null, c3);
+
+        ContentValues c4 = new ContentValues();
+        c4.put("colNombre", "Verde");
+        c4.put("colExa", "#93E437");
+        db.insert("Colores", null, c4);
+
+        ContentValues c5 = new ContentValues();
+        c5.put("colNombre", "Morado");
+        c5.put("colExa", "#C737E4");
+        db.insert("Colores", null, c5);
+
+        ContentValues c6 = new ContentValues();
+        c6.put("colNombre", "Naranja");
+        c6.put("colExa", "#E48837");
+        db.insert("Colores", null, c6);
+
+        ContentValues c7 = new ContentValues();
+        c7.put("colNombre", "Azul");
+        c7.put("colExa", "#37DEE4");
+        db.insert("Colores", null, c7);
+
+        ContentValues c8 = new ContentValues();
+        c8.put("colNombre", "Azul");
+        c8.put("colExa", "#3748E4");
+        db.insert("Colores", null, c8);
+
+        ContentValues c9 = new ContentValues();
+        c9.put("colNombre", "Rojo");
+        c9.put("colExa", "#E43737");
+        db.insert("Colores", null, c9);
+
+        ContentValues c10 = new ContentValues();
+        c10.put("colNombre", "Verde");
+        c10.put("colExa", "#51E437");
+        db.insert("Colores", null, c10);
+
+        ContentValues c11 = new ContentValues();
+        c11.put("colNombre", "Azul");
+        c11.put("colExa", "#37A8E4");
+        db.insert("Colores", null, c11);
+
+        ContentValues c12 = new ContentValues();
+        c12.put("colNombre", "Morado");
+        c12.put("colExa", "#A837E4");
+        db.insert("Colores", null, c12);
+
+        ContentValues c13 = new ContentValues();
+        c13.put("colNombre", "Verde");
+        c13.put("colExa", "#074D16");
+        db.insert("Colores", null, c13);
+
+        ContentValues c14 = new ContentValues();
+        c14.put("colNombre", "Azul");
+        c14.put("colExa", "#074D48");
+        db.insert("Colores", null, c14);
+
+        ContentValues c15 = new ContentValues();
+        c15.put("colNombre", "Rojo");
+        c15.put("colExa", "#4D1307");
+        db.insert("Colores", null, c15);
+
+        ContentValues c16 = new ContentValues();
+        c16.put("colNombre", "Morado");
+        c16.put("colExa", "#4D0745");
+        db.insert("Colores", null, c16);
+
+        ContentValues c17 = new ContentValues();
+        c17.put("colNombre", "Azul");
+        c17.put("colExa", "#10074D");
+        db.insert("Colores", null, c17);
+
+        ContentValues c18 = new ContentValues();
+        c18.put("colNombre", "Azul");
+        c18.put("colExa", "#074C4D");
+        db.insert("Colores", null, c18);
+
     }
 
     @Override
@@ -93,14 +170,16 @@ public class AdminBD extends SQLiteOpenHelper {
     public ObjUsuario selectUsuario(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query("Usuario", null, null, null, null, null, null);
-        cursor.moveToFirst();
-        ObjUsuario usuario = new ObjUsuario(
-                cursor.getString(cursor.getColumnIndex("usuNombre")),
-                cursor.getInt(cursor.getColumnIndex("usuPrimera")),
-                cursor.getString(cursor.getColumnIndex("usuImg")));
-        db.close();
-        cursor.close();
-        return usuario;
+        if(cursor.moveToFirst()){
+            ObjUsuario usuario = new ObjUsuario(
+                    cursor.getString(cursor.getColumnIndex("usuNombre")),
+                    cursor.getInt(cursor.getColumnIndex("usuPrimera")),
+                    cursor.getString(cursor.getColumnIndex("usuImg")));
+            db.close();
+            cursor.close();
+            return usuario;
+        }
+        return null;
     }
 
     /**
@@ -128,14 +207,16 @@ public class AdminBD extends SQLiteOpenHelper {
      */
     public ArrayList<ObjColor> selectColores(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query("Colores", null, null, null ,null, null ,null);
+        Cursor cursor = db.query("Colores", null, null, null, null, null, null);
         ArrayList<ObjColor> colores = new ArrayList<ObjColor>();
         if(cursor.moveToFirst()){
-            ObjColor color = new ObjColor(
-                    cursor.getInt(cursor.getColumnIndex("colId")),
-                    cursor.getString(cursor.getColumnIndex("colNombre")),
-                    cursor.getString(cursor.getColumnIndex("colExa")));
-            colores.add(color);
+            do {
+                ObjColor color = new ObjColor(
+                        cursor.getInt(cursor.getColumnIndex("colId")),
+                        cursor.getString(cursor.getColumnIndex("colNombre")),
+                        cursor.getString(cursor.getColumnIndex("colExa")));
+                colores.add(color);
+            }while(cursor.moveToNext());
         }
         db.close();
         cursor.close();
