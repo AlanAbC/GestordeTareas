@@ -28,11 +28,16 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView btnMenu;
     private NavigationView nav;
     //Fin menu, declaracion de variables
+    private ArrayList<ObjTarea> tareas;
+    private ListView hoy;
+    private ListView manana;
+    private ListView semana;
+    private ListView mes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,12 +114,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }else {
-            //Codigo para poner en el Menu el nombre de usuario jj
+            //Codigo para poner en el Menu el nombre de usuario
             View header = nav.getHeaderView(0);
             TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
             nombreUsuario.setText(usuario.getNombre());
             //Fin Codigo para poner el nombre de usuario en el menu
-            cargarTareas(); //LLamada a funcion para llenar las tareas
+            hoy = (ListView)findViewById(R.id.listaHoy);
+            manana = (ListView)findViewById(R.id.listaManana);
+            semana = (ListView)findViewById(R.id.listaSemana);
+            mes = (ListView)findViewById(R.id.listaMes);
+            try {
+                cargarTareas(); //LLamada a funcion para llenar las tareas
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         //FIn creacion y comprobacion de primera vez
     }
@@ -172,11 +190,64 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public Date sumarDiasAFecha(Date fecha, int dias){
+        if (dias==0) return fecha;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.add(Calendar.DAY_OF_YEAR, dias);
+        return calendar.getTime();
+    }
+
+    public static int getDayOfTheWeek(Date d){
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.setTime(d);
+        return cal.get(Calendar.DAY_OF_WEEK);
+    }
+
     /**
      * Funcion para llenar los listview con las tareas pendientes
      */
-    public void cargarTareas(){
-
+    public void cargarTareas() throws ParseException {
+        tareas = db.selectTareas();
+        msg(tareas.size() + "");
+        if(tareas.size() > 0){
+            ArrayList<ObjTarea> tareasPendientes = new ArrayList<ObjTarea>();
+            for(ObjTarea t : tareas){
+                if(t.getCompletado() == 0){
+                    tareasPendientes.add(t);
+                }
+            }
+            if(tareasPendientes.size() > 0){
+                ArrayList<ObjTarea> tareasHoy = new ArrayList<ObjTarea>();
+                ArrayList<ObjTarea> tareasManana = new ArrayList<ObjTarea>();
+                ArrayList<ObjTarea> tareasSemana = new ArrayList<ObjTarea>();
+                ArrayList<ObjTarea> tareasMes = new ArrayList<ObjTarea>();
+                Date feAc = new Date();
+                for(ObjTarea t : tareasPendientes){
+                    if(t.getFechaEntrega().equals(feAc)){
+                        tareasHoy.add(t);
+                    }else if(t.getFechaEntrega().after(feAc) && t.getFechaEntrega().before(sumarDiasAFecha(feAc, 2))){
+                        tareasManana.add(t);
+                    }else if(getDayOfTheWeek(t.getFechaEntrega()) == getDayOfTheWeek(feAc)){
+                        tareasSemana.add(t);
+                    }else if(t.getFechaEntrega().getMonth() == feAc.getMonth()){
+                        tareasMes.add(t);
+                    }
+                }
+                if(tareasHoy.size() > 0){
+                    hoy.setAdapter(new TareasAdaptador(getApplicationContext(), tareasHoy));
+                }
+                if(tareasManana.size() > 0){
+                    manana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasManana));
+                }
+                if(tareasSemana.size() > 0){
+                    semana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasSemana));
+                }
+                if(tareasMes.size() > 0){
+                    mes.setAdapter(new TareasAdaptador(getApplicationContext(), tareasMes));
+                }
+            }
+        }
     }
 
     /**

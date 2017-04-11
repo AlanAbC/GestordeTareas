@@ -7,12 +7,14 @@
     android:orientation="vertical"
     android:gravity="bottom">
 
-    <LinearLayout
+    <TextView
         android:layout_width="10dp"
         android:layout_height="match_parent"
         android:background="#000000"
         android:orientation="vertical"
-        android:id="@+id/colorMat"></LinearLayout>
+        android:id="@+id/colorMat"
+        android:textSize="50dp"/>
+
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -21,8 +23,8 @@
         android:id="@+id/tarea"
         android:paddingLeft="15dp"
         android:layout_toRightOf="@id/colorMat"
-        android:text="NOMBRE TAREA"
-        />
+        android:text="NOMBRE TAREA"/>
+
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -32,8 +34,8 @@
         android:layout_below="@id/tarea"
         android:paddingLeft="25dp"
         android:layout_toRightOf="@id/colorMat"
-        android:text="NOMBRE MATERIA"
-        />
+        android:text="NOMBRE MATERIA" />
+
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -43,8 +45,8 @@
         android:id="@+id/echa"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/tarea"
-        android:scaleType="centerInside"
-        />
+        android:scaleType="centerInside" />
+
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -55,7 +57,6 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/echa"
         android:layout_marginLeft="5dp"
-        android:scaleType="centerInside"
-        />
+        android:scaleType="centerInside" />
 
 </RelativeLayout>
