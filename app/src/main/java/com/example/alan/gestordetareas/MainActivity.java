@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
     public static int getDayOfTheWeek(Date d){
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(d);
-        return cal.get(Calendar.DAY_OF_WEEK);
+        return cal.get(Calendar.WEEK_OF_YEAR);
     }
 
     /**
@@ -223,26 +223,31 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<ObjTarea> tareasMes = new ArrayList<ObjTarea>();
                 Date feAc = new Date();
                 for(ObjTarea t : tareasPendientes){
-                    if(t.getFechaEntrega().equals(feAc)){
+                    if(t.getFechaEntrega().before(sumarDiasAFecha(feAc, 1))){
                         tareasHoy.add(t);
-                    }else if(t.getFechaEntrega().after(feAc) && t.getFechaEntrega().before(sumarDiasAFecha(feAc, 2))){
+                    }else if(t.getFechaEntrega().after(sumarDiasAFecha(feAc, 1)) && t.getFechaEntrega().before(sumarDiasAFecha(feAc, 3))){
                         tareasManana.add(t);
                     }else if(getDayOfTheWeek(t.getFechaEntrega()) == getDayOfTheWeek(feAc)){
                         tareasSemana.add(t);
                     }else if(t.getFechaEntrega().getMonth() == feAc.getMonth()){
                         tareasMes.add(t);
                     }
+                    Log.d("Veces del ciclo", "más 1 - " + t.getFechaEntrega() + " (-) " + feAc + " - " + t.getFechaEntrega().after(sumarDiasAFecha(feAc, 1)) + " (-) " +  t.getFechaEntrega().before(sumarDiasAFecha(feAc, 2)));
                 }
                 if(tareasHoy.size() > 0){
+                    Log.d("materias hoy", tareasHoy.size() + "");
                     hoy.setAdapter(new TareasAdaptador(getApplicationContext(), tareasHoy));
                 }
                 if(tareasManana.size() > 0){
+                    Log.d("materias mañana", tareasManana.size() + "");
                     manana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasManana));
                 }
                 if(tareasSemana.size() > 0){
+                    Log.d("materias semana", tareasSemana.size() + "");
                     semana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasSemana));
                 }
                 if(tareasMes.size() > 0){
+                    Log.d("materias Mes", tareasMes.size() + "");
                     mes.setAdapter(new TareasAdaptador(getApplicationContext(), tareasMes));
                 }
             }
