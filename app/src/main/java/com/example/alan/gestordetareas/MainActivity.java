@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         menu = nav.getMenu();
         menuNav();
         // Fin menu
-        //Creacion del objeto usuario y comprobacion de primera ves o no en el sistema
+        //Creacion del objeto usuario y comprobacion de primera ves o no en el sistemaa
         //cambia el nombre de la base de datos y el valor de usuPrimera a 1 en caso de que sea la primera vez
         //en caso contrario solo agrega nombre del usuario al menu y carga las tareas
         db = new AdminBD(this);
