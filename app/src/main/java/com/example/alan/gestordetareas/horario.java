@@ -1,6 +1,7 @@
 package com.example.alan.gestordetareas;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -8,15 +9,24 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class horario extends AppCompatActivity {
@@ -29,6 +39,7 @@ public class horario extends AppCompatActivity {
     private ImageView btnMenu;
     private NavigationView nav;
     //Fin menu, declaracion de variables
+    private Spinner spinnerDias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,7 @@ public class horario extends AppCompatActivity {
         TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
         nombreUsuario.setText(usuario.getNombre());
         //Fin Codigo para poner el nombre de usuario en el menu
+        cargarHorarios();
     }
 
     /**
@@ -109,5 +121,239 @@ public class horario extends AppCompatActivity {
                 drawerLayout.openDrawer(nav);
             }
         });
+    }
+
+    public void cargarHorarios(){
+        String[] diasSemana = {"Seleccione un dia" ,"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
+        final ArrayList<ObjHorario> horarios = db.selectHorarios();
+        final ArrayList<ObjHorario> lunes = new ArrayList<ObjHorario>();
+        final ArrayList<ObjHorario> martes = new ArrayList<ObjHorario>();
+        final ArrayList<ObjHorario> miercoles = new ArrayList<ObjHorario>();
+        final ArrayList<ObjHorario> jueves = new ArrayList<ObjHorario>();
+        final ArrayList<ObjHorario> viernes = new ArrayList<ObjHorario>();
+        final ArrayList<ObjHorario> sabado = new ArrayList<ObjHorario>();
+        for(ObjHorario h : horarios){
+            if(h.getDia() != null) {
+                if (h.getDia().equals("Lunes")) {
+                    lunes.add(h);
+                }
+                if (h.getDia().equals("Martes")) {
+                    martes.add(h);
+                }
+                if (h.getDia().equals("Miercoles")) {
+                    miercoles.add(h);
+                }
+                if (h.getDia().equals("Jueves")) {
+                    jueves.add(h);
+                }
+                if (h.getDia().equals("Viernes")) {
+                    viernes.add(h);
+                }
+                if (h.getDia().equals("Sabado")) {
+                    sabado.add(h);
+                }
+            }
+        }
+        spinnerDias = (Spinner)findViewById(R.id.dia);
+        ArrayAdapter adaptadorDias = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, diasSemana);
+        spinnerDias.setAdapter(adaptadorDias);
+        Calendar ahora = Calendar.getInstance();
+        final String diaHoy = diasSemana[ahora.get(Calendar.DAY_OF_WEEK) - 1];
+        ArrayAdapter miAdap = (ArrayAdapter) spinnerDias.getAdapter();
+        int posicionSpinner = miAdap.getPosition(diaHoy);
+        spinnerDias.setSelection(posicionSpinner);
+        spinnerDias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TableLayout tabla = (TableLayout)findViewById(R.id.horario);
+                if(position == 0){
+                    limpiarTabla(tabla);
+                }else if(position == 1){
+                    limpiarTabla(tabla);
+                    if(lunes.size() > 0){
+                        for(ObjHorario h : lunes){
+                            TableRow fila = new TableRow(getApplicationContext());
+                            TextView materia = new TextView(getApplicationContext());
+                            materia.setText(h.getMateria().getAbv());
+                            materia.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            materia.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView entrada = new TextView(getApplicationContext());
+                            entrada.setText(h.getEntrada());
+                            entrada.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            entrada.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salida = new TextView(getApplicationContext());
+                            salida.setText(h.getSalida());
+                            salida.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salida.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salon = new TextView(getApplicationContext());
+                            salon.setText(h.getSalon());
+                            salon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salon.setBackground(getResources().getDrawable(R.drawable.cell));
+                            fila.addView(materia);
+                            fila.addView(entrada);
+                            fila.addView(salida);
+                            fila.addView(salon);
+                            tabla.addView(fila);
+                        }
+                    }
+                }else if(position == 2){
+                    limpiarTabla(tabla);
+                    if(martes.size() > 0){
+                        for(ObjHorario h : martes){
+                            TableRow fila = new TableRow(getApplicationContext());
+                            TextView materia = new TextView(getApplicationContext());
+                            materia.setText(h.getMateria().getAbv());
+                            materia.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            materia.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView entrada = new TextView(getApplicationContext());
+                            entrada.setText(h.getEntrada());
+                            entrada.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            entrada.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salida = new TextView(getApplicationContext());
+                            salida.setText(h.getSalida());
+                            salida.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salida.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salon = new TextView(getApplicationContext());
+                            salon.setText(h.getSalon());
+                            salon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salon.setBackground(getResources().getDrawable(R.drawable.cell));
+                            fila.addView(materia);
+                            fila.addView(entrada);
+                            fila.addView(salida);
+                            fila.addView(salon);
+                            tabla.addView(fila);
+                        }
+                    }
+                }else if(position == 3){
+                    limpiarTabla(tabla);
+                    if(miercoles.size() > 0){
+                        for(ObjHorario h : miercoles){
+                            TableRow fila = new TableRow(getApplicationContext());
+                            TextView materia = new TextView(getApplicationContext());
+                            materia.setText(h.getMateria().getAbv());
+                            materia.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            materia.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView entrada = new TextView(getApplicationContext());
+                            entrada.setText(h.getEntrada());
+                            entrada.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            entrada.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salida = new TextView(getApplicationContext());
+                            salida.setText(h.getSalida());
+                            salida.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salida.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salon = new TextView(getApplicationContext());
+                            salon.setText(h.getSalon());
+                            salon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salon.setBackground(getResources().getDrawable(R.drawable.cell));
+                            fila.addView(materia);
+                            fila.addView(entrada);
+                            fila.addView(salida);
+                            fila.addView(salon);
+                            tabla.addView(fila);
+                        }
+                    }
+                }else if(position == 4){
+                    limpiarTabla(tabla);
+                    if(jueves.size() > 0){
+                        for(ObjHorario h : jueves){
+                            TableRow fila = new TableRow(getApplicationContext());
+                            TextView materia = new TextView(getApplicationContext());
+                            materia.setText(h.getMateria().getAbv());
+                            materia.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            materia.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView entrada = new TextView(getApplicationContext());
+                            entrada.setText(h.getEntrada());
+                            entrada.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            entrada.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salida = new TextView(getApplicationContext());
+                            salida.setText(h.getSalida());
+                            salida.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salida.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salon = new TextView(getApplicationContext());
+                            salon.setText(h.getSalon());
+                            salon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salon.setBackground(getResources().getDrawable(R.drawable.cell));
+                            fila.addView(materia);
+                            fila.addView(entrada);
+                            fila.addView(salida);
+                            fila.addView(salon);
+                            tabla.addView(fila);
+                        }
+                    }
+                }else if(position == 5){
+                    limpiarTabla(tabla);
+                    if(viernes.size() > 0){
+                        for(ObjHorario h : viernes){
+                            TableRow fila = new TableRow(getApplicationContext());
+                            TextView materia = new TextView(getApplicationContext());
+                            materia.setText(h.getMateria().getAbv());
+                            materia.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            materia.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView entrada = new TextView(getApplicationContext());
+                            entrada.setText(h.getEntrada());
+                            entrada.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            entrada.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salida = new TextView(getApplicationContext());
+                            salida.setText(h.getSalida());
+                            salida.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salida.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salon = new TextView(getApplicationContext());
+                            salon.setText(h.getSalon());
+                            salon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salon.setBackground(getResources().getDrawable(R.drawable.cell));
+                            fila.addView(materia);
+                            fila.addView(entrada);
+                            fila.addView(salida);
+                            fila.addView(salon);
+                            tabla.addView(fila);
+                        }
+                    }
+                }else if(position == 6){
+                    limpiarTabla(tabla);
+                    if(sabado.size() > 0){
+                        for(ObjHorario h : sabado){
+                            TableRow fila = new TableRow(getApplicationContext());
+                            TextView materia = new TextView(getApplicationContext());
+                            materia.setText(h.getMateria().getAbv());
+                            materia.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            materia.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView entrada = new TextView(getApplicationContext());
+                            entrada.setText(h.getEntrada());
+                            entrada.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            entrada.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salida = new TextView(getApplicationContext());
+                            salida.setText(h.getSalida());
+                            salida.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salida.setBackground(getResources().getDrawable(R.drawable.cell));
+                            TextView salon = new TextView(getApplicationContext());
+                            salon.setText(h.getSalon());
+                            salon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            salon.setBackground(getResources().getDrawable(R.drawable.cell));
+                            fila.addView(materia);
+                            fila.addView(entrada);
+                            fila.addView(salida);
+                            fila.addView(salon);
+                            tabla.addView(fila);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void limpiarTabla(TableLayout tabla) {
+        if(tabla.getChildCount() > 1){
+            for(int i = 1; i < tabla.getChildCount(); i++){
+                View hijo = tabla.getChildAt(i);
+                if(hijo instanceof TableRow){
+                    ((ViewGroup)hijo).removeAllViews();
+                }
+            }
+        }
     }
 }

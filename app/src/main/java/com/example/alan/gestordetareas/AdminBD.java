@@ -379,7 +379,7 @@ public class AdminBD extends SQLiteOpenHelper {
      */
     public ArrayList<ObjHorario> selectHorarios(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Horaio", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Horario", null);
         ArrayList<ObjMateria> materias = selectMaterias();
         ArrayList<ObjHorario> horarios = new ArrayList<ObjHorario>();
         if(cursor.moveToFirst()){

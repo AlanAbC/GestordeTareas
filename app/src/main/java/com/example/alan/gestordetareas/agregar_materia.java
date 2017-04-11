@@ -293,7 +293,7 @@ public class agregar_materia extends AppCompatActivity {
                                     horarioLu.setEntrada(horLuEntrada.getText().toString());
                                     horarioLu.setSalida(horLuSalida.getText().toString());
                                     horarioLu.setSalon(horLuSalon.getText().toString());
-                                    horarioLu.setSalida("Lunes");
+                                    horarioLu.setDia("Lunes");
                                     validacion += db.insertHorario(horarioLu);
                                 }
                             }
@@ -314,7 +314,7 @@ public class agregar_materia extends AppCompatActivity {
                                     horarioMa.setEntrada(horMaEntrada.getText().toString());
                                     horarioMa.setSalida(horMaSalida.getText().toString());
                                     horarioMa.setSalon(horMaSalon.getText().toString());
-                                    horarioMa.setSalida("Martes");
+                                    horarioMa.setDia("Martes");
                                     validacion += db.insertHorario(horarioMa);
                                 }
                             }
@@ -335,7 +335,7 @@ public class agregar_materia extends AppCompatActivity {
                                     horarioMi.setEntrada(horMiEntrada.getText().toString());
                                     horarioMi.setSalida(horMiSalida.getText().toString());
                                     horarioMi.setSalon(horMiSalon.getText().toString());
-                                    horarioMi.setSalida("Miercoles");
+                                    horarioMi.setDia("Miercoles");
                                     validacion += db.insertHorario(horarioMi);
                                 }
                             }
@@ -356,7 +356,7 @@ public class agregar_materia extends AppCompatActivity {
                                     horarioJu.setEntrada(horJuEntrada.getText().toString());
                                     horarioJu.setSalida(horJuSalida.getText().toString());
                                     horarioJu.setSalon(horJuSalon.getText().toString());
-                                    horarioJu.setSalida("Jueves");
+                                    horarioJu.setDia("Jueves");
                                     validacion += db.insertHorario(horarioJu);
                                 }
                             }
@@ -377,7 +377,7 @@ public class agregar_materia extends AppCompatActivity {
                                     horarioVi.setEntrada(horViEntrada.getText().toString());
                                     horarioVi.setSalida(horViSalida.getText().toString());
                                     horarioVi.setSalon(horViSalon.getText().toString());
-                                    horarioVi.setSalida("Viernes");
+                                    horarioVi.setDia("Viernes");
                                     validacion += db.insertHorario(horarioVi);
                                 }
                             }
@@ -398,7 +398,7 @@ public class agregar_materia extends AppCompatActivity {
                                     horarioSa.setEntrada(horSaEntrada.getText().toString());
                                     horarioSa.setSalida(horSaSalida.getText().toString());
                                     horarioSa.setSalon(horSaSalon.getText().toString());
-                                    horarioSa.setSalida("Sabado");
+                                    horarioSa.setDia("Sabado");
                                     validacion += db.insertHorario(horarioSa);
                                 }
                             }
