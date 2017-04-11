@@ -96,7 +96,7 @@
                         android:layout_height="40dp"
                         android:id="@+id/materiaS"
                         android:layout_marginTop="15dp"
-                        android:layout_below="@id/materia"></Spinner>
+                        android:layout_below="@id/materia"/>
 
                     <TextView
                         android:layout_width="match_parent"

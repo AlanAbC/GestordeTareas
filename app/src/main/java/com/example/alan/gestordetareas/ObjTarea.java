@@ -10,14 +10,16 @@ public class ObjTarea {
     private Date fechaCreacion;
     private String descripcion;
     private ObjMateria materia;
+    private int completado;
 
-    public ObjTarea(int id, String nombre, Date fechaEntrega, Date fechaCreacion, String descripcion, ObjMateria materia) {
+    public ObjTarea(int id, String nombre, Date fechaEntrega, Date fechaCreacion, String descripcion, ObjMateria materia, int completado) {
         this.id = id;
         this.nombre = nombre;
         this.fechaEntrega = fechaEntrega;
         this.fechaCreacion = fechaCreacion;
         this.descripcion = descripcion;
         this.materia = materia;
+        this.completado = completado;
     }
 
     public ObjTarea(){
@@ -70,5 +72,13 @@ public class ObjTarea {
 
     public void setMateria(ObjMateria materia) {
         this.materia = materia;
+    }
+
+    public int getCompletado() {
+        return completado;
+    }
+
+    public void setCompletado(int completado) {
+        this.completado = completado;
     }
 }

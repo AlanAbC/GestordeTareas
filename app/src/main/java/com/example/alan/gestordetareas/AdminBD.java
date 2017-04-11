@@ -49,6 +49,7 @@ public class AdminBD extends SQLiteOpenHelper {
                     "tarFechaEntrega DateTime," +
                     "tarFechaCreacion DateTime," +
                     "tarDescripcion TEXT," +
+                    "tarCompletado Integer," +
                     "matId Integer NOT NULL);";
 
         //Tablas
@@ -422,7 +423,8 @@ public class AdminBD extends SQLiteOpenHelper {
                                 sdf.parse(cursor.getString(cursor.getColumnIndex("tarFechaEntrega"))),
                                 sdf.parse(cursor.getString(cursor.getColumnIndex("tarFechaCreacion"))),
                                 cursor.getString(cursor.getColumnIndex("tarDescripcion")),
-                                materia);
+                                materia,
+                                cursor.getInt(cursor.getColumnIndex("tarCompletado")));
                         tareas.add(tarea);
                     }
                 }
@@ -445,6 +447,7 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("tarFechaCreacion", tarea.getFechaCreacion().toString());
             v.put("tarDescripcion", tarea.getDescripcion());
             v.put("matId", tarea.getMateria().getId());
+            v.put("tarCompletado", tarea.getCompletado());
             db.insert("Tareas", null, v);
             return 1;
         }catch(Exception e){
@@ -466,6 +469,7 @@ public class AdminBD extends SQLiteOpenHelper {
             v.put("tarFechaCreacion", tarea.getFechaCreacion().toString());
             v.put("tarDescripcion", tarea.getDescripcion());
             v.put("matId", tarea.getMateria().getId());
+            v.put("tarCompletado", tarea.getCompletado());
             db.update("Tareas", v, "tarId = " + tarea.getId(), null);
             return 1;
         }catch(Exception e){
