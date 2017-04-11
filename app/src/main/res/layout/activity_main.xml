@@ -49,8 +49,6 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginLeft="20dp"/>
 
-
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -77,7 +75,7 @@
                         android:layout_below="@id/txtHoy"/>
 
                 </RelativeLayout>
-
+                
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -246,7 +244,9 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:id="@+id/actualizarUsuario"/>
+                android:id="@+id/actualizarUsuario"
+                android:background="#1b9aaa"
+                android:textColor="#ffff"/>
 
         </RelativeLayout>
 

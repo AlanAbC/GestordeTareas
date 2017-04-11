@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 for(ObjTarea t : tareasPendientes){
                     if(t.getFechaEntrega().before(sumarDiasAFecha(feAc, 1))){
                         tareasHoy.add(t);
-                    }else if(t.getFechaEntrega().after(sumarDiasAFecha(feAc, 1)) && t.getFechaEntrega().before(sumarDiasAFecha(feAc, 3))){
+                    }else if(t.getFechaEntrega().after(sumarDiasAFecha(feAc, 1)) && t.getFechaEntrega().before(sumarDiasAFecha(feAc, 2))){
                         tareasManana.add(t);
                     }else if(getDayOfTheWeek(t.getFechaEntrega()) == getDayOfTheWeek(feAc)){
                         tareasSemana.add(t);
@@ -237,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
                 if(tareasHoy.size() > 0){
                     Log.d("materias hoy", tareasHoy.size() + "");
                     hoy.setAdapter(new TareasAdaptador(getApplicationContext(), tareasHoy));
+                    hoy.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 100));
                 }
                 if(tareasManana.size() > 0){
                     Log.d("materias mañana", tareasManana.size() + "");
