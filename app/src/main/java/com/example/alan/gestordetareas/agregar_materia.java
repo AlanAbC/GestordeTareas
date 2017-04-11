@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -381,7 +382,7 @@ public class agregar_materia extends AppCompatActivity {
                                     validacion += db.insertHorario(horarioVi);
                                 }
                             }
-                            if (flagMartes == 1) {
+                            if (flagSabado == 1) {
                                 ObjHorario horarioSa = new ObjHorario();
                                 EditText horSaEntrada = (EditText) findViewById(R.id.entradaTS);
                                 EditText horSaSalida = (EditText) findViewById(R.id.salidaTS);
@@ -402,11 +403,15 @@ public class agregar_materia extends AppCompatActivity {
                                     validacion += db.insertHorario(horarioSa);
                                 }
                             }
-                            if (validacion > 1) {
+                            Log.d("valor validacion", validacion + " - " + (1 + flagLunes + flagMartes + flagMiercoles + flagJueves + flagViernes + flagSabado));
+                            if (validacion == (1 + flagLunes + flagMartes + flagMiercoles + flagJueves + flagViernes + flagSabado)) {
                                 msg("Se registro correctamente :)");
                                 Intent i = new Intent(agregar_materia.this, MainActivity.class);
                                 startActivity(i);
                                 finish();
+                            }else{
+                                ObjMateria mFlag = db.findMateria(nuevaMateria.getNombre());
+                                db.deleteMateria(mFlag.getId());
                             }
                         }else{
                             msg("Ocurrio un error intentelo de nuevo");

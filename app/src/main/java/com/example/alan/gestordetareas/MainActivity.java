@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
@@ -33,6 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Console;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -106,8 +108,9 @@ public class MainActivity extends AppCompatActivity {
                     if(respuesta == 1){
                         msg("Se a registrado correctamente");
                         inicio.setVisibility(View.GONE);
-                        TextView nombreMenuUsuario = (TextView)findViewById(R.id.menuNombreUsuario);
-                        nombreMenuUsuario.setText(nombre);
+                        View header = nav.getHeaderView(0);
+                        TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
+                        nombreUsuario.setText(nombre);
                     }else{
                         msg("Ocurrio un error, intente nuevamente");
                     }
@@ -123,11 +126,7 @@ public class MainActivity extends AppCompatActivity {
             manana = (ListView)findViewById(R.id.listaManana);
             semana = (ListView)findViewById(R.id.listaSemana);
             mes = (ListView)findViewById(R.id.listaMes);
-            try {
-                cargarTareas(); //LLamada a funcion para llenar las tareas
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            cargarTareas(); //LLamada a funcion para llenar las tareas
         }
         //FIn creacion y comprobacion de primera vez
     }
@@ -207,9 +206,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Funcion para llenar los listview con las tareas pendientes
      */
-    public void cargarTareas() throws ParseException {
+    public void cargarTareas(){
         tareas = db.selectTareas();
-        msg(tareas.size() + "");
+        Log.d("Hasta donde llega", "SI cargo las tareas y el tamaño es: " + tareas.size());
         if(tareas.size() > 0){
             ArrayList<ObjTarea> tareasPendientes = new ArrayList<ObjTarea>();
             for(ObjTarea t : tareas){

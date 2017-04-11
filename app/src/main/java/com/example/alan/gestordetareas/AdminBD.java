@@ -6,10 +6,15 @@ import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class AdminBD extends SQLiteOpenHelper {
 
@@ -407,30 +412,36 @@ public class AdminBD extends SQLiteOpenHelper {
      * @return Array List de Objetos tipo ObjTarea
      * @throws ParseException
      */
-    public ArrayList<ObjTarea> selectTareas() throws ParseException {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Tareas", null);
-        ArrayList<ObjMateria> materias = selectMaterias();
-        ArrayList<ObjTarea> tareas = new ArrayList<ObjTarea>();
-        if(cursor.moveToFirst()){
-            SimpleDateFormat sdf = new SimpleDateFormat();
-            do{
-                for(ObjMateria materia : materias){
-                    if((cursor.getInt(cursor.getColumnIndex("matId")) == materia.getId())){
-                        ObjTarea tarea = new ObjTarea(
-                                cursor.getInt(cursor.getColumnIndex("tarId")),
-                                cursor.getString(cursor.getColumnIndex("tarNombre")),
-                                sdf.parse(cursor.getString(cursor.getColumnIndex("tarFechaEntrega"))),
-                                sdf.parse(cursor.getString(cursor.getColumnIndex("tarFechaCreacion"))),
-                                cursor.getString(cursor.getColumnIndex("tarDescripcion")),
-                                materia,
-                                cursor.getInt(cursor.getColumnIndex("tarCompletado")));
-                        tareas.add(tarea);
+    public ArrayList<ObjTarea> selectTareas(){
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT * FROM Tareas", null);
+            ArrayList<ObjMateria> materias = selectMaterias();
+            ArrayList<ObjTarea> tareas = new ArrayList<ObjTarea>();
+            if (cursor.moveToFirst()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+                do {
+                    for (ObjMateria materia : materias) {
+                        if ((cursor.getInt(cursor.getColumnIndex("matId")) == materia.getId())) {
+                            ObjTarea tarea = new ObjTarea(
+                                    cursor.getInt(cursor.getColumnIndex("tarId")),
+                                    cursor.getString(cursor.getColumnIndex("tarNombre")),
+                                    sdf.parse(cursor.getString(cursor.getColumnIndex("tarFechaEntrega"))),
+                                    sdf.parse(cursor.getString(cursor.getColumnIndex("tarFechaCreacion"))),
+                                    cursor.getString(cursor.getColumnIndex("tarDescripcion")),
+                                    materia,
+                                    cursor.getInt(cursor.getColumnIndex("tarCompletado")));
+                            tareas.add(tarea);
+                        }
                     }
-                }
-            }while(cursor.moveToNext());
+                } while (cursor.moveToNext());
+            }
+            return tareas;
+        }catch(Exception e){
+            Log.e("Error al parseo", e.getMessage());
+            ArrayList<ObjTarea> tareas = new ArrayList<ObjTarea>();
+            return tareas;
         }
-        return tareas;
     }
 
     /**
@@ -444,7 +455,7 @@ public class AdminBD extends SQLiteOpenHelper {
             ContentValues v = new ContentValues();
             v.put("tarNombre", tarea.getNombre());
             v.put("tarFechaEntrega", tarea.getFechaEntrega().toString());
-            v.put("tarFechaCreacion", tarea.getFechaCreacion().toString());
+            v.put("tarFechaCreacion", Calendar.getInstance().getTime().toString());
             v.put("tarDescripcion", tarea.getDescripcion());
             v.put("matId", tarea.getMateria().getId());
             v.put("tarCompletado", tarea.getCompletado());
@@ -466,7 +477,6 @@ public class AdminBD extends SQLiteOpenHelper {
             ContentValues v = new ContentValues();
             v.put("tarNombre", tarea.getNombre());
             v.put("tarFechaEntrega", tarea.getFechaEntrega().toString());
-            v.put("tarFechaCreacion", tarea.getFechaCreacion().toString());
             v.put("tarDescripcion", tarea.getDescripcion());
             v.put("matId", tarea.getMateria().getId());
             v.put("tarCompletado", tarea.getCompletado());

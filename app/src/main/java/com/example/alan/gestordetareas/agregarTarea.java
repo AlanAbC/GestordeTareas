@@ -163,8 +163,8 @@ public class agregarTarea extends AppCompatActivity {
     public void agregarTarea(View view){
         if(materias.size() > 0) {
             if (!nombre.getText().toString().equals("")) {
-                String f = fechaEntrega.getYear() + "/" + (fechaEntrega.getMonth() + 1) + "/" + fechaEntrega.getDayOfMonth();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                String f = fechaEntrega.getYear() + "/" + (fechaEntrega.getMonth() + 1) + "/" + fechaEntrega.getDayOfMonth() + " 23:59";
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
                 Date fe = sdf.parse(f, new ParsePosition(0));
                 Date feAc = new Date();
                 if (fe.after(feAc)) {
