@@ -1,6 +1,7 @@
 package com.example.alan.gestordetareas;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +31,7 @@ public class acerca extends AppCompatActivity {
     private ImageView btnMenu;
     private NavigationView nav;
     //Fin menu, declaracion de variables
+    private ImageView donativo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,15 @@ public class acerca extends AppCompatActivity {
         TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
         nombreUsuario.setText(usuario.getNombre());
         //Fin Codigo para poner el nombre de usuario en el menu
+        donativo = (ImageView)findViewById(R.id.btn_donativo);
+        donativo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=85QFE5ZJLM4DL");
+                Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(i);
+            }
+        });
     }
 
     /**
