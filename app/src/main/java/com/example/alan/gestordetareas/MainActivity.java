@@ -237,7 +237,10 @@ public class MainActivity extends AppCompatActivity {
                 if(tareasHoy.size() > 0){
                     Log.d("materias hoy", tareasHoy.size() + "");
                     hoy.setAdapter(new TareasAdaptador(getApplicationContext(), tareasHoy));
-                    hoy.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 100));
+                    /*float scale = getResources().getDisplayMetrics().density;
+                    int dpAsPixels = (int) (60* scale + 0.5f);
+                    ViewGroup.LayoutParams p = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (dpAsPixels * tareasHoy.size()));
+                    hoy.setLayoutParams(p);*/
                 }
                 if(tareasManana.size() > 0){
                     Log.d("materias mañana", tareasManana.size() + "");
