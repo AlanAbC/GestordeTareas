@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             manana = (ListView)findViewById(R.id.listaManana);
             semana = (ListView)findViewById(R.id.listaSemana);
             mes = (ListView)findViewById(R.id.listaMes);
-            cargarTareas(); //LLamada a funcion para llenar las tareas
+            cargarTareas();//LLamada a funcion para llenar las tareas
         }
         //FIn creacion y comprobacion de primera vez
     }
