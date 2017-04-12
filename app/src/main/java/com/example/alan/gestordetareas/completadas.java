@@ -8,15 +8,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class completadas extends AppCompatActivity {
@@ -29,6 +33,8 @@ public class completadas extends AppCompatActivity {
     private ImageView btnMenu;
     private NavigationView nav;
     //Fin menu, declaracion de variables
+    private ListView completadas;
+    private ArrayList<ObjTarea> tareas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,8 @@ public class completadas extends AppCompatActivity {
         TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
         nombreUsuario.setText(usuario.getNombre());
         //Fin Codigo para poner el nombre de usuario en el menu
+        completadas = (ListView)findViewById(R.id.completas);
+        cargarTareas();//LLamada a funcion para llenar las tareas
     }
 
     /**
@@ -109,5 +117,20 @@ public class completadas extends AppCompatActivity {
                 drawerLayout.openDrawer(nav);
             }
         });
+    }
+
+    public void cargarTareas(){
+        tareas = db.selectTareas();
+        if(tareas.size() > 0){
+            ArrayList<ObjTarea> tareasCompletadas = new ArrayList<ObjTarea>();
+            for(ObjTarea t : tareas){
+                if(t.getCompletado() == 1){
+                    tareasCompletadas.add(t);
+                }
+            }
+            if(tareasCompletadas.size() > 0){
+                completadas.setAdapter(new TareasAdaptador(getApplicationContext(), tareasCompletadas));
+            }
+        }
     }
 }

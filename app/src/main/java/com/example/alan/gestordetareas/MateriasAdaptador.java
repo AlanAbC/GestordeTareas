@@ -1,6 +1,8 @@
 package com.example.alan.gestordetareas;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +18,16 @@ import java.util.ArrayList;
 
 public class MateriasAdaptador extends BaseAdapter {
 
-    LayoutInflater inflator;
-    ArrayList<ObjMateria> materias;
+    private LayoutInflater inflator;
+    private ArrayList<ObjMateria> materias;
+    private Context context;
+    private AdminBD db;
 
     public MateriasAdaptador(Context context, ArrayList<ObjMateria> materias) {
         inflator = LayoutInflater.from(context);
         this.materias = materias;
+        this.context = context;
+        db = new AdminBD(context);
     }
 
     @Override
@@ -41,7 +47,7 @@ public class MateriasAdaptador extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ObjMateria materia = materias.get(position);
+        final ObjMateria materia = materias.get(position);
         convertView = inflator.inflate(R.layout.materia, null);
         TextView colorBarra = (TextView) convertView.findViewById(R.id.colorFondoMateria);
         TextView nombreMateria = (TextView) convertView.findViewById(R.id.materia);

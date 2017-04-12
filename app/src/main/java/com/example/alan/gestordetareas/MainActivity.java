@@ -255,14 +255,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("materias hoy", tareasHoy.size() + "");
                     hoy.setAdapter(new TareasAdaptador(getApplicationContext(), tareasHoy));
                     ajustarListView(hoy);
-                    hoy.setFocusableInTouchMode(true);
-                    hoy.setFocusable(true);
-                    hoy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            msg("Seleccionaste el listView en la posicion " + position);
-                        }
-                    });
                 }
                 if(tareasManana.size() > 0){
                     Log.d("materias mañana", tareasManana.size() + "");

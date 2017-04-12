@@ -21,14 +21,16 @@ import java.util.ArrayList;
 
 public class TareasAdaptador extends BaseAdapter {
 
-    LayoutInflater inflator;
-    ArrayList<ObjTarea> tareas;
-    Context context;
+    private LayoutInflater inflator;
+    private ArrayList<ObjTarea> tareas;
+    private Context context;
+    private AdminBD db;
 
     public TareasAdaptador(Context context, ArrayList<ObjTarea> tareas) {
         inflator = LayoutInflater.from(context);
         this.tareas = tareas;
         this.context = context;
+        db = new AdminBD(context);
     }
 
     @Override
@@ -63,6 +65,15 @@ public class TareasAdaptador extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Log.i("Click:", "Se preciono el boton de cambiar estado de: " + tarea.getNombre());
+                int estado = 0;
+                if(tarea.getCompletado() == 0){
+                    estado = 1;
+                }
+                tarea.setCompletado(estado);
+                int flag = db.updateTarea(tarea);
+                if(flag == 1){
+                    
+                }
             }
         });
         eliminar.setOnClickListener(new View.OnClickListener() {
