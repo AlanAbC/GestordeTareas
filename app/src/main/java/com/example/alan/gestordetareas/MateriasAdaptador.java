@@ -2,12 +2,15 @@ package com.example.alan.gestordetareas;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -43,9 +46,23 @@ public class MateriasAdaptador extends BaseAdapter {
         TextView colorBarra = (TextView) convertView.findViewById(R.id.colorFondoMateria);
         TextView nombreMateria = (TextView) convertView.findViewById(R.id.materia);
         TextView nombreMaestro = (TextView) convertView.findViewById(R.id.maestro);
+        ImageButton editar = (ImageButton) convertView.findViewById(R.id.editar);
+        ImageButton eliminar = (ImageButton) convertView.findViewById(R.id.borrar);
         colorBarra.setBackgroundColor(Color.parseColor(materia.getColor().getExadecimal()));
         nombreMateria.setText(materia.getNombre());
         nombreMaestro.setText(materia.getProfesor());
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Si funciona:", "Boton de editar");
+            }
+        });
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Si funciona:", "Boton de eliminar");
+            }
+        });
         return convertView;
     }
 }

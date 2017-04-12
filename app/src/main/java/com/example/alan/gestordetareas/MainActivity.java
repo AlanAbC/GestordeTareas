@@ -20,17 +20,22 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView manana;
     private ListView semana;
     private ListView mes;
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,6 +195,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /**
+     * Funcion que suma un dia a la fecha ingresada
+     * @param fecha
+     * @param dias
+     * @return DATE regresa la fecha ingresada mas un dia
+     */
     public Date sumarDiasAFecha(Date fecha, int dias){
         if (dias==0) return fecha;
         Calendar calendar = Calendar.getInstance();
@@ -197,6 +209,11 @@ public class MainActivity extends AppCompatActivity {
         return calendar.getTime();
     }
 
+    /**
+     * Funcion que regresa el numero de la semana del año de una fecha
+     * @param d
+     * @return INT numro de la semana del año
+     */
     public static int getDayOfTheWeek(Date d){
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(d);
@@ -237,25 +254,51 @@ public class MainActivity extends AppCompatActivity {
                 if(tareasHoy.size() > 0){
                     Log.d("materias hoy", tareasHoy.size() + "");
                     hoy.setAdapter(new TareasAdaptador(getApplicationContext(), tareasHoy));
-                    /*float scale = getResources().getDisplayMetrics().density;
-                    int dpAsPixels = (int) (60* scale + 0.5f);
-                    ViewGroup.LayoutParams p = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (dpAsPixels * tareasHoy.size()));
-                    hoy.setLayoutParams(p);*/
+                    ajustarListView(hoy);
+                    hoy.setFocusableInTouchMode(true);
+                    hoy.setFocusable(true);
+                    hoy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            msg("Seleccionaste el listView en la posicion " + position);
+                        }
+                    });
                 }
                 if(tareasManana.size() > 0){
                     Log.d("materias mañana", tareasManana.size() + "");
                     manana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasManana));
+                    ajustarListView(manana);
                 }
                 if(tareasSemana.size() > 0){
                     Log.d("materias semana", tareasSemana.size() + "");
                     semana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasSemana));
+                    ajustarListView(semana);
                 }
                 if(tareasMes.size() > 0){
                     Log.d("materias Mes", tareasMes.size() + "");
                     mes.setAdapter(new TareasAdaptador(getApplicationContext(), tareasMes));
+                    ajustarListView(mes);
                 }
             }
         }
+    }
+
+    /**
+     * Funcion la cual ajusta el tamaño de un ListView dependiendo de los elementos que contiene
+     * @param listView
+     */
+    private void ajustarListView(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 
     /**
