@@ -4,7 +4,7 @@
     android:layout_height="170dp"
     android:layout_marginRight="50dp"
     android:layout_marginLeft="50dp"
-    android:background="#c3cdd0">
+    android:background="#FFFFFF">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

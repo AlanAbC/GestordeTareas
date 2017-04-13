@@ -64,7 +64,14 @@ public class MainActivity extends AppCompatActivity {
     private ListView semana;
     private ListView mes;
     private ScrollView scrollView;
-
+    private TextView txtHoy;
+    private int flagHoy=0;
+    private TextView txtMañana;
+    private int flagManañana=0;
+    private TextView txtSemana;
+    private int flagSemana=0;
+    private TextView txtMes;
+    private int flagMes=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +140,74 @@ public class MainActivity extends AppCompatActivity {
             semana = (ListView)findViewById(R.id.listaSemana);
             mes = (ListView)findViewById(R.id.listaMes);
             cargarTareas();//LLamada a funcion para llenar las tareas
+
+            //funcion para ocultar listviewHoy
+            txtHoy=(TextView)findViewById(R.id.txtHoy);
+            txtHoy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(flagHoy==0){
+                        hoy.setVisibility(View.GONE);
+                        flagHoy++;
+                    }
+                    else {
+                        hoy.setVisibility(View.VISIBLE);
+                        flagHoy--;
+                    }
+                }
+            });
+
+            //funcion para ocultar listviewMañana
+            txtMañana=(TextView)findViewById(R.id.txtMañana);
+            txtMañana.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(flagManañana==0){
+                        manana.setVisibility(View.GONE);
+                        flagManañana++;
+                    }
+                    else {
+                        manana.setVisibility(View.VISIBLE);
+                        flagManañana--;
+                    }
+                }
+            });
+
+            //funcion para ocultar listviewSemana
+            txtSemana=(TextView)findViewById(R.id.txtSemana);
+            txtSemana.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(flagSemana==0){
+                        semana.setVisibility(View.GONE);
+                        flagSemana++;
+                    }
+                    else {
+                        semana.setVisibility(View.VISIBLE);
+                        flagSemana--;
+                    }
+                }
+            });
+
+            //funcion para ocultar listviewMes
+            txtMes=(TextView)findViewById(R.id.txtMes);
+            txtMes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(flagMes==0){
+                        mes.setVisibility(View.GONE);
+                        flagMes++;
+                    }
+                    else {
+                        mes.setVisibility(View.VISIBLE);
+                        flagMes--;
+                    }
+                }
+            });
         }
         //FIn creacion y comprobacion de primera vez
     }
