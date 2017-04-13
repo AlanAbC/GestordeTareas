@@ -37,7 +37,9 @@ public class DialogoAdvertenciaTodasTareas extends DialogFragment {
                 }
                 if(flag > 0){
                     Intent in = new Intent(getActivity(), MainActivity.class);
-                    startActivity(in);
+                    in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getActivity().startActivity(in);
+                    getActivity().finish();
                     Toast.makeText(getActivity(), "Se borro correctamente las tarea", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getActivity(), "Ocurrio un error", Toast.LENGTH_SHORT).show();
