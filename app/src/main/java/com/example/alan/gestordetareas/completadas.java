@@ -70,6 +70,7 @@ public class completadas extends AppCompatActivity {
         nombreUsuario.setText(usuario.getNombre());
         //Fin Codigo para poner el nombre de usuario en el menu
         completadas = (ListView)findViewById(R.id.completas);
+        tareasCompletadas = new ArrayList<ObjTarea>();
         cargarTareas();//LLamada a funcion para llenar las tareas
         limpiarLista = (Button)findViewById(R.id.btn_limpiarLista);
         limpiarLista.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +148,6 @@ public class completadas extends AppCompatActivity {
     public void cargarTareas(){
         tareas = db.selectTareas();
         if(tareas.size() > 0){
-            tareasCompletadas = new ArrayList<ObjTarea>();
             for(ObjTarea t : tareas){
                 if(t.getCompletado() == 1){
                     tareasCompletadas.add(t);

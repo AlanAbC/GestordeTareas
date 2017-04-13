@@ -35,7 +35,7 @@ public class DialogoAdvertenciaTodasTareas extends DialogFragment {
                 for(int i = 0; i < id.length; i++){
                     flag += db.deleteTarea(id[i]);
                 }
-                if(flag > 1){
+                if(flag > 0){
                     Intent in = new Intent(getActivity(), MainActivity.class);
                     startActivity(in);
                     Toast.makeText(getActivity(), "Se borro correctamente las tarea", Toast.LENGTH_SHORT).show();

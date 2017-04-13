@@ -78,6 +78,7 @@ public class TareasAdaptador extends BaseAdapter {
                 int flag = db.updateTarea(tarea);
                 if(flag == 1){
                     Intent i = new Intent(context, MainActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(i);
                     Toast.makeText(context, "Se cambió el estado correctamente", Toast.LENGTH_SHORT).show();
                 }
