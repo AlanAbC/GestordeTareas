@@ -148,7 +148,7 @@ public class agregarTarea extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     materiaSeleccionada = position;
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#000000"));//con esta linea se cambia el color del texto pero no se como cambiarlo a todosactualmente solo cambia el del elemento seleccionado
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#000000"));//con  esta linea se cambia el color del texto pero no se como cambiarlo a todosactualmente solo cambia el del elemento seleccionado
                 }
 
                 @Override
