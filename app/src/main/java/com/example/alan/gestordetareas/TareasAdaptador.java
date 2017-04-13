@@ -29,13 +29,15 @@ public class TareasAdaptador extends BaseAdapter {
     private Context context;
     private FragmentManager fragmentManager;
     private AdminBD db;
+    private Activity activity;
 
-    public TareasAdaptador(Context context, ArrayList<ObjTarea> tareas, FragmentManager fragmentManager) {
+    public TareasAdaptador(Context context, ArrayList<ObjTarea> tareas, FragmentManager fragmentManager, Activity activity) {
         inflator = LayoutInflater.from(context);
         this.tareas = tareas;
         this.context = context;
         this.fragmentManager = fragmentManager;
         db = new AdminBD(context);
+        this.activity = activity;
     }
 
     @Override
@@ -77,9 +79,10 @@ public class TareasAdaptador extends BaseAdapter {
                 tarea.setCompletado(estado);
                 int flag = db.updateTarea(tarea);
                 if(flag == 1){
-                    Intent i = new Intent(context, MainActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(i);
+                    Intent i = new Intent(activity, MainActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    activity.startActivity(i);
+                    activity.finish();
                     Toast.makeText(context, "Se cambió el estado correctamente", Toast.LENGTH_SHORT).show();
                 }
             }

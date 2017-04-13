@@ -328,22 +328,22 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(tareasHoy.size() > 0){
                     Log.d("materias hoy", tareasHoy.size() + "");
-                    hoy.setAdapter(new TareasAdaptador(getApplicationContext(), tareasHoy, getFragmentManager()));
+                    hoy.setAdapter(new TareasAdaptador(getApplicationContext(), tareasHoy, getFragmentManager(), MainActivity.this));
                     ajustarListView(hoy);
                 }
                 if(tareasManana.size() > 0){
                     Log.d("materias mañana", tareasManana.size() + "");
-                    manana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasManana, getFragmentManager()));
+                    manana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasManana, getFragmentManager(), MainActivity.this));
                     ajustarListView(manana);
                 }
                 if(tareasSemana.size() > 0){
                     Log.d("materias semana", tareasSemana.size() + "");
-                    semana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasSemana, getFragmentManager()));
+                    semana.setAdapter(new TareasAdaptador(getApplicationContext(), tareasSemana, getFragmentManager(), MainActivity.this));
                     ajustarListView(semana);
                 }
                 if(tareasMes.size() > 0){
                     Log.d("materias Mes", tareasMes.size() + "");
-                    mes.setAdapter(new TareasAdaptador(getApplicationContext(), tareasMes, getFragmentManager()));
+                    mes.setAdapter(new TareasAdaptador(getApplicationContext(), tareasMes, getFragmentManager(), MainActivity.this));
                     ajustarListView(mes);
                 }
             }

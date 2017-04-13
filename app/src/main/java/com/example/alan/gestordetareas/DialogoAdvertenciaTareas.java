@@ -34,7 +34,9 @@ public class DialogoAdvertenciaTareas extends DialogFragment{
                 AdminBD db = new AdminBD(getActivity());
                 if(db.deleteTarea(id) == 1){
                     Intent i = new Intent(getActivity(), MainActivity.class);
-                    startActivity(i);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getActivity().startActivity(i);
+                    getActivity().finish();
                     Toast.makeText(getActivity(), "Se borro correctamente la tarea", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getActivity(), "No se pudo borrar la tarea", Toast.LENGTH_SHORT).show();
