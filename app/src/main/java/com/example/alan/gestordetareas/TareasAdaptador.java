@@ -1,9 +1,11 @@
 package com.example.alan.gestordetareas;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Html;
 import android.util.Log;
@@ -25,12 +27,14 @@ public class TareasAdaptador extends BaseAdapter {
     private LayoutInflater inflator;
     private ArrayList<ObjTarea> tareas;
     private Context context;
+    private FragmentManager fragmentManager;
     private AdminBD db;
 
-    public TareasAdaptador(Context context, ArrayList<ObjTarea> tareas) {
+    public TareasAdaptador(Context context, ArrayList<ObjTarea> tareas, FragmentManager fragmentManager) {
         inflator = LayoutInflater.from(context);
         this.tareas = tareas;
         this.context = context;
+        this.fragmentManager = fragmentManager;
         db = new AdminBD(context);
     }
 
@@ -83,6 +87,11 @@ public class TareasAdaptador extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Log.i("Click:", "Se preciono el boton de eliminar de: " + tarea.getNombre());
+                DialogoAdvertenciaTareas advertencia = new DialogoAdvertenciaTareas();
+                Bundle variable = new Bundle();
+                variable.putInt("id", tarea.getId());
+                advertencia.setArguments(variable);
+                advertencia.show(fragmentManager, "Advertencia");
             }
         });
         layout.setOnClickListener(new View.OnClickListener() {

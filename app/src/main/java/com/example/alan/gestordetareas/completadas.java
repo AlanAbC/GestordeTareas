@@ -131,7 +131,7 @@ public class completadas extends AppCompatActivity {
                 }
             }
             if(tareasCompletadas.size() > 0){
-                completadas.setAdapter(new TareasAdaptador(getApplicationContext(), tareasCompletadas));
+                completadas.setAdapter(new TareasAdaptador(getApplicationContext(), tareasCompletadas, getFragmentManager()));
                 ajustarListView(completadas);
             }
         }
