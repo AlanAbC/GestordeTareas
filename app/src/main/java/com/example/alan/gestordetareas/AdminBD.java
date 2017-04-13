@@ -273,6 +273,8 @@ public class AdminBD extends SQLiteOpenHelper {
         try{
             SQLiteDatabase db = this.getWritableDatabase();
             db.delete("Materias", "matId = " + id, null);
+            db.delete("Horario", "matId = " + id, null);
+            db.delete("Tareas", "matId = " + id, null);
             return 1;
         }catch(Exception e){
             return 0;

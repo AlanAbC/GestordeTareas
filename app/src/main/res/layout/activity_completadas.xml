@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/completas"
-                    android:layout_below="@id/menu"></ListView>
+                    android:layout_below="@id/menu"/>
 
                 <Button
                     android:layout_width="match_parent"
@@ -67,7 +67,8 @@
                     android:layout_marginBottom="50dp"
                     android:layout_below="@id/completas"
                     android:layout_marginRight="30dp"
-                    android:layout_marginLeft="30dp"/>
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/btn_limpiarLista"/>
 
             </RelativeLayout>
 

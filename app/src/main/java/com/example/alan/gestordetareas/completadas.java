@@ -16,10 +16,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,6 +39,8 @@ public class completadas extends AppCompatActivity {
     //Fin menu, declaracion de variables
     private ListView completadas;
     private ArrayList<ObjTarea> tareas;
+    private ArrayList<ObjTarea> tareasCompletadas;
+    private Button limpiarLista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,25 @@ public class completadas extends AppCompatActivity {
         //Fin Codigo para poner el nombre de usuario en el menu
         completadas = (ListView)findViewById(R.id.completas);
         cargarTareas();//LLamada a funcion para llenar las tareas
+        limpiarLista = (Button)findViewById(R.id.btn_limpiarLista);
+        limpiarLista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tareasCompletadas.size() > 0){
+                    int[] ids = new int[tareasCompletadas.size()];
+                    for(int i = 0; i < ids.length; i ++){
+                        ids[i] = tareasCompletadas.get(i).getId();
+                    }
+                    DialogoAdvertenciaTodasTareas advertencia = new DialogoAdvertenciaTodasTareas();
+                    Bundle variable = new Bundle();
+                    variable.putIntArray("id", ids);
+                    advertencia.setArguments(variable);
+                    advertencia.show(getFragmentManager(), "Advertencia");
+                }else{
+                    Toast.makeText(completadas.this, "No hay tareas completadas por eliminar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     /**
@@ -124,7 +147,7 @@ public class completadas extends AppCompatActivity {
     public void cargarTareas(){
         tareas = db.selectTareas();
         if(tareas.size() > 0){
-            ArrayList<ObjTarea> tareasCompletadas = new ArrayList<ObjTarea>();
+            tareasCompletadas = new ArrayList<ObjTarea>();
             for(ObjTarea t : tareas){
                 if(t.getCompletado() == 1){
                     tareasCompletadas.add(t);

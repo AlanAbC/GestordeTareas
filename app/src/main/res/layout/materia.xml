@@ -24,8 +24,8 @@
         android:paddingLeft="15dp"
         android:textColor="#191919"
         android:layout_toRightOf="@id/colorFondoMateria"
-        android:text="NOMBRE MATERIA"
-        />
+        android:text="NOMBRE MATERIA" />
+
     <TextView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -36,8 +36,9 @@
         android:layout_below="@id/materia"
         android:paddingLeft="25dp"
         android:layout_toRightOf="@id/colorFondoMateria"
-        android:text="NOMBRE MAESTRO"
-        />
+        android:text="NOMBRE MAESTRO"/>
+
+    <!--
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -47,8 +48,9 @@
         android:id="@+id/editar"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/materia"
-        android:scaleType="centerInside"
-        />
+        android:scaleType="centerInside" />
+    -->
+
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -57,9 +59,8 @@
         android:padding="8dp"
         android:id="@+id/borrar"
         android:layout_marginTop="5dp"
-        android:layout_toRightOf="@id/editar"
-        android:layout_marginLeft="5dp"
-        android:scaleType="centerInside"
-        />
+        android:layout_toRightOf="@id/materia"
+        android:layout_marginLeft="50dp"
+        android:scaleType="centerInside" />
 
 </RelativeLayout>
