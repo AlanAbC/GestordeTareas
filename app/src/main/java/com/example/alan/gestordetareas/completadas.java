@@ -12,10 +12,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -130,7 +132,26 @@ public class completadas extends AppCompatActivity {
             }
             if(tareasCompletadas.size() > 0){
                 completadas.setAdapter(new TareasAdaptador(getApplicationContext(), tareasCompletadas));
+                ajustarListView(completadas);
             }
         }
+    }
+
+    /**
+     * Funcion la cual ajusta el tamaño de un ListView dependiendo de los elementos que contiene
+     * @param listView
+     */
+    private void ajustarListView(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 }

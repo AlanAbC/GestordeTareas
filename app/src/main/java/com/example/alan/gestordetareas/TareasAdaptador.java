@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -72,7 +73,9 @@ public class TareasAdaptador extends BaseAdapter {
                 tarea.setCompletado(estado);
                 int flag = db.updateTarea(tarea);
                 if(flag == 1){
-                    
+                    Intent i = new Intent(context, MainActivity.class);
+                    context.startActivity(i);
+                    Toast.makeText(context, "Se cambió el estado correctamente", Toast.LENGTH_SHORT).show();
                 }
             }
         });
