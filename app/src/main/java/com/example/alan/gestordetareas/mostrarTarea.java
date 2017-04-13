@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 public class mostrarTarea extends AppCompatActivity {
-
+    LinearLayout colorf;
     TextView fondoNombre;
     TextView nombreTarea;
     TextView nombreMateria;
@@ -32,6 +32,7 @@ public class mostrarTarea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_mostrar_tarea);
+        colorf=(LinearLayout)findViewById(R.id.nombre);
         fondoNombre = (TextView)findViewById(R.id.fondoNombre);
         nombreTarea = (TextView)findViewById(R.id.nombreT);
         nombreMateria = (TextView)findViewById(R.id.materiaT);
@@ -49,7 +50,7 @@ public class mostrarTarea extends AppCompatActivity {
         String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Nobiembre", "Diciembre"};
         String fechaMuestra = dias[calendar.get(Calendar.DAY_OF_WEEK) - 1] + " " + calendar.get(Calendar.DAY_OF_MONTH) + " de " + meses[calendar.get(Calendar.MONTH)] + " del " + calendar.get(Calendar.YEAR);
         //String fechaMuestra = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
-        fondoNombre.setBackgroundColor(Color.parseColor(color));
+        colorf.setBackgroundColor(Color.parseColor(color));
         fondoNombre.setText(nombre);
         nombreTarea.setText(nombre);
         nombreMateria.setText(materia);

@@ -91,6 +91,7 @@ public class TareasAdaptador extends BaseAdapter {
                 i.putExtra("materia", tarea.getMateria().getNombre());
                 i.putExtra("fecha", tarea.getFechaEntrega().getTime());
                 i.putExtra("descripcion", tarea.getDescripcion());
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
         });
