@@ -1,6 +1,7 @@
 package com.example.alan.gestordetareas;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -142,10 +143,12 @@ public class agregarTarea extends AppCompatActivity {
             }
             ArrayAdapter adaptadorMaterias = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, nombreMaterias);
             spinnerMaterias.setAdapter(adaptadorMaterias);
+
             spinnerMaterias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     materiaSeleccionada = position;
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#000000"));
                 }
 
                 @Override
