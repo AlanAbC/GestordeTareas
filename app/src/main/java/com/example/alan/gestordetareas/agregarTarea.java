@@ -141,7 +141,7 @@ public class agregarTarea extends AppCompatActivity {
             for(int i = 0; i < materias.size(); i++){
                 nombreMaterias[i] = materias.get(i).getNombre();
             }
-            ArrayAdapter adaptadorMaterias = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, nombreMaterias);
+            ArrayAdapter adaptadorMaterias = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_materias, nombreMaterias);
             spinnerMaterias.setAdapter(adaptadorMaterias);
 
             spinnerMaterias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
