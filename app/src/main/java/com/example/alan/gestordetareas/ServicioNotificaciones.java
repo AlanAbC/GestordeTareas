@@ -53,6 +53,7 @@ public class ServicioNotificaciones extends Service {
         private AdminBD db;
         private boolean flag;
         private ArrayList<ObjTarea> tareas;
+        //private Date horaNotificaciones;
 
         @Override
         protected void onPreExecute() {
@@ -97,13 +98,11 @@ public class ServicioNotificaciones extends Service {
 
                     }
                 }
-                flag = false;
-            }
-            try {
-                Thread.sleep(60000);
-                flag = true;
-            }catch(InterruptedException e){
-                Log.e("Dormir acplicacion", e + "");
+                try {
+                    Thread.sleep(43200000);
+                }catch(InterruptedException e){
+                    Log.e("Dormir acplicacion", e + "");
+                }
             }
             return null;
         }
