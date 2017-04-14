@@ -22,7 +22,9 @@
         <activity android:name=".agregar_materia" />
         <activity android:name=".horario" />
         <activity android:name=".completadas" />
-        <activity android:name=".acerca"></activity>
+        <activity android:name=".acerca" />
+
+        <service android:name=".ServicioNotificaciones" />
     </application>
 
 </manifest>

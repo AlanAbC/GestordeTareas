@@ -210,6 +210,8 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         //FIn creacion y comprobacion de primera vez
+        Intent servicio = new Intent(MainActivity.this, ServicioNotificaciones.class);
+        startService(servicio);
     }
 
 
