@@ -1,4 +1,4 @@
-package com.example.alan.gestordetareas;
+package com.claresti.mistareas.gestordetareas;
 
 import android.content.Context;
 import android.graphics.Color;

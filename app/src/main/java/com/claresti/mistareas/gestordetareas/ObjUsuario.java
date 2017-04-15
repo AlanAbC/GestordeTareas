@@ -1,4 +1,4 @@
-package com.example.alan.gestordetareas;
+package com.claresti.mistareas.gestordetareas;
 
 public class ObjUsuario {
 
