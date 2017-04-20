@@ -228,7 +228,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="22dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"
+                android:gravity="center_horizontal"
                 android:id="@+id/txt_MenuInicio"/>
 
 

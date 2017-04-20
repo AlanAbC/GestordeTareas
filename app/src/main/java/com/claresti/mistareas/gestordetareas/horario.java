@@ -1,9 +1,11 @@
 package com.claresti.mistareas.gestordetareas;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -196,8 +198,7 @@ public class horario extends AppCompatActivity {
                             salida.setTextColor(Color.parseColor("#000000"));
                             TextView salon = new TextView(getApplicationContext());
                             salon.setText(h.getSalon());
-                            salon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                            salon.setBackground(getResources().getDrawable(R.drawable.cell));
+                            salon.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);                            salon.setBackground(getResources().getDrawable(R.drawable.cell));
                             salon.setTextColor(Color.parseColor("#000000"));
                             fila.addView(materia);
                             fila.addView(entrada);
