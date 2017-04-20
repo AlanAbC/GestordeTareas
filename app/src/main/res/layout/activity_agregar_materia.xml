@@ -167,6 +167,7 @@
                             android:layout_width="120dp"
                             android:id="@+id/entradaTL"
                             android:textAlignment="center"
+                            android:inputType="time"
                             android:layout_marginLeft="45dp"
                             android:layout_height="wrap_content" />
 
@@ -184,6 +185,7 @@
                             android:layout_width="120dp"
                             android:id="@+id/salidaTL"
                             android:textAlignment="center"
+                            android:inputType="time"
                             android:layout_toRightOf="@id/entradaTL"
                             android:layout_marginLeft="15dp"
                             android:layout_height="wrap_content" />
@@ -251,6 +253,7 @@
                             android:layout_width="120dp"
                             android:id="@+id/entradaTMa"
                             android:textAlignment="center"
+                            android:inputType="time"
                             android:layout_marginLeft="45dp"
                             android:layout_height="wrap_content" />
 
@@ -268,6 +271,7 @@
                             android:layout_width="120dp"
                             android:id="@+id/salidaTMa"
                             android:textAlignment="center"
+                            android:inputType="time"
                             android:layout_toRightOf="@id/entradaTMa"
                             android:layout_marginLeft="15dp"
                             android:layout_height="wrap_content" />
@@ -335,6 +339,7 @@
                             android:layout_width="120dp"
                             android:textAlignment="center"
                             android:id="@+id/entradaTMi"
+                            android:inputType="time"
                             android:layout_marginLeft="45dp"
                             android:layout_height="wrap_content" />
 
@@ -352,6 +357,7 @@
                             android:layout_width="120dp"
                             android:textAlignment="center"
                             android:id="@+id/salidaTMi"
+                            android:inputType="time"
                             android:layout_toRightOf="@id/entradaTMi"
                             android:layout_marginLeft="15dp"
                             android:layout_height="wrap_content" />
@@ -418,6 +424,7 @@
                         <EditText
                             android:layout_width="120dp"
                             android:id="@+id/entradaTJ"
+                            android:inputType="time"
                             android:textAlignment="center"
                             android:layout_marginLeft="45dp"
                             android:layout_height="wrap_content" />
@@ -436,6 +443,7 @@
                             android:textAlignment="center"
                             android:layout_width="120dp"
                             android:id="@+id/salidaTJ"
+                            android:inputType="time"
                             android:layout_toRightOf="@id/entradaTJ"
                             android:layout_marginLeft="15dp"
                             android:layout_height="wrap_content" />
@@ -448,7 +456,6 @@
                             android:layout_toRightOf="@id/entradaJ"
                             android:text="Salida"
                             android:textSize="17dp"
-
                             android:textAlignment="center"
                             android:layout_marginLeft="15dp"/>
 
@@ -503,6 +510,7 @@
                         <EditText
                             android:layout_width="120dp"
                             android:id="@+id/entradaTV"
+                            android:inputType="time"
                             android:textAlignment="center"
                             android:layout_marginLeft="45dp"
                             android:layout_height="wrap_content" />
@@ -521,6 +529,7 @@
                             android:layout_width="120dp"
                             android:textAlignment="center"
                             android:id="@+id/salidaTV"
+                            android:inputType="time"
                             android:layout_toRightOf="@id/entradaTV"
                             android:layout_marginLeft="15dp"
                             android:layout_height="wrap_content" />
@@ -589,6 +598,7 @@
                         <EditText
                             android:layout_width="120dp"
                             android:id="@+id/entradaTS"
+                            android:inputType="time"
                             android:textAlignment="center"
                             android:layout_marginLeft="45dp"
                             android:layout_height="wrap_content" />
@@ -606,6 +616,7 @@
                         <EditText
                             android:layout_width="120dp"
                             android:id="@+id/salidaTS"
+                            android:inputType="time"
                             android:textAlignment="center"
                             android:layout_toRightOf="@id/entradaTS"
                             android:layout_marginLeft="15dp"
@@ -643,6 +654,7 @@
                             android:textAlignment="center"/>
 
                     </RelativeLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -653,6 +665,7 @@
                         android:textSize="19dp"
                         android:layout_marginTop="20dp"
                         android:paddingLeft="20dp"/>
+
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
@@ -661,7 +674,8 @@
                         android:layout_below="@id/color"
                         android:layout_marginLeft="70dp"
                         android:layout_marginBottom="30dp"
-                        android:layout_marginRight="70dp"></Spinner>
+                        android:layout_marginRight="70dp"/>
+
                 </RelativeLayout>
 
             </RelativeLayout>
