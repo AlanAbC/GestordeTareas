@@ -214,7 +214,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/salonL"
                             android:layout_below="@id/salonTL"
-                            android:text="Salon"
+                            android:text="Abreviacion Salon"
                             android:textSize="17dp"
                             android:layout_marginTop="10dp"
                             android:textAlignment="center"/>
@@ -298,7 +298,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/salonMa"
                             android:layout_below="@id/salonTMa"
-                            android:text="Salon"
+                            android:text="Abreviacion Salon"
                             android:textSize="17dp"
                             android:layout_marginTop="10dp"
                             android:textAlignment="center"/>
@@ -382,7 +382,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/salonMi"
                             android:layout_below="@id/salonTMi"
-                            android:text="Salon"
+                            android:text="Abreviacion Salon"
                             android:textSize="17dp"
                             android:layout_marginTop="10dp"
                             android:textAlignment="center"/>
@@ -467,7 +467,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/salonJ"
                             android:layout_below="@id/salonTJ"
-                            android:text="Salon"
+                            android:text="Abreviacion Salon"
                             android:textSize="17dp"
                             android:layout_marginTop="10dp"
                             android:textAlignment="center"/>
@@ -552,7 +552,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/salonV"
                             android:layout_below="@id/salonTV"
-                            android:text="Salon"
+                            android:text="Abreviacion Salon"
                             android:textSize="17dp"
                             android:layout_marginTop="10dp"
                             android:textAlignment="center"/>
@@ -637,7 +637,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/salonS"
                             android:layout_below="@id/salonTS"
-                            android:text="Salon"
+                            android:text="Abreviacion Salon"
                             android:textSize="17dp"
                             android:layout_marginTop="10dp"
                             android:textAlignment="center"/>
