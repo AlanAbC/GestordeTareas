@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     android:padding="0dp">
 
     <RelativeLayout
@@ -83,8 +84,27 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/fecha"
+                android:id="@+id/maestro"
                 android:layout_below="@id/materiaT"
+                android:text="Maestro"
+                android:paddingLeft="0dp"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/maestroT"
+                android:layout_below="@id/maestro"
+                android:paddingLeft="10dp"
+                android:text="Aqui va el maestro"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fecha"
+                android:layout_below="@id/maestroT"
                 android:text="Fecha"
                 android:paddingLeft="0dp"
                 android:textStyle="bold"
@@ -106,7 +126,7 @@
             android:layout_width="320dp"
             android:layout_below="@id/datos"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="20dp"
             android:shadowColor="#8a6603"
             android:shadowDx="3"
             android:shadowDy="2"
@@ -134,7 +154,22 @@
                 android:textSize="15dp"/>
 
         </RelativeLayout>
-
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editar"
+            app:backgroundTint="#1b9aaa"
+            android:src="@drawable/edit"
+            app:fabSize="normal"
+            android:onClick="agregarTarea"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="bottom|right|end"
+            android:layout_marginBottom="32dp"
+            android:layout_marginRight="15dp"
+            app:elevation="2dp"/>
     </RelativeLayout>
+
 
 </ScrollView>
