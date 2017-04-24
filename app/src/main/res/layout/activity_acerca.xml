@@ -28,7 +28,7 @@
                     android:layout_height="60dp"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="8dp"
-                    android:background= "#a042ff"
+                    android:background= "#7600ec"
                     android:id="@+id/menu"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true">
@@ -113,6 +113,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/menu_principal"
+        app:itemTextColor="#7600ec"
         app:headerLayout="@layout/header_menu"/>
 
 </android.support.v4.widget.DrawerLayout>

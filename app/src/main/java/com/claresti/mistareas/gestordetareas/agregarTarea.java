@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,7 @@ public class agregarTarea extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     final List<MenuItem> items = new ArrayList<>();
     private Menu menu;
+    private RelativeLayout principal;
     private ImageView btnMenu;
     private NavigationView nav;
     //Fin menu, declaracion de variables
@@ -53,6 +56,7 @@ public class agregarTarea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_agregar_tarea);
+        principal =(RelativeLayout)findViewById(R.id.principal);
         //Cambiar el color en la barra de notificaciones (Solo funciona de lollipop hacia arriba)
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             Window window = getWindow();
@@ -148,7 +152,7 @@ public class agregarTarea extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     materiaSeleccionada = position;
-                    ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#000000"));//con  esta linea se cambia el color del texto pero no se como cambiarlo a todosactualmente solo cambia el del elemento seleccionado
+                    ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#a1a1a1"));//con  esta linea se cambia el color del texto pero no se como cambiarlo a todosactualmente solo cambia el del elemento seleccionado
                 }
 
                 @Override
@@ -160,7 +164,8 @@ public class agregarTarea extends AppCompatActivity {
     }
 
     public void msg(String msg){
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+        Snackbar.make(principal, msg, Snackbar.LENGTH_SHORT).show();
+
     }
 
     public void agregarTarea(View view){
@@ -181,8 +186,8 @@ public class agregarTarea extends AppCompatActivity {
                         tareaNueva.setNombre(nombre.getText().toString());
                         int flag = db.insertTarea(tareaNueva);
                         if(flag == 1){
-                            msg("Tarea creada correctamente :)");
                             Intent i = new Intent(agregarTarea.this, MainActivity.class);
+                            i.putExtra("msg","Tarea creada correctamente");
                             startActivity(i);
                             finish();
                         }else{

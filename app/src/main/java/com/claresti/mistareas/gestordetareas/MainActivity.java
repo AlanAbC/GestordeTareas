@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -60,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
     private int flagSemana=0;
     private TextView txtMes;
     private int flagMes=0;
+    private RelativeLayout principal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        principal=(RelativeLayout)findViewById(R.id.principal);
         //Publicidad
         AdView mAdView = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -205,6 +208,11 @@ public class MainActivity extends AppCompatActivity {
         //FIn creacion y comprobacion de primera vez
         Intent servicio = new Intent(MainActivity.this, ServicioNotificaciones.class);
         startService(servicio);
+
+        if((String) getIntent().getExtras().getSerializable("msg")!=null){
+            msg((String) getIntent().getExtras().getSerializable("msg"));
+
+        }
     }
 
 
@@ -368,6 +376,13 @@ public class MainActivity extends AppCompatActivity {
      * @param msg
      */
     public void msg(String msg){
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+        Snackbar.make(principal, msg, Snackbar.LENGTH_LONG).setAction("Aceptar", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        }).show();
+
+
     }
 }
