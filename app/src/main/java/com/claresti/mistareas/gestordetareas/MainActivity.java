@@ -209,9 +209,12 @@ public class MainActivity extends AppCompatActivity {
         Intent servicio = new Intent(MainActivity.this, ServicioNotificaciones.class);
         startService(servicio);
 
-        if((String) getIntent().getExtras().getSerializable("msg")!=null){
-            msg((String) getIntent().getExtras().getSerializable("msg"));
-
+        Intent i = getIntent();
+        Bundle extras = i.getExtras();
+        if(extras != null){
+            if (extras.containsKey("msg")) {
+                msg(getIntent().getExtras().getString("msg"));
+            }
         }
     }
 
