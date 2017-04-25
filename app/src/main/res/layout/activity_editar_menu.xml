@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:id="@+id/dLayout"
-    android:theme="@android:styles/amarillo"
+    android:theme="@style/amarillo"
     android:layout_width="match_parent">
 
     <RelativeLayout

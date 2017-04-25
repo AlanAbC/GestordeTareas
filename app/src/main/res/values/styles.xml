@@ -9,8 +9,8 @@
     </style>
     <style name="amarillo" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#1b9aaa</item>
-        <item name="colorPrimaryDark">#1b9aaa</item>
+        <item name="colorPrimary">#d29400</item>
+        <item name="colorPrimaryDark">#d29400</item>
         <item name="colorAccent">#eea600</item>
     </style>
 

@@ -259,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        //Bloque de codigo que da funcionalidad al boton de editar del header del menu
         View headerview = nav.getHeaderView(0);
         ImageView editar = (ImageView)headerview.findViewById(R.id.editar);
         editar.setOnClickListener(new View.OnClickListener() {
@@ -268,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        //FIn bloque
         btnMenu = (ImageView)findViewById(R.id.Btnmenu);
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
