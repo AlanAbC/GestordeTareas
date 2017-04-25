@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.claresti.mistareas.gestordetareas">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,22 +12,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.claresti.mistareas.gestordetareas.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.claresti.mistareas.gestordetareas.Materias" />
-        <activity android:name="com.claresti.mistareas.gestordetareas.mostrarTarea" />
-        <activity android:name="com.claresti.mistareas.gestordetareas.agregarTarea" />
-        <activity android:name="com.claresti.mistareas.gestordetareas.agregar_materia" />
-        <activity android:name="com.claresti.mistareas.gestordetareas.horario" />
-        <activity android:name="com.claresti.mistareas.gestordetareas.completadas" />
-        <activity android:name="com.claresti.mistareas.gestordetareas.acerca" />
+        <activity android:name=".Materias" />
+        <activity android:name=".mostrarTarea" />
+        <activity android:name=".agregarTarea" />
+        <activity android:name=".agregar_materia" />
+        <activity android:name=".horario" />
+        <activity android:name=".completadas" />
+        <activity android:name=".acerca" />
 
-        <service android:name="com.claresti.mistareas.gestordetareas.ServicioNotificaciones" />
+        <service android:name=".ServicioNotificaciones" />
+
+        <activity android:name=".EditarMenu"></activity>
     </application>
 
 </manifest>
