@@ -259,10 +259,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        Layout header;
-        ImageView editar;
-        header=;
-        editar=(ImageView).;
+        View headerview = nav.getHeaderView(0);
+        ImageView editar = (ImageView)headerview.findViewById(R.id.editar);
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
