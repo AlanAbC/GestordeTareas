@@ -9,44 +9,52 @@ import android.widget.TextView;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.claresti.mistareas.gestordetareas.R.id.nombre;
+
 public class mostrarTarea extends AppCompatActivity {
+
+    //Declaracion variables elementos layout
     LinearLayout colorf;
     TextView fondoNombre;
     TextView nombreTarea;
     TextView nombreMateria;
     TextView fechaView;
     TextView descripcionView;
+    TextView maestro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_mostrar_tarea);
-        colorf=(LinearLayout)findViewById(R.id.nombre);
+
+        // Asignacion elementos layout
+        colorf=(LinearLayout)findViewById(nombre);
         fondoNombre = (TextView)findViewById(R.id.fondoNombre);
         nombreTarea = (TextView)findViewById(R.id.nombreT);
         nombreMateria = (TextView)findViewById(R.id.materiaT);
+        maestro = (TextView)findViewById(R.id.maestroT);
         fechaView = (TextView)findViewById(R.id.fechaT);
         descripcionView = (TextView)findViewById(R.id.descripcionT);
-        String color = (String) getIntent().getExtras().getSerializable("color");
-        String nombre = (String) getIntent().getExtras().getSerializable("nombre");
-        String materia = (String) getIntent().getExtras().getSerializable("materia");
-        long fecha = (long) getIntent().getExtras().getSerializable("fecha");
-        String descripcion = (String) getIntent().getExtras().getSerializable("descripcion");
+
+        // Obtencion del objeto tarea enviado por el comunicador
+        ObjTarea tarea = ObjComunicadorTarea.getTarea();
+
+        //Creacion del formato de la fecha que se mostrará
         Calendar calendar = Calendar.getInstance();
-        Date fechaen = new Date(fecha);
-        calendar.setTime(fechaen);
+        calendar.setTime(tarea.getFechaEntrega());
         String[] dias = {"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"};
         String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Nobiembre", "Diciembre"};
         String fechaMuestra = dias[calendar.get(Calendar.DAY_OF_WEEK) - 1] + " " + calendar.get(Calendar.DAY_OF_MONTH) + " de " + meses[calendar.get(Calendar.MONTH)] + " del " + calendar.get(Calendar.YEAR);
-        //String fechaMuestra = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
-        colorf.setBackgroundColor(Color.parseColor(color));
-        fondoNombre.setText(nombre);
-        nombreTarea.setText(nombre);
-        nombreMateria.setText(materia);
-        fechaView.setText(fechaMuestra);
-        descripcionView.setText(descripcion);
-    }
 
+        // Asignacion de los valores del objeto tarea a los elementos del layout
+        colorf.setBackgroundColor(Color.parseColor(tarea.getMateria().getColor().getExadecimal()));
+        fondoNombre.setText(tarea.getNombre());
+        nombreTarea.setText(tarea.getNombre());
+        nombreMateria.setText(tarea.getMateria().getNombre());
+        fechaView.setText(fechaMuestra);
+        descripcionView.setText(tarea.getDescripcion());
+        maestro.setText(tarea.getMateria().getProfesor());
+    }
 
 }
