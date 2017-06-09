@@ -161,7 +161,7 @@
             app:backgroundTint="#1b9aaa"
             android:src="@drawable/edit"
             app:fabSize="normal"
-            android:onClick="agregarTarea"
+            android:onClick="modificarTarea"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

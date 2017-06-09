@@ -100,13 +100,6 @@ public class TareasAdaptador extends BaseAdapter {
             public void onClick(View v) {
                 Intent i = new Intent(context.getApplicationContext(), mostrarTarea.class);
                 ObjComunicadorTarea.setTarea(tarea);
-                /*
-                i.putExtra("color", tarea.getMateria().getColor().getExadecimal());
-                i.putExtra("nombre", tarea.getNombre());
-                i.putExtra("materia", tarea.getMateria().getNombre());
-                i.putExtra("fecha", tarea.getFechaEntrega().getTime());
-                i.putExtra("descripcion", tarea.getDescripcion());
-                */
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }

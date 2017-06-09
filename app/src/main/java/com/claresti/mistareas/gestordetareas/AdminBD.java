@@ -201,6 +201,19 @@ public class AdminBD extends SQLiteOpenHelper {
         }
     }
 
+    public String updateUsuarioImg(ObjUsuario usuario){
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues v = new ContentValues();
+            v.put("usuNombre", usuario.getNombre());
+            v.put("usuImg", usuario.getImg());
+            db.update("Usuario", v, "usuPrimera = 1", null);
+            return "1";
+        }catch(Exception e){
+            return e.toString();
+        }
+    }
+
     /**
      * Funcion que regresa todos los colores de la base de datos
      * @return Array List de objetos tipo ObjColor

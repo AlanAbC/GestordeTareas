@@ -3,8 +3,10 @@ package com.claresti.mistareas.gestordetareas;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -55,6 +57,10 @@ public class mostrarTarea extends AppCompatActivity {
         fechaView.setText(fechaMuestra);
         descripcionView.setText(tarea.getDescripcion());
         maestro.setText(tarea.getMateria().getProfesor());
+    }
+
+    public void modificarTarea(View view){
+        Toast.makeText(getApplicationContext(), "Editar tarea", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -1,6 +1,10 @@
 package com.claresti.mistareas.gestordetareas;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +35,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -63,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtMes;
     private int flagMes=0;
     private RelativeLayout principal;
+    private ObjUsuario usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //FIn insertar listener boton agregar
+        db = new AdminBD(this);
+        usuario = db.selectUsuario();
         //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
         drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         nav = (NavigationView)findViewById(R.id.navigation);
@@ -100,8 +109,7 @@ public class MainActivity extends AppCompatActivity {
         //Creacion del objeto usuario y comprobacion de primera ves o no en el sistemaa
         //cambia el nombre de la base de datos y el valor de usuPrimera a 1 en caso de que sea la primera vez
         //en caso contrario solo agrega nombre del usuario al menu y carga las tareas
-        db = new AdminBD(this);
-        ObjUsuario usuario = db.selectUsuario();
+
         if(usuario.getPrimera() == 0){
             //Creacion de la ventana de inicio
             final RelativeLayout inicio = (RelativeLayout)findViewById(R.id.lPrimeraVez);
@@ -262,6 +270,15 @@ public class MainActivity extends AppCompatActivity {
         //Bloque de codigo que da funcionalidad al boton de editar del header del menu
         View headerview = nav.getHeaderView(0);
         ImageView editar = (ImageView)headerview.findViewById(R.id.editar);
+        RelativeLayout imgFondo = (RelativeLayout)headerview.findViewById(R.id.l_imgFondo);
+        if(usuario.getImg().equals("imgmenu")){
+            imgFondo.setBackgroundResource(R.drawable.imgmenu);
+        }else{
+            Uri path = Uri.fromFile(new File(usuario.getImg()));
+            Bitmap bitmap = BitmapFactory.decodeFile(usuario.getImg());
+            BitmapDrawable bdrawable = new BitmapDrawable(getApplicationContext().getResources(),bitmap);
+            imgFondo.setBackground(bdrawable);
+        }
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

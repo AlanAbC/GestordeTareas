@@ -6,11 +6,20 @@
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
-    android:gravity="bottom">
+    android:gravity="bottom"
+    android:id="@+id/l_imgFondo">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="USERNAME"
+        android:id="@+id/menuNombreUsuario"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="55dp"
+        android:layout_height="25dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -19,12 +28,5 @@
         android:id="@+id/editar"
         android:padding="2dp"
         android:src="@drawable/edit"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="USERNAME"
-        android:id="@+id/menuNombreUsuario"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </RelativeLayout>

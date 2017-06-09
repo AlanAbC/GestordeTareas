@@ -2,7 +2,11 @@ package com.claresti.mistareas.gestordetareas;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -20,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -28,6 +33,7 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -35,6 +41,7 @@ import java.util.List;
 public class horario extends AppCompatActivity {
 
     private AdminBD db; //Variable del administrador de la base de datos
+    private ObjUsuario usuario;
     //Menu, Declaracion de variables
     private DrawerLayout drawerLayout;
     final List<MenuItem> items = new ArrayList<>();
@@ -61,16 +68,17 @@ public class horario extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.horario));
         }
         //Fin cambio de color de barra de notificaciones
+        //Codigo para crear el objeto de la base de datos y
+        //agregar el nombre de usuario al menu
+        db = new AdminBD(this);
+        usuario = db.selectUsuario();
         //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
         drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         nav = (NavigationView)findViewById(R.id.navigation);
         menu = nav.getMenu();
         menuNav();
         // Fin menu
-        //Codigo para crear el objeto de la base de datos y
-        //agregar el nombre de usuario al menu
-        db = new AdminBD(this);
-        ObjUsuario usuario = db.selectUsuario();
+
         //Codigo para poner en el Menu el nombre de usuario
         View header = nav.getHeaderView(0);
         TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
@@ -120,6 +128,25 @@ public class horario extends AppCompatActivity {
                 drawerLayout.closeDrawer(nav);
                 item.setChecked(false);
                 return false;
+            }
+        });
+        //Bloque de codigo que da funcionalidad al boton de editar del header del menu
+        View headerview = nav.getHeaderView(0);
+        ImageView editar = (ImageView)headerview.findViewById(R.id.editar);
+        RelativeLayout imgFondo = (RelativeLayout)headerview.findViewById(R.id.l_imgFondo);
+        if(usuario.getImg().equals("imgmenu")){
+            imgFondo.setBackgroundResource(R.drawable.imgmenu);
+        }else{
+            Uri path = Uri.fromFile(new File(usuario.getImg()));
+            Bitmap bitmap = BitmapFactory.decodeFile(usuario.getImg());
+            BitmapDrawable bdrawable = new BitmapDrawable(getApplicationContext().getResources(),bitmap);
+            imgFondo.setBackground(bdrawable);
+        }
+        editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(horario.this, EditarMenu.class);
+                startActivity(i);
             }
         });
         btnMenu = (ImageView)findViewById(R.id.Btnmenu);
