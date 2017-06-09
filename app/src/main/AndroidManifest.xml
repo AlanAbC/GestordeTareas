@@ -10,6 +10,8 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -29,10 +31,17 @@
         <activity android:name=".horario" />
         <activity android:name=".completadas" />
         <activity android:name=".acerca" />
-
-        <service android:name=".ServicioNotificaciones" />
-
         <activity android:name=".EditarMenu"/>
+        <service android:name=".ServicioNotificaciones" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>

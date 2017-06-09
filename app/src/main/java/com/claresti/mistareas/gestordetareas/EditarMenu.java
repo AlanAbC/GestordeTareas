@@ -64,7 +64,7 @@ public class EditarMenu extends AppCompatActivity {
     private ObjUsuario usuario;
 
     //Variables de directorio para subir imegen
-    private static String APP_DIRECTORY = "GestorGasolina/";
+    private static String APP_DIRECTORY = "MisTareas/";
     private static String MEDIA_DIRECTORY = APP_DIRECTORY + "Pictures";
 
     //Variables de permisos
@@ -88,16 +88,16 @@ public class EditarMenu extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.horario));
         }
 
+        //Codigo para crear el objeto de la base de datos y
+        //agregar el nombre de usuario al menu
+        db = new AdminBD(this);
+        usuario = db.selectUsuario();
+
         //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
         drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         nav = (NavigationView)findViewById(R.id.navigation);
         menu = nav.getMenu();
         menuNav();
-
-        //Codigo para crear el objeto de la base de datos y
-        //agregar el nombre de usuario al menu
-        db = new AdminBD(this);
-        ObjUsuario usuario = db.selectUsuario();
 
         //Codigo para poner en el Menu el nombre de usuario
         View header = nav.getHeaderView(0);
