@@ -303,12 +303,10 @@ public class agregar_materia extends AppCompatActivity {
                     Bundle extras = intent.getExtras();
                     if(extras != null){
                         if (extras.containsKey("editar")) {
-
+                            Intent i = new Intent(agregar_materia.this, agregar_materia.class);
+                            startActivity(i);
+                            finish();
                         }
-                    }else{
-                        Intent i = new Intent(agregar_materia.this, agregar_materia.class);
-                        startActivity(i);
-                        finish();
                     }
                 }else if(pos == 6){
                     Intent i = new Intent(agregar_materia.this, acerca.class);
