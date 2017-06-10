@@ -171,7 +171,17 @@ public class agregarTarea extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }else if(pos == 4){
-
+                    //Validacion si es agregar tarea y actualizar tarea
+                    Intent intent = getIntent();
+                    Bundle extras = intent.getExtras();
+                    if(extras != null){
+                        if (extras.containsKey("editar")) {
+                            // Obtencion de la tarea
+                            Intent i = new Intent(agregarTarea.this, agregarTarea.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }
                 }else if(pos == 5){
                     Intent i = new Intent(agregarTarea.this, agregar_materia.class);
                     startActivity(i);
