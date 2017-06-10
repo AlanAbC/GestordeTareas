@@ -641,11 +641,98 @@
 
                     </RelativeLayout>
 
+                    <CheckBox
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@id/conSabado"
+                        android:id="@+id/checkLunesViernes"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TLunesViernes"
+                        android:layout_below="@id/conSabado"
+                        android:text="Lunes a Viernes"
+                        android:layout_marginTop="15dp"
+                        android:textSize="17dp"
+                        android:layout_toRightOf="@id/checkSabado"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/conLunesViernes"
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone"
+                        android:layout_below="@id/TLunesViernes"
+                        android:layout_marginBottom="40dp">
+
+                        <EditText
+                            android:layout_width="120dp"
+                            android:id="@+id/entradaTLV"
+                            android:inputType="time"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="45dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/entradaLV"
+                            android:layout_below="@id/entradaTLV"
+                            android:text="Entrada"
+                            android:textSize="17dp"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="45dp"/>
+
+                        <EditText
+                            android:layout_width="120dp"
+                            android:id="@+id/salidaTLV"
+                            android:inputType="time"
+                            android:textAlignment="center"
+                            android:layout_toRightOf="@id/entradaTLV"
+                            android:layout_marginLeft="15dp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/salidaLV"
+                            android:layout_below="@id/entradaTLV"
+                            android:layout_toRightOf="@id/entradaLV"
+                            android:text="Salida"
+                            android:textSize="17dp"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="15dp"/>
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/salidaLV"
+                            android:id="@+id/salonTLV"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="30dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/salonLV"
+                            android:layout_below="@id/salonTLV"
+                            android:text="Abreviacion Salon"
+                            android:textSize="17dp"
+                            android:layout_marginTop="10dp"
+                            android:textAlignment="center"/>
+
+                    </RelativeLayout>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Color"
-                        android:layout_below="@id/conSabado"
+                        android:layout_below="@id/conLunesViernes"
                         android:id="@+id/color"
                         android:textSize="19dp"
                         android:layout_marginTop="20dp"

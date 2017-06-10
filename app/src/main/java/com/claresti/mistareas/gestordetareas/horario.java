@@ -56,28 +56,29 @@ public class horario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_horario);
+
         //Publicidad
         AdView mAdView = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        //Fin publicidad
+
         //Cambiar el color en la barra de notificaciones (Solo funciona de lollipop hacia arriba)
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.horario));
         }
-        //Fin cambio de color de barra de notificaciones
+
         //Codigo para crear el objeto de la base de datos y
         //agregar el nombre de usuario al menu
         db = new AdminBD(this);
         usuario = db.selectUsuario();
+
         //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
         drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         nav = (NavigationView)findViewById(R.id.navigation);
         menu = nav.getMenu();
         menuNav();
-        // Fin menu
 
         //Codigo para poner en el Menu el nombre de usuario
         View header = nav.getHeaderView(0);
@@ -137,7 +138,7 @@ public class horario extends AppCompatActivity {
         if(usuario.getImg().equals("imgmenu")){
             imgFondo.setBackgroundResource(R.drawable.imgmenu);
         }else{
-            Uri path = Uri.fromFile(new File(usuario.getImg()));
+            //Uri path = Uri.fromFile(new File(usuario.getImg()));
             Bitmap bitmap = BitmapFactory.decodeFile(usuario.getImg());
             BitmapDrawable bdrawable = new BitmapDrawable(getApplicationContext().getResources(),bitmap);
             imgFondo.setBackground(bdrawable);

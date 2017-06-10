@@ -49,12 +49,14 @@ public class agregar_materia extends AppCompatActivity {
     private CheckBox jueves;
     private CheckBox viernes;
     private CheckBox sabado;
+    private CheckBox lunesViernes;
     private int flagLunes = 0;
     private int flagMartes = 0;
     private int flagMiercoles = 0;
     private int flagJueves = 0;
     private int flagViernes = 0;
     private int flagSabado = 0;
+    private int flagLunesViernes = 0;
     private int flagSpinner;
     private RelativeLayout conLunes;
     private RelativeLayout conMartes;
@@ -62,6 +64,7 @@ public class agregar_materia extends AppCompatActivity {
     private RelativeLayout conJueves;
     private RelativeLayout conViernes;
     private RelativeLayout conSabado;
+    private RelativeLayout conLunesViernes;
 
     //Array de colores
     private ArrayList<ObjColor> colores; //lista de objetos tipo ObjColores
@@ -120,14 +123,19 @@ public class agregar_materia extends AppCompatActivity {
         conViernes = (RelativeLayout)findViewById(R.id.conViernes);
         sabado = (CheckBox)findViewById(R.id.checkSabado);
         conSabado = (RelativeLayout)findViewById(R.id.conSabado);
+        lunesViernes = (CheckBox)findViewById(R.id.checkLunesViernes);
+        conLunesViernes = (RelativeLayout)findViewById(R.id.conLunesViernes);
 
         // Escuchadores de los checkBox de los dias
         lunes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagLunes == 0){
+                if(isChecked){
                     conLunes.setVisibility(View.VISIBLE);
                     flagLunes = 1;
+                    lunesViernes.setChecked(false);
+                    conLunesViernes.setVisibility(View.GONE);
+                    flagLunesViernes = 0;
                 }else{
                     conLunes.setVisibility(View.GONE);
                     flagLunes = 0;
@@ -137,9 +145,12 @@ public class agregar_materia extends AppCompatActivity {
         martes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagMartes == 0){
+                if(isChecked){
                     conMartes.setVisibility(View.VISIBLE);
                     flagMartes = 1;
+                    lunesViernes.setChecked(false);
+                    conLunesViernes.setVisibility(View.GONE);
+                    flagLunesViernes = 0;
                 }else{
                     conMartes.setVisibility(View.GONE);
                     flagMartes = 0;
@@ -149,9 +160,12 @@ public class agregar_materia extends AppCompatActivity {
         miercoles.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagMiercoles == 0){
+                if(isChecked){
                     conMiercoles.setVisibility(View.VISIBLE);
                     flagMiercoles = 1;
+                    lunesViernes.setChecked(false);
+                    conLunesViernes.setVisibility(View.GONE);
+                    flagLunesViernes = 0;
                 }else{
                     conMiercoles.setVisibility(View.GONE);
                     flagMiercoles = 0;
@@ -161,9 +175,12 @@ public class agregar_materia extends AppCompatActivity {
         jueves.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagJueves == 0){
+                if(isChecked){
                     conJueves.setVisibility(View.VISIBLE);
                     flagJueves = 1;
+                    lunesViernes.setChecked(false);
+                    conLunesViernes.setVisibility(View.GONE);
+                    flagLunesViernes = 0;
                 }else{
                     conJueves.setVisibility(View.GONE);
                     flagJueves = 0;
@@ -173,9 +190,12 @@ public class agregar_materia extends AppCompatActivity {
         viernes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagViernes == 0){
+                if(isChecked){
                     conViernes.setVisibility(View.VISIBLE);
                     flagViernes = 1;
+                    lunesViernes.setChecked(false);
+                    conLunesViernes.setVisibility(View.GONE);
+                    flagLunesViernes = 0;
                 }else{
                     conViernes.setVisibility(View.GONE);
                     flagViernes = 0;
@@ -185,12 +205,39 @@ public class agregar_materia extends AppCompatActivity {
         sabado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(flagSabado == 0){
+                if(isChecked){
                     conSabado.setVisibility(View.VISIBLE);
                     flagSabado = 1;
                 }else{
                     conSabado.setVisibility(View.GONE);
                     flagSabado = 0;
+                }
+            }
+        });
+        lunesViernes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    conLunesViernes.setVisibility(View.VISIBLE);
+                    flagLunesViernes = 1;
+                    conLunes.setVisibility(View.GONE);
+                    conMartes.setVisibility(View.GONE);
+                    conMiercoles.setVisibility(View.GONE);
+                    conJueves.setVisibility(View.GONE);
+                    conViernes.setVisibility(View.GONE);
+                    flagLunes = 0;
+                    flagMartes = 0;
+                    flagMiercoles = 0;
+                    flagJueves = 0;
+                    flagViernes = 0;
+                    lunes.setChecked(false);
+                    martes.setChecked(false);
+                    miercoles.setChecked(false);
+                    jueves.setChecked(false);
+                    viernes.setChecked(false);
+                }else{
+                    conLunesViernes.setVisibility(View.GONE);
+                    flagLunesViernes = 0;
                 }
             }
         });
@@ -304,150 +351,175 @@ public class agregar_materia extends AppCompatActivity {
                 if(!profesor.getText().toString().equals("")){
                     nuevaMateria.setProfesor(profesor.getText().toString());
                     nuevaMateria.setColor(colores.get(flagSpinner));
-                    if(flagLunes == 0 && flagMartes == 0 && flagMiercoles == 0 && flagJueves == 0 && flagViernes == 0 && flagSabado == 0){
-                        msg("Selecciona al menos un dia de horario para la materia");
-                    }else{
-                        validacion += db.insertMateria(nuevaMateria);
-                        if(validacion == 1) {
-                            if (flagLunes == 1) {
-                                ObjHorario horarioLu = new ObjHorario();
-                                EditText horLuEntrada = (EditText) findViewById(R.id.entradaTL);
-                                EditText horLuSalida = (EditText) findViewById(R.id.salidaTL);
-                                EditText horLuSalon = (EditText) findViewById(R.id.salonTL);
-                                if (horLuEntrada.getText().toString().equals("")) {
-                                    msg("Ingresa hora de entrada para el dia lunes");
-                                } else if (horLuSalida.getText().toString().equals("")) {
-                                    msg("ingresa hora de salida para el dia lunes");
-                                } else if (horLuSalon.getText().toString().equals("")) {
-                                    msg("Ingresa salon para el dia lunes");
-                                } else {
-                                    ObjMateria mLu = db.findMateria(nuevaMateria.getNombre());
-                                    horarioLu.setMateria(mLu);
-                                    horarioLu.setEntrada(horLuEntrada.getText().toString());
-                                    horarioLu.setSalida(horLuSalida.getText().toString());
-                                    horarioLu.setSalon(horLuSalon.getText().toString());
-                                    horarioLu.setDia("Lunes");
-                                    validacion += db.insertHorario(horarioLu);
-                                }
+                    validacion += db.insertMateria(nuevaMateria);
+                    if(validacion == 1) {
+                        if (flagLunes == 1) {
+                            ObjHorario horarioLu = new ObjHorario();
+                            EditText horLuEntrada = (EditText) findViewById(R.id.entradaTL);
+                            EditText horLuSalida = (EditText) findViewById(R.id.salidaTL);
+                            EditText horLuSalon = (EditText) findViewById(R.id.salonTL);
+                            if (horLuEntrada.getText().toString().equals("")) {
+                                msg("Ingresa hora de entrada para el dia lunes");
+                            } else if (horLuSalida.getText().toString().equals("")) {
+                                msg("ingresa hora de salida para el dia lunes");
+                            } else if (horLuSalon.getText().toString().equals("")) {
+                                msg("Ingresa salon para el dia lunes");
+                            } else {
+                                ObjMateria mLu = db.findMateria(nuevaMateria.getNombre());
+                                horarioLu.setMateria(mLu);
+                                horarioLu.setEntrada(horLuEntrada.getText().toString());
+                                horarioLu.setSalida(horLuSalida.getText().toString());
+                                horarioLu.setSalon(horLuSalon.getText().toString());
+                                horarioLu.setDia("Lunes");
+                                validacion += db.insertHorario(horarioLu);
                             }
-                            if (flagMartes == 1) {
-                                ObjHorario horarioMa = new ObjHorario();
-                                EditText horMaEntrada = (EditText) findViewById(R.id.entradaTMa);
-                                EditText horMaSalida = (EditText) findViewById(R.id.salidaTMa);
-                                EditText horMaSalon = (EditText) findViewById(R.id.salonTMa);
-                                if (horMaEntrada.getText().toString().equals("")) {
-                                    msg("Ingresa hora de entrada para el dia martes");
-                                } else if (horMaSalida.getText().toString().equals("")) {
-                                    msg("ingresa hora de salida para el dia martes");
-                                } else if (horMaSalon.getText().toString().equals("")) {
-                                    msg("Ingresa salon para el dia martes");
-                                } else {
-                                    ObjMateria mMa = db.findMateria(nuevaMateria.getNombre());
-                                    horarioMa.setMateria(mMa);
-                                    horarioMa.setEntrada(horMaEntrada.getText().toString());
-                                    horarioMa.setSalida(horMaSalida.getText().toString());
-                                    horarioMa.setSalon(horMaSalon.getText().toString());
-                                    horarioMa.setDia("Martes");
-                                    validacion += db.insertHorario(horarioMa);
-                                }
-                            }
-                            if (flagMiercoles == 1) {
-                                ObjHorario horarioMi = new ObjHorario();
-                                EditText horMiEntrada = (EditText) findViewById(R.id.entradaTMi);
-                                EditText horMiSalida = (EditText) findViewById(R.id.salidaTMi);
-                                EditText horMiSalon = (EditText) findViewById(R.id.salonTMi);
-                                if (horMiEntrada.getText().toString().equals("")) {
-                                    msg("Ingresa hora de entrada para el dia miercoles");
-                                } else if (horMiSalida.getText().toString().equals("")) {
-                                    msg("ingresa hora de salida para el dia mirecoles");
-                                } else if (horMiSalon.getText().toString().equals("")) {
-                                    msg("Ingresa salon para el dia miercoles");
-                                } else {
-                                    ObjMateria mMi = db.findMateria(nuevaMateria.getNombre());
-                                    horarioMi.setMateria(mMi);
-                                    horarioMi.setEntrada(horMiEntrada.getText().toString());
-                                    horarioMi.setSalida(horMiSalida.getText().toString());
-                                    horarioMi.setSalon(horMiSalon.getText().toString());
-                                    horarioMi.setDia("Miercoles");
-                                    validacion += db.insertHorario(horarioMi);
-                                }
-                            }
-                            if (flagJueves == 1) {
-                                ObjHorario horarioJu = new ObjHorario();
-                                EditText horJuEntrada = (EditText) findViewById(R.id.entradaTJ);
-                                EditText horJuSalida = (EditText) findViewById(R.id.salidaTJ);
-                                EditText horJuSalon = (EditText) findViewById(R.id.salonTJ);
-                                if (horJuEntrada.getText().toString().equals("")) {
-                                    msg("Ingresa hora de entrada para el dia jueves");
-                                } else if (horJuSalida.getText().toString().equals("")) {
-                                    msg("ingresa hora de salida para el dia jueves");
-                                } else if (horJuSalon.getText().toString().equals("")) {
-                                    msg("Ingresa salon para el dia jueves");
-                                } else {
-                                    ObjMateria mJu = db.findMateria(nuevaMateria.getNombre());
-                                    horarioJu.setMateria(mJu);
-                                    horarioJu.setEntrada(horJuEntrada.getText().toString());
-                                    horarioJu.setSalida(horJuSalida.getText().toString());
-                                    horarioJu.setSalon(horJuSalon.getText().toString());
-                                    horarioJu.setDia("Jueves");
-                                    validacion += db.insertHorario(horarioJu);
-                                }
-                            }
-                            if (flagViernes == 1) {
-                                ObjHorario horarioVi = new ObjHorario();
-                                EditText horViEntrada = (EditText) findViewById(R.id.entradaTV);
-                                EditText horViSalida = (EditText) findViewById(R.id.salidaTV);
-                                EditText horViSalon = (EditText) findViewById(R.id.salonTV);
-                                if (horViEntrada.getText().toString().equals("")) {
-                                    msg("Ingresa hora de entrada para el dia viernes");
-                                } else if (horViSalida.getText().toString().equals("")) {
-                                    msg("ingresa hora de salida para el dia viernes");
-                                } else if (horViSalon.getText().toString().equals("")) {
-                                    msg("Ingresa salon para el dia viernes");
-                                } else {
-                                    ObjMateria mVi = db.findMateria(nuevaMateria.getNombre());
-                                    horarioVi.setMateria(mVi);
-                                    horarioVi.setEntrada(horViEntrada.getText().toString());
-                                    horarioVi.setSalida(horViSalida.getText().toString());
-                                    horarioVi.setSalon(horViSalon.getText().toString());
-                                    horarioVi.setDia("Viernes");
-                                    validacion += db.insertHorario(horarioVi);
-                                }
-                            }
-                            if (flagSabado == 1) {
-                                ObjHorario horarioSa = new ObjHorario();
-                                EditText horSaEntrada = (EditText) findViewById(R.id.entradaTS);
-                                EditText horSaSalida = (EditText) findViewById(R.id.salidaTS);
-                                EditText horSaSalon = (EditText) findViewById(R.id.salonTS);
-                                if (horSaEntrada.getText().toString().equals("")) {
-                                    msg("Ingresa hora de entrada para el dia sabado");
-                                } else if (horSaSalida.getText().toString().equals("")) {
-                                    msg("ingresa hora de salida para el dia sabado");
-                                } else if (horSaSalon.getText().toString().equals("")) {
-                                    msg("Ingresa salon para el dia sabado");
-                                } else {
-                                    ObjMateria mSa = db.findMateria(nuevaMateria.getNombre());
-                                    horarioSa.setMateria(mSa);
-                                    horarioSa.setEntrada(horSaEntrada.getText().toString());
-                                    horarioSa.setSalida(horSaSalida.getText().toString());
-                                    horarioSa.setSalon(horSaSalon.getText().toString());
-                                    horarioSa.setDia("Sabado");
-                                    validacion += db.insertHorario(horarioSa);
-                                }
-                            }
-                            Log.d("valor validacion", validacion + " - " + (1 + flagLunes + flagMartes + flagMiercoles + flagJueves + flagViernes + flagSabado));
-                            if (validacion == (1 + flagLunes + flagMartes + flagMiercoles + flagJueves + flagViernes + flagSabado)) {
-                                msg("Se registro correctamente :)");
-                                Intent i = new Intent(agregar_materia.this, MainActivity.class);
-                                startActivity(i);
-                                finish();
-                            }else{
-                                ObjMateria mFlag = db.findMateria(nuevaMateria.getNombre());
-                                db.deleteMateria(mFlag.getId());
-                            }
-                        }else{
-                            msg("Ocurrio un error intentelo de nuevo");
                         }
+                        if (flagMartes == 1) {
+                            ObjHorario horarioMa = new ObjHorario();
+                            EditText horMaEntrada = (EditText) findViewById(R.id.entradaTMa);
+                            EditText horMaSalida = (EditText) findViewById(R.id.salidaTMa);
+                            EditText horMaSalon = (EditText) findViewById(R.id.salonTMa);
+                            if (horMaEntrada.getText().toString().equals("")) {
+                                msg("Ingresa hora de entrada para el dia martes");
+                            } else if (horMaSalida.getText().toString().equals("")) {
+                                msg("ingresa hora de salida para el dia martes");
+                            } else if (horMaSalon.getText().toString().equals("")) {
+                                msg("Ingresa salon para el dia martes");
+                            } else {
+                                ObjMateria mMa = db.findMateria(nuevaMateria.getNombre());
+                                horarioMa.setMateria(mMa);
+                                horarioMa.setEntrada(horMaEntrada.getText().toString());
+                                horarioMa.setSalida(horMaSalida.getText().toString());
+                                horarioMa.setSalon(horMaSalon.getText().toString());
+                                horarioMa.setDia("Martes");
+                                validacion += db.insertHorario(horarioMa);
+                            }
+                        }
+                        if (flagMiercoles == 1) {
+                            ObjHorario horarioMi = new ObjHorario();
+                            EditText horMiEntrada = (EditText) findViewById(R.id.entradaTMi);
+                            EditText horMiSalida = (EditText) findViewById(R.id.salidaTMi);
+                            EditText horMiSalon = (EditText) findViewById(R.id.salonTMi);
+                            if (horMiEntrada.getText().toString().equals("")) {
+                                msg("Ingresa hora de entrada para el dia miercoles");
+                            } else if (horMiSalida.getText().toString().equals("")) {
+                                msg("ingresa hora de salida para el dia mirecoles");
+                            } else if (horMiSalon.getText().toString().equals("")) {
+                                msg("Ingresa salon para el dia miercoles");
+                            } else {
+                                ObjMateria mMi = db.findMateria(nuevaMateria.getNombre());
+                                horarioMi.setMateria(mMi);
+                                horarioMi.setEntrada(horMiEntrada.getText().toString());
+                                horarioMi.setSalida(horMiSalida.getText().toString());
+                                horarioMi.setSalon(horMiSalon.getText().toString());
+                                horarioMi.setDia("Miercoles");
+                                validacion += db.insertHorario(horarioMi);
+                            }
+                        }
+                        if (flagJueves == 1) {
+                            ObjHorario horarioJu = new ObjHorario();
+                            EditText horJuEntrada = (EditText) findViewById(R.id.entradaTJ);
+                            EditText horJuSalida = (EditText) findViewById(R.id.salidaTJ);
+                            EditText horJuSalon = (EditText) findViewById(R.id.salonTJ);
+                            if (horJuEntrada.getText().toString().equals("")) {
+                                msg("Ingresa hora de entrada para el dia jueves");
+                            } else if (horJuSalida.getText().toString().equals("")) {
+                                msg("ingresa hora de salida para el dia jueves");
+                            } else if (horJuSalon.getText().toString().equals("")) {
+                                msg("Ingresa salon para el dia jueves");
+                            } else {
+                                ObjMateria mJu = db.findMateria(nuevaMateria.getNombre());
+                                horarioJu.setMateria(mJu);
+                                horarioJu.setEntrada(horJuEntrada.getText().toString());
+                                horarioJu.setSalida(horJuSalida.getText().toString());
+                                horarioJu.setSalon(horJuSalon.getText().toString());
+                                horarioJu.setDia("Jueves");
+                                validacion += db.insertHorario(horarioJu);
+                            }
+                        }
+                        if (flagViernes == 1) {
+                            ObjHorario horarioVi = new ObjHorario();
+                            EditText horViEntrada = (EditText) findViewById(R.id.entradaTV);
+                            EditText horViSalida = (EditText) findViewById(R.id.salidaTV);
+                            EditText horViSalon = (EditText) findViewById(R.id.salonTV);
+                            if (horViEntrada.getText().toString().equals("")) {
+                                msg("Ingresa hora de entrada para el dia viernes");
+                            } else if (horViSalida.getText().toString().equals("")) {
+                                msg("ingresa hora de salida para el dia viernes");
+                            } else if (horViSalon.getText().toString().equals("")) {
+                                msg("Ingresa salon para el dia viernes");
+                            } else {
+                                ObjMateria mVi = db.findMateria(nuevaMateria.getNombre());
+                                horarioVi.setMateria(mVi);
+                                horarioVi.setEntrada(horViEntrada.getText().toString());
+                                horarioVi.setSalida(horViSalida.getText().toString());
+                                horarioVi.setSalon(horViSalon.getText().toString());
+                                horarioVi.setDia("Viernes");
+                                validacion += db.insertHorario(horarioVi);
+                            }
+                        }
+                        if (flagSabado == 1) {
+                            ObjHorario horarioSa = new ObjHorario();
+                            EditText horSaEntrada = (EditText) findViewById(R.id.entradaTS);
+                            EditText horSaSalida = (EditText) findViewById(R.id.salidaTS);
+                            EditText horSaSalon = (EditText) findViewById(R.id.salonTS);
+                            if (horSaEntrada.getText().toString().equals("")) {
+                                msg("Ingresa hora de entrada para el dia sabado");
+                            } else if (horSaSalida.getText().toString().equals("")) {
+                                msg("ingresa hora de salida para el dia sabado");
+                            } else if (horSaSalon.getText().toString().equals("")) {
+                                msg("Ingresa salon para el dia sabado");
+                            } else {
+                                ObjMateria mSa = db.findMateria(nuevaMateria.getNombre());
+                                horarioSa.setMateria(mSa);
+                                horarioSa.setEntrada(horSaEntrada.getText().toString());
+                                horarioSa.setSalida(horSaSalida.getText().toString());
+                                horarioSa.setSalon(horSaSalon.getText().toString());
+                                horarioSa.setDia("Sabado");
+                                validacion += db.insertHorario(horarioSa);
+                            }
+                        }
+                        if(flagLunesViernes == 1){
+                            ObjHorario horarioSa = new ObjHorario();
+                            EditText horLVEntrada = (EditText) findViewById(R.id.entradaTLV);
+                            EditText horLVSalida = (EditText) findViewById(R.id.salidaTLV);
+                            EditText horLVSalon = (EditText) findViewById(R.id.salonTLV);
+                            if (horLVEntrada.getText().toString().equals("")) {
+                                msg("Ingresa hora de entrada para el horario de lunes a viernes");
+                            } else if (horLVSalida.getText().toString().equals("")) {
+                                msg("ingresa hora de salida para el horario de lunes a viernes");
+                            } else if (horLVSalon.getText().toString().equals("")) {
+                                msg("Ingresa salon para el horario de lunes a viernes");
+                            } else {
+                                ObjMateria mLV = db.findMateria(nuevaMateria.getNombre());
+                                horarioSa.setMateria(mLV);
+                                horarioSa.setEntrada(horLVEntrada.getText().toString());
+                                horarioSa.setSalida(horLVSalida.getText().toString());
+                                horarioSa.setSalon(horLVSalon.getText().toString());
+                                horarioSa.setDia("Lunes");
+                                validacion += db.insertHorario(horarioSa);
+                                horarioSa.setDia("Martes");
+                                db.insertHorario(horarioSa);
+                                horarioSa.setDia("Miercoles");
+                                db.insertHorario(horarioSa);
+                                horarioSa.setDia("Jueves");
+                                db.insertHorario(horarioSa);
+                                horarioSa.setDia("Viernes");
+                                db.insertHorario(horarioSa);
+                            }
+                        }
+                        Log.d("valor validacion", validacion + " - " + (1 + flagLunes + flagMartes + flagMiercoles + flagJueves + flagViernes + flagSabado));
+                        if (validacion == (1 + flagLunes + flagMartes + flagMiercoles + flagJueves + flagViernes + flagSabado + flagLunesViernes)) {
+                            msg("Se registro correctamente :)");
+                            Intent i = new Intent(agregar_materia.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            ObjMateria mFlag = db.findMateria(nuevaMateria.getNombre());
+                            db.deleteMateria(mFlag.getId());
+                        }
+                    }else{
+                        msg("Ocurrio un error intentelo de nuevo");
                     }
                 }else{
                     msg("Ingresa el masestro que imparte la materia");
