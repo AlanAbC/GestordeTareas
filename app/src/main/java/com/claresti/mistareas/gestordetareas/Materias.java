@@ -82,7 +82,7 @@ public class Materias extends AppCompatActivity {
 
     private void cargarmaterias() {
         materias = db.selectMaterias();
-        listaMaterias.setAdapter(new MateriasAdaptador(getApplicationContext(), materias, getFragmentManager()));
+        listaMaterias.setAdapter(new MateriasAdaptador(getApplicationContext(), materias, getFragmentManager(), Materias.this));
     }
 
     /**

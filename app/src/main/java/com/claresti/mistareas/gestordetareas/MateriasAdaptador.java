@@ -1,7 +1,9 @@
 package com.claresti.mistareas.gestordetareas;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,13 +23,15 @@ public class MateriasAdaptador extends BaseAdapter {
     private Context context;
     private AdminBD db;
     private FragmentManager fragmentManager;
+    private Activity activity;
 
-    public MateriasAdaptador(Context context, ArrayList<ObjMateria> materias, FragmentManager fragmentManager) {
+    public MateriasAdaptador(Context context, ArrayList<ObjMateria> materias, FragmentManager fragmentManager, Activity activity) {
         inflator = LayoutInflater.from(context);
         this.materias = materias;
         this.context = context;
         db = new AdminBD(context);
         this.fragmentManager = fragmentManager;
+        this.activity = activity;
     }
 
     @Override
@@ -52,19 +56,22 @@ public class MateriasAdaptador extends BaseAdapter {
         TextView colorBarra = (TextView) convertView.findViewById(R.id.colorFondoMateria);
         TextView nombreMateria = (TextView) convertView.findViewById(R.id.materia);
         TextView nombreMaestro = (TextView) convertView.findViewById(R.id.maestro);
-        //ImageButton editar = (ImageButton) convertView.findViewById(R.id.editar);
+        ImageButton editar = (ImageButton) convertView.findViewById(R.id.editar);
         ImageButton eliminar = (ImageButton) convertView.findViewById(R.id.borrar);
         colorBarra.setBackgroundColor(Color.parseColor(materia.getColor().getExadecimal()));
         nombreMateria.setText(materia.getNombre());
         nombreMaestro.setText(materia.getProfesor());
-        /*
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Si funciona:", "Boton de editar");
+                Intent i = new Intent(activity, agregar_materia.class);
+                i.putExtra("editar", "1");
+                ObjComunicadorMateria.setMateria(materia);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                activity.startActivity(i);
+                activity.finish();
             }
         });
-        */
         eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

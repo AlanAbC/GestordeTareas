@@ -65,6 +65,7 @@ public class agregar_materia extends AppCompatActivity {
     private RelativeLayout conViernes;
     private RelativeLayout conSabado;
     private RelativeLayout conLunesViernes;
+    private TextView titulo;
 
     //Array de colores
     private ArrayList<ObjColor> colores; //lista de objetos tipo ObjColores
@@ -75,6 +76,9 @@ public class agregar_materia extends AppCompatActivity {
     private Menu menu;
     private ImageView btnMenu;
     private NavigationView nav;
+
+    //Objeto de materia para editar
+    private ObjMateria materia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +110,7 @@ public class agregar_materia extends AppCompatActivity {
         nombreUsuario.setText(usuario.getNombre());
 
         //Asignacion de variables del layout
+        titulo = (TextView)findViewById(R.id.txt_titulo);
         nombre = (EditText)findViewById(R.id.nombreT);
         abreviacion = (EditText)findViewById(R.id.abreviacionT);
         profesor = (EditText)findViewById(R.id.maestroT);
@@ -241,6 +246,25 @@ public class agregar_materia extends AppCompatActivity {
                 }
             }
         });
+
+        //Validacion si es agregar tarea y actualizar tarea
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if(extras != null){
+            if (extras.containsKey("editar")) {
+                // Obtencion de la tarea
+                materia = ObjComunicadorMateria.getMateria();
+                editar();
+                //msg(getIntent().getExtras().getString("msg"));
+            }
+        }
+    }
+
+    /**
+     * Funcion encargada de rellenar los valores de la materia
+     */
+    private void editar() {
+        titulo.setText("ACTUALIZAR MATERIA");
     }
 
     /**
@@ -275,7 +299,17 @@ public class agregar_materia extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }else if(pos == 5){
+                    Intent intent = getIntent();
+                    Bundle extras = intent.getExtras();
+                    if(extras != null){
+                        if (extras.containsKey("editar")) {
 
+                        }
+                    }else{
+                        Intent i = new Intent(agregar_materia.this, agregar_materia.class);
+                        startActivity(i);
+                        finish();
+                    }
                 }else if(pos == 6){
                     Intent i = new Intent(agregar_materia.this, acerca.class);
                     startActivity(i);
