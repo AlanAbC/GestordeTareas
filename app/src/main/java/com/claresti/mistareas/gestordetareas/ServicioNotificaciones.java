@@ -67,6 +67,7 @@ public class ServicioNotificaciones extends Service {
         protected Object doInBackground(Object[] params) {
             while(flag){
                 if(contador == 0) {
+                    tareas = db.selectTareas();
                     if (tareas.size() > 0) {
                         ArrayList<ObjTarea> tareasPendientes = new ArrayList<ObjTarea>();
                         for (ObjTarea t : tareas) {

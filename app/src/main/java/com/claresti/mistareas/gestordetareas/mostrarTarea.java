@@ -1,5 +1,6 @@
 package com.claresti.mistareas.gestordetareas;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,18 +12,23 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.claresti.mistareas.gestordetareas.R.id.agregarTarea;
 import static com.claresti.mistareas.gestordetareas.R.id.nombre;
+import static com.claresti.mistareas.gestordetareas.R.id.tarea;
 
 public class mostrarTarea extends AppCompatActivity {
 
     //Declaracion variables elementos layout
-    LinearLayout colorf;
-    TextView fondoNombre;
-    TextView nombreTarea;
-    TextView nombreMateria;
-    TextView fechaView;
-    TextView descripcionView;
-    TextView maestro;
+    private LinearLayout colorf;
+    private TextView fondoNombre;
+    private TextView nombreTarea;
+    private TextView nombreMateria;
+    private TextView fechaView;
+    private TextView descripcionView;
+    private TextView maestro;
+
+    //Objeto tarea
+    private ObjTarea tarea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +46,7 @@ public class mostrarTarea extends AppCompatActivity {
         descripcionView = (TextView)findViewById(R.id.descripcionT);
 
         // Obtencion del objeto tarea enviado por el comunicador
-        ObjTarea tarea = ObjComunicadorTarea.getTarea();
+        tarea = ObjComunicadorTarea.getTarea();
 
         //Creacion del formato de la fecha que se mostrará
         Calendar calendar = Calendar.getInstance();
@@ -60,7 +66,11 @@ public class mostrarTarea extends AppCompatActivity {
     }
 
     public void modificarTarea(View view){
-        Toast.makeText(getApplicationContext(), "Editar tarea", Toast.LENGTH_SHORT).show();
+        ObjComunicadorTarea.setTarea(tarea);
+        Intent i = new Intent(mostrarTarea.this, agregarTarea.class);
+        i.putExtra("editar", "1");
+        startActivity(i);
+        finish();
     }
 
 }

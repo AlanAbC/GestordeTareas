@@ -34,8 +34,10 @@ import java.util.List;
 
 public class agregar_materia extends AppCompatActivity {
 
-    private AdminBD db; //Variable del administrador de la base de datos
+    //Variable del administrador de la base de datos
+    private AdminBD db;
     private ObjUsuario usuario;
+
     //Variables de los elementos del Layout
     private EditText nombre;
     private EditText abreviacion;
@@ -60,44 +62,47 @@ public class agregar_materia extends AppCompatActivity {
     private RelativeLayout conJueves;
     private RelativeLayout conViernes;
     private RelativeLayout conSabado;
-    //Fin Elementos del Layout
+
+    //Array de colores
     private ArrayList<ObjColor> colores; //lista de objetos tipo ObjColores
+
     //Menu, Declaracion de variables
     private DrawerLayout drawerLayout;
     private final List<MenuItem> items = new ArrayList<>();
     private Menu menu;
     private ImageView btnMenu;
     private NavigationView nav;
-    //Fin menu, declaracion de variables
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_agregar_materia);
+
         //Cambiar el color en la barra de notificaciones (Solo funciona de lollipop hacia arriba)
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.agregar));
         }
-        //Fin cambio de color de barra de notificaciones
+
         //Codigo para crear el objeto de la base de datos y
         //agregar el nombre de usuario al menu
         db = new AdminBD(this);
         usuario = db.selectUsuario();
+
         //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
         drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         nav = (NavigationView)findViewById(R.id.navigation);
         menu = nav.getMenu();
         menuNav();
-        // Fin menu
 
         //Codigo para poner en el Menu el nombre de usuario
         View header = nav.getHeaderView(0);
         TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
         nombreUsuario.setText(usuario.getNombre());
-        //Fin Codigo para poner el nombre de usuario en el menu
+
+        //Asignacion de variables del layout
         nombre = (EditText)findViewById(R.id.nombreT);
         abreviacion = (EditText)findViewById(R.id.abreviacionT);
         profesor = (EditText)findViewById(R.id.maestroT);
@@ -115,6 +120,8 @@ public class agregar_materia extends AppCompatActivity {
         conViernes = (RelativeLayout)findViewById(R.id.conViernes);
         sabado = (CheckBox)findViewById(R.id.checkSabado);
         conSabado = (RelativeLayout)findViewById(R.id.conSabado);
+
+        // Escuchadores de los checkBox de los dias
         lunes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

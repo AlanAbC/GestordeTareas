@@ -34,13 +34,16 @@ import java.io.File;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class agregarTarea extends AppCompatActivity {
 
-    private AdminBD db; //Variable del administrador de la base de datos
+    //Variable del administrador de la base de datos
+    private AdminBD db;
     private ObjUsuario usuario;
+
     //Menu, Declaracion de variables
     private DrawerLayout drawerLayout;
     final List<MenuItem> items = new ArrayList<>();
@@ -48,14 +51,17 @@ public class agregarTarea extends AppCompatActivity {
     private RelativeLayout principal;
     private ImageView btnMenu;
     private NavigationView nav;
-    //Fin menu, declaracion de variables
+
+    //Declaracion de variables del layout
     private EditText nombre;
     private Spinner spinnerMaterias;
     private DatePicker fechaEntrega;
     private EditText descripcion;
-    private FloatingActionButton agregar;
+    private TextView titulo;
     private int materiaSeleccionada = 0;
     private ArrayList<ObjMateria> materias;
+    private String[] nombreMaterias;
+    private ObjTarea tarea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,34 +69,78 @@ public class agregarTarea extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_agregar_tarea);
         principal =(RelativeLayout)findViewById(R.id.principal);
+
         //Cambiar el color en la barra de notificaciones (Solo funciona de lollipop hacia arriba)
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.agregar));
         }
-        //Fin cambio de color de barra de notificaciones
+
         //Codigo para crear el objeto de la base de datos y
         //agregar el nombre de usuario al menu
         db = new AdminBD(this);
         usuario = db.selectUsuario();
+
         //Menu, Inicia las variables del menu y llama la funcion encargada de su manipulacion
         drawerLayout = (DrawerLayout) findViewById(R.id.dLayout);
         nav = (NavigationView)findViewById(R.id.navigation);
         menu = nav.getMenu();
         menuNav();
-        // Fin menu
 
         //Codigo para poner en el Menu el nombre de usuario
         View header = nav.getHeaderView(0);
         TextView nombreUsuario = (TextView) header.findViewById(R.id.menuNombreUsuario);
         nombreUsuario.setText(usuario.getNombre());
-        //Fin Codigo para poner el nombre de usuario en el menu
+
+        //Asignacion de variables del layout
         nombre = (EditText)findViewById(R.id.nombreT);
         spinnerMaterias  =(Spinner)findViewById(R.id.materiaS);
         fechaEntrega = (DatePicker)findViewById(R.id.fechaS);
         descripcion = (EditText)findViewById(R.id.descripcionT);
+        titulo = (TextView)findViewById(R.id.txt_titulo);
         llenarMaterias();
+
+        //Validacion si es agregar tarea y actualizar tarea
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if(extras != null){
+            if (extras.containsKey("editar")) {
+                // Obtencion de la tarea
+                tarea = ObjComunicadorTarea.getTarea();
+                editar();
+                //msg(getIntent().getExtras().getString("msg"));
+            }
+        }
+    }
+
+    /**
+     * Funcion encargada de llenar los valores del layout con la informacion de la tarea
+     */
+    private void editar() {
+
+        // LLenado de los valores en el layout
+        titulo.setText("ACTUALIZAR TAREA");
+        nombre.setText(tarea.getNombre());
+        descripcion.setText(tarea.getDescripcion());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(tarea.getFechaEntrega());
+        fechaEntrega.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        SetSpinnerSelection(spinnerMaterias, nombreMaterias, tarea.getMateria().getNombre());
+    }
+
+    /**
+     * Funcion encargada de seleccionar un item del spinner comparado con un STring
+     * @param spinner spinner al que se le quiere seleccionar
+     * @param array array de objetos que se ingreso en el espiner
+     * @param text texto el cual se quiere buscar en el espinner
+     */
+    public void SetSpinnerSelection(Spinner spinner,String[] array,String text) {
+        for(int i=0;i<array.length;i++) {
+            if(array[i].equals(text)) {
+                spinner.setSelection(i);
+            }
+        }
     }
 
     /**
@@ -164,10 +214,13 @@ public class agregarTarea extends AppCompatActivity {
         });
     }
 
+    /**
+     * Funcion encargada de llenar el espiner de las materias
+     */
     public void llenarMaterias(){
         materias = db.selectMaterias();
         if(materias.size() > 0){
-            String[] nombreMaterias = new String[materias.size()];
+            nombreMaterias = new String[materias.size()];
             for(int i = 0; i < materias.size(); i++){
                 nombreMaterias[i] = materias.get(i).getNombre();
             }
@@ -189,47 +242,96 @@ public class agregarTarea extends AppCompatActivity {
         }
     }
 
+    /**
+     * Funcion encargada de generar mensajes en pantalla
+     * @param msg mensaje a mostrar
+     */
     public void msg(String msg){
         Snackbar.make(principal, msg, Snackbar.LENGTH_SHORT).show();
 
     }
 
-    public void agregarTarea(View view){
-        if(materias.size() > 0) {
-            if (!nombre.getText().toString().equals("")) {
-                String f = fechaEntrega.getYear() + "/" + (fechaEntrega.getMonth() + 1) + "/" + fechaEntrega.getDayOfMonth() + " 23:59";
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-                Date fe = sdf.parse(f, new ParsePosition(0));
-                Date feAc = new Date();
-                if (fe.after(feAc)) {
-                    if (!descripcion.getText().toString().equals("")) {
-                        ObjTarea tareaNueva = new ObjTarea();
-                        tareaNueva.setMateria(materias.get(materiaSeleccionada));
-                        tareaNueva.setCompletado(0);
-                        tareaNueva.setDescripcion(descripcion.getText().toString());
-                        tareaNueva.setFechaCreacion(feAc);
-                        tareaNueva.setFechaEntrega(fe);
-                        tareaNueva.setNombre(nombre.getText().toString());
-                        int flag = db.insertTarea(tareaNueva);
-                        if(flag == 1){
-                            Intent i = new Intent(agregarTarea.this, MainActivity.class);
-                            i.putExtra("msg","Tarea creada correctamente");
-                            startActivity(i);
-                            finish();
-                        }else{
-                            msg("Ocurrio un erro vuelva a intentar");
+    /**
+     * Funcion encargada de agregar o actualizar una tarea
+     * @param view
+     */
+    public void agregarTarea(View view) {
+        //Validacion si es agregar tarea y actualizar tarea
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if (extras != null) {
+            if (extras.containsKey("editar")) {
+                if (!nombre.getText().toString().equals("")) {
+                    String f = fechaEntrega.getYear() + "/" + (fechaEntrega.getMonth() + 1) + "/" + fechaEntrega.getDayOfMonth() + " 23:59";
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+                    Date fe = sdf.parse(f, new ParsePosition(0));
+                    Date feAc = new Date();
+                    if (fe.after(feAc)) {
+                        if (!descripcion.getText().toString().equals("")) {
+                            ObjTarea tareaNueva = new ObjTarea();
+                            tareaNueva.setMateria(materias.get(materiaSeleccionada));
+                            tareaNueva.setCompletado(0);
+                            tareaNueva.setDescripcion(descripcion.getText().toString());
+                            tareaNueva.setFechaCreacion(feAc);
+                            tareaNueva.setFechaEntrega(fe);
+                            tareaNueva.setNombre(nombre.getText().toString());
+                            tareaNueva.setId(tarea.getId());
+                            int flag = db.updateTarea(tareaNueva);
+                            if (flag == 1) {
+                                Intent i = new Intent(agregarTarea.this, MainActivity.class);
+                                i.putExtra("msg", "Se actualizó correctamente la tarea");
+                                startActivity(i);
+                                finish();
+                            } else {
+                                msg("Ocurrio un erro vuelva a intentar");
+                            }
+                        } else {
+                            msg("Ingresa una descripcion de la tarea");
                         }
                     } else {
-                        msg("Ingresa una descripcion de la tarea");
+                        msg("No puedes ingresar una fecha que ya paso");
                     }
                 } else {
-                    msg("No puedes ingresar una fecha que ya paso");
+                    msg("Ingres un nombre a la tarea");
+                }
+            }
+        } else {
+            if (materias.size() > 0) {
+                if (!nombre.getText().toString().equals("")) {
+                    String f = fechaEntrega.getYear() + "/" + (fechaEntrega.getMonth() + 1) + "/" + fechaEntrega.getDayOfMonth() + " 23:59";
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+                    Date fe = sdf.parse(f, new ParsePosition(0));
+                    Date feAc = new Date();
+                    if (fe.after(feAc)) {
+                        if (!descripcion.getText().toString().equals("")) {
+                            ObjTarea tareaNueva = new ObjTarea();
+                            tareaNueva.setMateria(materias.get(materiaSeleccionada));
+                            tareaNueva.setCompletado(0);
+                            tareaNueva.setDescripcion(descripcion.getText().toString());
+                            tareaNueva.setFechaCreacion(feAc);
+                            tareaNueva.setFechaEntrega(fe);
+                            tareaNueva.setNombre(nombre.getText().toString());
+                            int flag = db.insertTarea(tareaNueva);
+                            if (flag == 1) {
+                                Intent i = new Intent(agregarTarea.this, MainActivity.class);
+                                i.putExtra("msg", "Tarea creada correctamente");
+                                startActivity(i);
+                                finish();
+                            } else {
+                                msg("Ocurrio un erro vuelva a intentar");
+                            }
+                        } else {
+                            msg("Ingresa una descripcion de la tarea");
+                        }
+                    } else {
+                        msg("No puedes ingresar una fecha que ya paso");
+                    }
+                } else {
+                    msg("Ingres un nombre a la tarea");
                 }
             } else {
-                msg("Ingres un nombre a la tarea");
+                msg("No puedes agregar una tarea porque no tienes materias");
             }
-        }else{
-            msg("No puedes agregar una tarea porque no tienes materias");
         }
     }
 }
