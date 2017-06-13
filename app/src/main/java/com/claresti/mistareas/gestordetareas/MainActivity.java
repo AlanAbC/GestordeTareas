@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -70,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
     private int flagMes=0;
     private RelativeLayout principal;
     private ObjUsuario usuario;
+    //Declaracion de variables para el control de bottom sheet
+    private Button btnConBottomSheet;
+    private LinearLayout bottomSheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
         //FIn insertar listener boton agregar
         db = new AdminBD(this);
         usuario = db.selectUsuario();
@@ -107,6 +113,28 @@ public class MainActivity extends AppCompatActivity {
         menu = nav.getMenu();
         menuNav();
         // Fin menu
+        //Llamada de las variables para el control de bottomsheet
+        bottomSheet = (LinearLayout)findViewById(R.id.bottomSheet);
+        final BottomSheetBehavior bsb = BottomSheetBehavior.from(bottomSheet);
+
+        if(bd.selectUsuario().equals("0")) {
+            //funcion para expandir bottomsheet en cuanto inicia la app
+            bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
+            bd.updateUsuario();                                         //------------Aqui iria la comprobacion para saber si hay materias
+        }else {
+            bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+        //Fin bottom  sheet
+        //Control para esconder bottomsheet
+        btnConBottomSheet=(Button)findViewById(R.id.btnConBottomSheet);
+        btnConBottomSheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
+        //Fin control para esconder bottom sheet
         //Creacion del objeto usuario y comprobacion de primera ves o no en el sistemaa
         //cambia el nombre de la base de datos y el valor de usuPrimera a 1 en caso de que sea la primera vez
         //en caso contrario solo agrega nombre del usuario al menu y carga las tareas
