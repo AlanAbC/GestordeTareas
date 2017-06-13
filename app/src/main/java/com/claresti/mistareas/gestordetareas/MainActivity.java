@@ -132,7 +132,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                Intent i = new Intent(MainActivity.this, agregar_materia.class);
+                startActivity(i);
             }
         });
         //Fin control para esconder bottom sheet
