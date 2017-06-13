@@ -384,7 +384,7 @@ public class AdminBD extends SQLiteOpenHelper {
     public int deleteHorario(int id){
         try{
             SQLiteDatabase db = this.getWritableDatabase();
-            db.delete("Horario", "horId = " + id, null);
+            db.delete("Horario", "matId = " + id, null);
             return 1;
         }catch(Exception e){
             return 0;
@@ -414,6 +414,32 @@ public class AdminBD extends SQLiteOpenHelper {
                         horarios.add(horario);
                     }
                 }
+            }while(cursor.moveToNext());
+        }
+        return horarios;
+    }
+
+    /**
+     * Funcion que regresa un array list con todos los horarios de la base de datos
+     * @return Array List de objetos tipos ObjHorario
+     */
+    public ArrayList<ObjHorario> selectHorariosMateria(ObjMateria materia){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Horario WHERE matId = " + materia.getId(), null);
+        ArrayList<ObjHorario> horarios = new ArrayList<ObjHorario>();
+        if(cursor.moveToFirst()){
+            do{
+                if((cursor.getInt(cursor.getColumnIndex("matId")) == materia.getId())){
+                    ObjHorario horario = new ObjHorario(
+                            cursor.getInt(cursor.getColumnIndex("horId")),
+                            materia,
+                            cursor.getString(cursor.getColumnIndex("horEntrada")),
+                            cursor.getString(cursor.getColumnIndex("horSalida")),
+                            cursor.getString(cursor.getColumnIndex("horSalon")),
+                            cursor.getString(cursor.getColumnIndex("horDia")));
+                    horarios.add(horario);
+                }
+
             }while(cursor.moveToNext());
         }
         return horarios;

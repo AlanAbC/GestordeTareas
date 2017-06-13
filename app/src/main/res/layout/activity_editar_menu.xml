@@ -115,7 +115,6 @@
             app:backgroundTint="#eea600"
             android:src="@drawable/agregart"
             app:fabSize="normal"
-            android:onClick="actualizar"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

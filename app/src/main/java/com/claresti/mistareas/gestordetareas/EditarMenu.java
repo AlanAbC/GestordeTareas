@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
@@ -59,6 +60,7 @@ public class EditarMenu extends AppCompatActivity {
     private ImageView img;
     private Button selectImg;
     private RelativeLayout ventana;
+    private FloatingActionButton aceptar;
 
     //Variables de objetos
     private ObjUsuario usuario;
@@ -118,6 +120,8 @@ public class EditarMenu extends AppCompatActivity {
         img = (ImageView)findViewById(R.id.img);
         selectImg = (Button)findViewById(R.id.btn_img);
         ventana = (RelativeLayout)findViewById(R.id.principal);
+        aceptar = (FloatingActionButton)findViewById(R.id.agregar);
+
         //Validacion de permisos
         if(permisos()){
             selectImg.setEnabled(true);
@@ -143,6 +147,8 @@ public class EditarMenu extends AppCompatActivity {
             Uri path = Uri.fromFile(archivoImg);
             img.setImageURI(path);
         }
+
+        listeners();
     }
 
     /**
@@ -312,55 +318,60 @@ public class EditarMenu extends AppCompatActivity {
      * funcion encargada de crear la actualizacion con los camvbios del usuario
      * @param view
      */
-    public void actualizar(View view){
-        if(nombre.getText().toString().isEmpty() && mPath.isEmpty()){
-            msg("No hay cambios que realizar");
-        }else{
-            if(nombre.getText().toString().isEmpty() && !mPath.isEmpty()){
-                ObjUsuario usuarioAct = new ObjUsuario();
-                usuarioAct.setNombre(usuario.getNombre());
-                usuarioAct.setImg(mPath);
-                String respuesta = db.updateUsuarioImg(usuarioAct);
-                if(respuesta.equals("1")){
-                    Intent i = new Intent(EditarMenu.this, MainActivity.class);
-                    i.putExtra("msg", "Se actualizo correctamente");
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                    finish();
+    public void listeners(){
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nombre.getText().toString().isEmpty() && mPath.isEmpty()){
+                    msg("No hay cambios que realizar");
                 }else{
-                    msg("Ocurrio el error: " + respuesta);
-                }
-            }else if(!nombre.getText().toString().isEmpty() && mPath.isEmpty()){
-                ObjUsuario usuarioAct = new ObjUsuario();
-                usuarioAct.setNombre(nombre.getText().toString());
-                usuarioAct.setImg(usuario.getImg());
-                String respuesta = db.updateUsuarioImg(usuarioAct);
-                if(respuesta.equals("1")){
-                    Intent i = new Intent(EditarMenu.this, MainActivity.class);
-                    i.putExtra("msg", "Se actualizo correctamente");
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                    finish();
-                }else{
-                    msg("Ocurrio el error: " + respuesta);
-                }
-            }else if(!nombre.getText().toString().isEmpty() && !mPath.isEmpty()) {
-                ObjUsuario usuarioAct = new ObjUsuario();
-                usuarioAct.setNombre(nombre.getText().toString());
-                usuarioAct.setImg(mPath);
-                String respuesta = db.updateUsuarioImg(usuarioAct);
-                if (respuesta.equals("1")) {
-                    Intent i = new Intent(EditarMenu.this, MainActivity.class);
-                    i.putExtra("msg", "Se actualizo correctamente");
-                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                    finish();
-                } else {
-                    msg("Ocurrio el error: " + respuesta);
+                    if(nombre.getText().toString().isEmpty() && !mPath.isEmpty()){
+                        ObjUsuario usuarioAct = new ObjUsuario();
+                        usuarioAct.setNombre(usuario.getNombre());
+                        usuarioAct.setImg(mPath);
+                        String respuesta = db.updateUsuarioImg(usuarioAct);
+                        if(respuesta.equals("1")){
+                            Intent i = new Intent(EditarMenu.this, MainActivity.class);
+                            i.putExtra("msg", "Se actualizo correctamente");
+                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            msg("Ocurrio el error: " + respuesta);
+                        }
+                    }else if(!nombre.getText().toString().isEmpty() && mPath.isEmpty()){
+                        ObjUsuario usuarioAct = new ObjUsuario();
+                        usuarioAct.setNombre(nombre.getText().toString());
+                        usuarioAct.setImg(usuario.getImg());
+                        String respuesta = db.updateUsuarioImg(usuarioAct);
+                        if(respuesta.equals("1")){
+                            Intent i = new Intent(EditarMenu.this, MainActivity.class);
+                            i.putExtra("msg", "Se actualizo correctamente");
+                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            finish();
+                        }else{
+                            msg("Ocurrio el error: " + respuesta);
+                        }
+                    }else if(!nombre.getText().toString().isEmpty() && !mPath.isEmpty()) {
+                        ObjUsuario usuarioAct = new ObjUsuario();
+                        usuarioAct.setNombre(nombre.getText().toString());
+                        usuarioAct.setImg(mPath);
+                        String respuesta = db.updateUsuarioImg(usuarioAct);
+                        if (respuesta.equals("1")) {
+                            Intent i = new Intent(EditarMenu.this, MainActivity.class);
+                            i.putExtra("msg", "Se actualizo correctamente");
+                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            finish();
+                        } else {
+                            msg("Ocurrio el error: " + respuesta);
+                        }
+                    }
+                    msg("No funciono, disculpeme :(");
                 }
             }
-            msg("No funciono, disculpeme :(");
-        }
+        });
     }
 
     /**
