@@ -113,30 +113,7 @@ public class MainActivity extends AppCompatActivity {
         menu = nav.getMenu();
         menuNav();
         // Fin menu
-        //Llamada de las variables para el control de bottomsheet
-        bottomSheet = (LinearLayout)findViewById(R.id.bottomSheet);
-        final BottomSheetBehavior bsb = BottomSheetBehavior.from(bottomSheet);
 
-        ArrayList<ObjMateria> materias = db.selectMaterias();
-        if(materias.size() < 1) {
-            //funcion para expandir bottomsheet en cuanto inicia la app
-            bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
-                                                     //------------Aqui iria la comprobacion para saber si hay materias
-        }else {
-            bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        }
-        //Fin bottom  sheet
-        //Control para esconder bottomsheet
-        btnConBottomSheet=(Button)findViewById(R.id.btnConBottomSheet);
-        btnConBottomSheet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent i = new Intent(MainActivity.this, agregar_materia.class);
-                startActivity(i);
-            }
-        });
-        //Fin control para esconder bottom sheet
         //Creacion del objeto usuario y comprobacion de primera ves o no en el sistemaa
         //cambia el nombre de la base de datos y el valor de usuPrimera a 1 en caso de que sea la primera vez
         //en caso contrario solo agrega nombre del usuario al menu y carga las tareas
@@ -245,6 +222,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        //Llamada de las variables para el control de bottomsheet
+        bottomSheet = (LinearLayout)findViewById(R.id.bottomSheet);
+        final BottomSheetBehavior bsb = BottomSheetBehavior.from(bottomSheet);
+
+        ArrayList<ObjMateria> materias = db.selectMaterias();
+        if(materias.size() < 1) {
+            //funcion para expandir bottomsheet en cuanto inicia la app
+            bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
+            //------------Aqui iria la comprobacion para saber si hay materias
+        }else {
+            bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+        //Fin bottom  sheet
+        //Control para esconder bottomsheet
+        btnConBottomSheet=(Button)findViewById(R.id.btnConBottomSheet);
+        btnConBottomSheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(MainActivity.this, agregar_materia.class);
+                startActivity(i);
+            }
+        });
+        //Fin control para esconder bottom sheet
+
         //FIn creacion y comprobacion de primera vez
         Intent servicio = new Intent(MainActivity.this, ServicioNotificaciones.class);
         startService(servicio);
