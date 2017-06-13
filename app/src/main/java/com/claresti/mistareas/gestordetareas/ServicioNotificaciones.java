@@ -60,7 +60,7 @@ public class ServicioNotificaciones extends Service {
             flag = true;
             db = new AdminBD(getApplicationContext());
             tareas = db.selectTareas();
-            contador = 36000;
+            contador = 18000;
         }
 
 
@@ -104,7 +104,7 @@ public class ServicioNotificaciones extends Service {
                             nManager.notify(12345, builder.build());
                         }
                     }
-                    contador = 36000;
+                    contador = 18000;
                 }
                 try {
                     Thread.sleep(1000);

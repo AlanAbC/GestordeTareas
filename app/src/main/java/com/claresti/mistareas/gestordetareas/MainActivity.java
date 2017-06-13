@@ -117,10 +117,11 @@ public class MainActivity extends AppCompatActivity {
         bottomSheet = (LinearLayout)findViewById(R.id.bottomSheet);
         final BottomSheetBehavior bsb = BottomSheetBehavior.from(bottomSheet);
 
-        if(bd.selectUsuario().equals("0")) {
+        ArrayList<ObjMateria> materias = db.selectMaterias();
+        if(materias.size() < 1) {
             //funcion para expandir bottomsheet en cuanto inicia la app
             bsb.setState(BottomSheetBehavior.STATE_EXPANDED);
-            bd.updateUsuario();                                         //------------Aqui iria la comprobacion para saber si hay materias
+                                                     //------------Aqui iria la comprobacion para saber si hay materias
         }else {
             bsb.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
