@@ -1,6 +1,7 @@
 package com.claresti.mistareas.gestordetareas;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -57,9 +58,9 @@ public class ServicioNotificaciones extends Service {
         protected void onPreExecute() {
             super.onPreExecute();
             flag = true;
-            AdminBD db = new AdminBD(getApplicationContext());
+            db = new AdminBD(getApplicationContext());
             tareas = db.selectTareas();
-            contador = 480;
+            contador = 36000;
         }
 
 
@@ -95,14 +96,18 @@ public class ServicioNotificaciones extends Service {
                                     .setVibrate(new long[]{100, 250, 100, 500})
                                     .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                                     .setWhen(System.currentTimeMillis());
-                            nManager.notify(12345, builder.build());
 
+                            Intent i = new Intent(ServicioNotificaciones.this, MainActivity.class);
+                            PendingIntent pendingIntent = PendingIntent.getActivity(ServicioNotificaciones.this, 0, i, 0);
+                            builder.setContentIntent(pendingIntent);
+
+                            nManager.notify(12345, builder.build());
                         }
                     }
-                    contador = 480;
+                    contador = 36000;
                 }
                 try {
-                    Thread.sleep(60000);
+                    Thread.sleep(1000);
                     contador --;
                 } catch (InterruptedException e) {
                     Log.e("Dormir acplicacion", e + "");

@@ -1,5 +1,6 @@
 package com.claresti.mistareas.gestordetareas;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -217,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
         //FIn creacion y comprobacion de primera vez
         Intent servicio = new Intent(MainActivity.this, ServicioNotificaciones.class);
         startService(servicio);
+        NotificationManager nManager = (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
+        nManager.cancel(12345);
 
         Intent i = getIntent();
         Bundle extras = i.getExtras();
