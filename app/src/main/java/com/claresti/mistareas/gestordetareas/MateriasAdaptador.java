@@ -67,9 +67,7 @@ public class MateriasAdaptador extends BaseAdapter {
                 Intent i = new Intent(activity, agregar_materia.class);
                 i.putExtra("editar", "1");
                 ObjComunicadorMateria.setMateria(materia);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(i);
-                activity.finish();
             }
         });
         eliminar.setOnClickListener(new View.OnClickListener() {

@@ -70,7 +70,6 @@ public class mostrarTarea extends AppCompatActivity {
         Intent i = new Intent(mostrarTarea.this, agregarTarea.class);
         i.putExtra("editar", "1");
         startActivity(i);
-        finish();
     }
 
 }
